@@ -1,7 +1,7 @@
 # Личный проект «Шесть городов»
 
-* Студент: [Вячеслав Петров](https://up.htmlacademy.ru/react/11/user/2011595).
-* Наставник: `Неизвестно`.
+* Студент: [Kostiantyn Borysov](https://github.com/koddaks).
+* Наставник: [Igor Belogurov](https://github.com/bibblebabl).
 
 ---
 
