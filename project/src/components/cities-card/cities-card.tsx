@@ -1,4 +1,4 @@
-type CitiesCardProps = {
+export type CitiesCardProps = {
   premium: boolean;
   src: string;
   value: number;
@@ -6,11 +6,20 @@ type CitiesCardProps = {
   housingType: string;
   cardName: string;
   cardLink: string;
+  rating: number;
 };
 
 function CitiesCard(props: CitiesCardProps): JSX.Element {
-  const { premium, src, value, bookmark, housingType, cardName, cardLink } =
-    props;
+  const {
+    premium,
+    src,
+    value,
+    bookmark,
+    housingType,
+    cardName,
+    cardLink,
+    rating,
+  } = props;
   return (
     <article className="cities__card place-card">
       {premium && (
@@ -49,7 +58,7 @@ function CitiesCard(props: CitiesCardProps): JSX.Element {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{ width: '80%' }}></span>
+            <span style={{ width: `${rating}%` }}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
