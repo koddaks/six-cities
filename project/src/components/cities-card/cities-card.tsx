@@ -34,7 +34,7 @@ function CitiesCard(props: CitiesCardProps): JSX.Element {
             src={src}
             width="260"
             height="200"
-            alt="Place image"
+            alt="Place view"
           />
         </a>
       </div>
