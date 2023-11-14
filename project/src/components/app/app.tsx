@@ -1,8 +1,9 @@
+import { citiesCardsMock } from '../../mock/cards';
 import Main from '../../pages/main/main';
-import { citiesCardData } from '../cities-card-list/cities-card-list';
+
 
 function App(): JSX.Element {
-  return <Main placesCount={citiesCardData.length}></Main>;
+  return <Main cards={citiesCardsMock}></Main>;
 }
 
 export default App;
