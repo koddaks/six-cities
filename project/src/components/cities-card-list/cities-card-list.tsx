@@ -7,9 +7,9 @@ type CitiesCardListProps = {
 
 const CitiesCardList = ({ cards }: CitiesCardListProps) => (
   <div className="cities__places-list places__list tabs__content">
-    {cards.map((cityCard: CitiesCardProps, index: number) => (
+    {cards.map((cityCard) => (
       <CitiesCard
-        key={index++}
+        key={cityCard.src}
         premium={cityCard.premium}
         src={cityCard.src}
         value={cityCard.value}
