@@ -1,8 +1,8 @@
-import CitiesCardList from '../../components/cities-card-list/cities-card-list';
-import { CitiesCardProps } from '../../components/cities-card/cities-card';
+import PlacesCardList from '../../components/cities-card-list/place-card-list';
+import { PlaceCardProps } from '../../components/cities-card/place-card';
 
 type MainProps = {
-  cards: CitiesCardProps[];
+  cards: PlaceCardProps[];
 };
 
 function Main({ cards }: MainProps): JSX.Element {
@@ -118,7 +118,7 @@ function Main({ cards }: MainProps): JSX.Element {
                   </li>
                 </ul>
               </form>
-              <CitiesCardList cards={cards} />
+              <PlacesCardList cards={cards} />
             </section>
             <div className="cities__right-section">
               <section className="cities__map map"></section>

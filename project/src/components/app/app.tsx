@@ -1,8 +1,8 @@
 import Main from '../../pages/main/main';
-import { CitiesCardProps } from '../cities-card/cities-card';
+import { PlaceCardProps } from '../cities-card/place-card';
 
 export type AppProps = {
-  cards: CitiesCardProps[];
+  cards: PlaceCardProps[];
 };
 
 function App({ cards }: AppProps): JSX.Element {

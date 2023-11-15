@@ -1,14 +1,13 @@
-import CitiesCard, { CitiesCardProps } from '../cities-card/cities-card';
+import PlaceCard, { PlaceCardProps } from '../cities-card/place-card';
 
-
-type CitiesCardListProps = {
-  cards: CitiesCardProps[];
+type PlacesCardListProps = {
+  cards: PlaceCardProps[];
 };
 
-const CitiesCardList = ({ cards }: CitiesCardListProps) => (
+const PlacesCardList = ({ cards }: PlacesCardListProps) => (
   <div className="cities__places-list places__list tabs__content">
     {cards.map((cityCard) => (
-      <CitiesCard
+      <PlaceCard
         key={cityCard.src}
         premium={cityCard.premium}
         src={cityCard.src}
@@ -23,4 +22,4 @@ const CitiesCardList = ({ cards }: CitiesCardListProps) => (
   </div>
 );
 
-export default CitiesCardList;
+export default PlacesCardList;

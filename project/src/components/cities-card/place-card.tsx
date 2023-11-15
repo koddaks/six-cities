@@ -1,4 +1,4 @@
-export type CitiesCardProps = {
+export type PlaceCardProps = {
   premium: boolean;
   src: string;
   value: number;
@@ -9,7 +9,7 @@ export type CitiesCardProps = {
   rating: number;
 };
 
-function CitiesCard(props: CitiesCardProps): JSX.Element {
+function PlaceCard(props: PlaceCardProps): JSX.Element {
   const {
     premium,
     src,
@@ -71,4 +71,4 @@ function CitiesCard(props: CitiesCardProps): JSX.Element {
   );
 }
 
-export default CitiesCard;
+export default PlaceCard;

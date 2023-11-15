@@ -1,6 +1,6 @@
-import { CitiesCardProps } from '../components/cities-card/cities-card';
+import { PlaceCardProps } from '../components/cities-card/place-card';
 
-export const citiesCardsMock: CitiesCardProps[] = [
+export const placeCardsMock: PlaceCardProps[] = [
   {
     premium: true,
     src: 'img/apartment-01.jpg',
