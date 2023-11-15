@@ -1,9 +1,12 @@
-import { citiesCardsMock } from '../../mock/cards';
 import Main from '../../pages/main/main';
+import { CitiesCardProps } from '../cities-card/cities-card';
 
+export type AppProps = {
+  cards: CitiesCardProps[];
+};
 
-function App(): JSX.Element {
-  return <Main cards={citiesCardsMock}></Main>;
+function App({ cards }: AppProps): JSX.Element {
+  return <Main cards={cards}></Main>;
 }
 
 export default App;

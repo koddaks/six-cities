@@ -1,13 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
+import { citiesCardsMock } from './mock/cards';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
+
 root.render(
   <React.StrictMode>
-    <App />
+    <App cards={citiesCardsMock} />
   </React.StrictMode>
 );

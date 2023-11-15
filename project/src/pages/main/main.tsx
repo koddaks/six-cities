@@ -1,7 +1,6 @@
 import CitiesCardList from '../../components/cities-card-list/cities-card-list';
 import { CitiesCardProps } from '../../components/cities-card/cities-card';
 
-
 type MainProps = {
   cards: CitiesCardProps[];
 };
@@ -119,7 +118,7 @@ function Main({ cards }: MainProps): JSX.Element {
                   </li>
                 </ul>
               </form>
-              <CitiesCardList cards={cards}/>
+              <CitiesCardList cards={cards} />
             </section>
             <div className="cities__right-section">
               <section className="cities__map map"></section>
