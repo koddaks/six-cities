@@ -1,11 +1,11 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { PlaceCardProps } from '../cities-card/place-card';
-import { AppRoute } from '../../routes/routes';
 import Main from '../../pages/main/main';
 import Favorites from '../../pages/favorites/favorites';
 import LogIn from '../../pages/login/login';
 import Property from '../../pages/property/property';
 import Page404 from '../../pages/page404/page404';
+import { AppRoute } from '../../const';
 
 export type AppProps = {
   cards: PlaceCardProps[];
