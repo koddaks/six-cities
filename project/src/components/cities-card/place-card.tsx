@@ -21,7 +21,7 @@ function PlaceCard(props: PlaceCardProps): JSX.Element {
 
   return (
     <article
-      className="cities__card place-card"
+      className={`cities__card place-card ${props.isActive ? '' : ''}`}
       onMouseOver={() => props.setActiveCard(id)}
     >
       {premium && (
