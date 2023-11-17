@@ -1,12 +1,9 @@
+import { Offer } from '../../types';
+
 export type PlaceCardProps = {
-  premium: boolean;
-  src: string;
-  value: number;
-  bookmark: boolean;
-  housingType: string;
-  cardName: string;
-  cardLink: string;
-  rating: number;
+  offer: Offer;
+  setActiveCard: (id: number) => void;
+  isActive: boolean;
 };
 
 function PlaceCard(props: PlaceCardProps): JSX.Element {
@@ -19,9 +16,14 @@ function PlaceCard(props: PlaceCardProps): JSX.Element {
     cardName,
     cardLink,
     rating,
-  } = props;
+    id,
+  } = props.offer;
+
   return (
-    <article className="cities__card place-card">
+    <article
+      className="cities__card place-card"
+      onMouseOver={() => props.setActiveCard(id)}
+    >
       {premium && (
         <div className="place-card__mark">
           <span>Premium</span>

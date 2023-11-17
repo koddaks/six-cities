@@ -1,6 +1,6 @@
-import { PlaceCardProps } from '../components/cities-card/place-card';
+import { Offer } from '../types';
 
-export const placeCardsMock: PlaceCardProps[] = [
+export const placeCardsMock: Offer[] = [
   {
     premium: true,
     src: 'img/apartment-01.jpg',
@@ -10,6 +10,7 @@ export const placeCardsMock: PlaceCardProps[] = [
     cardName: 'Beautiful & luxurious apartment at great location',
     cardLink: '#',
     rating: 80,
+    id: 1,
   },
   {
     premium: false,
@@ -20,6 +21,7 @@ export const placeCardsMock: PlaceCardProps[] = [
     cardName: 'Wood and stone place',
     cardLink: '#',
     rating: 80,
+    id: 2,
   },
   {
     premium: false,
@@ -30,6 +32,7 @@ export const placeCardsMock: PlaceCardProps[] = [
     cardName: 'Canal View Prinsengracht',
     cardLink: '#',
     rating: 80,
+    id: 3,
   },
   {
     premium: true,
@@ -40,6 +43,7 @@ export const placeCardsMock: PlaceCardProps[] = [
     cardName: 'Nice, cozy, warm big bed apartment',
     cardLink: '#',
     rating: 100,
+    id: 4,
   },
   {
     premium: false,
@@ -50,5 +54,6 @@ export const placeCardsMock: PlaceCardProps[] = [
     cardName: 'Wood and stone place',
     cardLink: '#',
     rating: 80,
+    id: 5,
   },
 ];

@@ -1,18 +1,30 @@
-import PlaceCard, { PlaceCardProps } from '../cities-card/place-card';
+import { useState } from 'react';
+import { Offer } from '../../types';
+import PlaceCard from '../cities-card/place-card';
 
 type PlacesCardListProps = {
-  cards: PlaceCardProps[];
+  offers: Offer[];
 };
 
-const PlacesCardList = ({ cards }: PlacesCardListProps) => (
-  <div className="cities__places-list places__list tabs__content">
-    {cards.map((card) => (
-      <PlaceCard
-        key={card.src}
-        {...card}
-      />
-    ))}
-  </div>
-);
+const PlacesCardList = ({ offers }: PlacesCardListProps) => {
+  const [activeCard, setActiveCard] = useState<number | null>(null);
+
+  const handleSetActiveCard = (id: number) => {
+    setActiveCard(id);
+  };
+
+  return (
+    <div className="cities__places-list places__list tabs__content">
+      {offers.map((offer) => (
+        <PlaceCard
+          key={offer.id}
+          offer={offer}
+          setActiveCard={handleSetActiveCard}
+          isActive={activeCard === offer.id}
+        />
+      ))}
+    </div>
+  );
+};
 
 export default PlacesCardList;

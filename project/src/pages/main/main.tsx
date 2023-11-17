@@ -1,11 +1,11 @@
 import PlacesCardList from '../../components/cities-card-list/place-card-list';
-import { PlaceCardProps } from '../../components/cities-card/place-card';
+import { Offer } from '../../types';
 
 type MainProps = {
-  cards: PlaceCardProps[];
+  offers: Offer[];
 };
 
-function Main({ cards }: MainProps): JSX.Element {
+function Main({ offers }: MainProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -93,7 +93,7 @@ function Main({ cards }: MainProps): JSX.Element {
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">
-                {cards.length} places to stay in Amsterdam
+                {offers.length} places to stay in Amsterdam
               </b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
@@ -121,7 +121,7 @@ function Main({ cards }: MainProps): JSX.Element {
                   </li>
                 </ul>
               </form>
-              <PlacesCardList cards={cards} />
+              <PlacesCardList offers={offers} />
             </section>
             <div className="cities__right-section">
               <section className="cities__map map"></section>
