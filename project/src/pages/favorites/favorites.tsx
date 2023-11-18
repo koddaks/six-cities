@@ -1,9 +1,17 @@
 import FavoritesList from '../../components/favorites-list/favorites-list';
+import { placeCardsMock } from '../../mock/offers';
+import { Offer } from '../../types';
 
 function Favorites() {
   // const handleOffersBookmarkFilter = (offers: Offer[]) => {
   //   offers.filter((offer) => offer.bookmark === true);
   // };
+
+  const handleOffersBookmarkFilter = (offers: Offer[]): Offer[] =>
+    offers.filter((offer) => offer.bookmark === true);
+
+  const filteredOffers = handleOffersBookmarkFilter(placeCardsMock);
+  console.log(filteredOffers);
 
   return (
     <div className="page">
@@ -48,7 +56,7 @@ function Favorites() {
 
       <main className="page__main page__main--favorites">
         <div className="page__favorites-container container">
-          <FavoritesList />
+          <FavoritesList filteredOffers={filteredOffers} />
         </div>
       </main>
       <footer className="footer container">

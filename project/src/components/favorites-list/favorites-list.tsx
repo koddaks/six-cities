@@ -1,4 +1,10 @@
-function FavoritesList() {
+import { Offer } from '../../types';
+
+type FavoritesListProps = {
+  filteredOffers: Offer[];
+};
+
+function FavoritesList({ filteredOffers }: FavoritesListProps) {
   return (
     <section className="favorites">
       <h1 className="favorites__title">Saved listing</h1>
