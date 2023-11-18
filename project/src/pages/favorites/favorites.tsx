@@ -3,12 +3,10 @@ import { placeCardsMock } from '../../mock/offers';
 import { Offer } from '../../types';
 
 function Favorites() {
-
   const handleOffersBookmarkFilter = (offers: Offer[]): Offer[] =>
     offers.filter((offer) => offer.bookmark === true);
 
   const filteredOffers = handleOffersBookmarkFilter(placeCardsMock);
-  console.log(filteredOffers);
 
   return (
     <div className="page">
