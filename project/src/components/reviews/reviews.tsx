@@ -18,7 +18,8 @@ function Reviews() {
   };
 
   const handleSubmitStatus = (newRating: number, newComment: string) => {
-    const isValid = newComment.length > 50 && newRating !== 0;
+    const minCommentLength = 50;
+    const isValid = newComment.length >= minCommentLength && newRating !== 0;
     setSubmitStatus(!isValid);
   };
 
