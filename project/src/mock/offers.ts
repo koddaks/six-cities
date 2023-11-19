@@ -22,6 +22,8 @@ export const placeCardsMock: Offer[] = [
     cardLink: '#',
     rating: 80,
     id: 2,
+    bedrooms: 5,
+    maxAdults: 5,
   },
   {
     premium: false,
