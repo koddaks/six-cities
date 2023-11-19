@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 function PlacesSortig() {
-  const [placesOptionActive, setPlacesOptionActive] = useState(true);
+  const [placesOptionActive, setPlacesOptionActive] = useState(false);
 
   const handleSetPlacesOptionToggle = () => {
     setPlacesOptionActive(!placesOptionActive);

@@ -26,7 +26,7 @@ function App({ offers }: AppProps): JSX.Element {
             </PrivateRoute>
           }
         />
-        <Route path={AppRoute.Property} element={<Property />}></Route>
+        <Route path={`${AppRoute.Property}/:id`} element={<Property />}></Route>
         <Route path="*" element={<Page404 />} />
       </Routes>
     </BrowserRouter>
