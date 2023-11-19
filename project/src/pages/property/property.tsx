@@ -1,6 +1,8 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { Offer } from '../../types';
 import PropertyDescriptionList from '../../components/property-description-list/property-description-list';
+import { useEffect } from 'react';
+import { AppRoute } from '../../const';
 
 type PropertyProps = {
   offers: Offer[];
@@ -11,10 +13,14 @@ function Property({ offers }: PropertyProps): JSX.Element {
   const navigate = useNavigate();
 
   const filteredOffers = offers.filter((offer) => id === offer.id.toString());
-  if (filteredOffers.length === 0) {
-    navigate('/404');
-  }
-  // console.log(filteredOffers);
+
+  useEffect(() => {
+    const property = offers.find((offer) => offer.id.toString() === id);
+
+    if (!property) {
+      navigate(`${AppRoute.Property}/:id/404`);
+    }
+  }, [id, navigate, offers]);
 
   return (
     <div className="page">
