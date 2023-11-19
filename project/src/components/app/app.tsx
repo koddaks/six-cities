@@ -7,6 +7,7 @@ import Page404 from '../../pages/page404/page404';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import PrivateRoute from '../private-route/private-route';
 import { Offer } from '../../types';
+import { placeCardsMock } from '../../mock/offers';
 
 export type AppProps = {
   offers: Offer[];
@@ -26,7 +27,7 @@ function App({ offers }: AppProps): JSX.Element {
             </PrivateRoute>
           }
         />
-        <Route path={`${AppRoute.Property}/:id`} element={<Property />}></Route>
+        <Route path={`${AppRoute.Property}/:id`} element={<Property offers={placeCardsMock} />}></Route>
         <Route path="*" element={<Page404 />} />
       </Routes>
     </BrowserRouter>
