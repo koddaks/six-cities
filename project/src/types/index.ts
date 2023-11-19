@@ -8,4 +8,6 @@ export type Offer = {
   cardLink: string;
   rating: number;
   id: number;
+  bedrooms?: number;
+  maxAdults?: number;
 };
