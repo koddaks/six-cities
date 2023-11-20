@@ -1,9 +1,11 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 function Reviews() {
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
   const [submitStatus, setSubmitStatus] = useState(true);
+
+  const inputRef = useRef(null);
 
   const handleRatingChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseInt(e.target.value, 10);
@@ -18,12 +20,22 @@ function Reviews() {
   };
 
   const handleSubmitStatus = (newRating: number, newComment: string) => {
-    const isValid = newComment.length > 50 && newRating !== 0;
+    const minCommentLength = 50;
+    const isValid = newComment.length >= minCommentLength && newRating !== 0;
     setSubmitStatus(!isValid);
   };
 
-  const handleSubmit: React.FormEventHandler<HTMLFormElement> | undefined = (event) => {
+  const handleSubmit: React.FormEventHandler<HTMLFormElement> | undefined = (
+    event
+  ) => {
     event.preventDefault();
+
+    if (inputRef.current) {
+      console.log(new FormData(inputRef.current).get('review'));
+      console.log(new FormData(inputRef.current).get('rating'));
+    } else {
+      console.error('inputRef.current равен null');
+    }
   };
 
   return (
@@ -64,6 +76,7 @@ function Reviews() {
         </li>
       </ul>
       <form
+        ref={inputRef}
         onSubmit={handleSubmit}
         className="reviews__form form"
         action="#"
@@ -74,6 +87,7 @@ function Reviews() {
         </label>
         <div className="reviews__rating-form form__rating">
           <input
+            ref={inputRef}
             onChange={handleRatingChange}
             className="form__rating-input visually-hidden"
             name="rating"
@@ -92,6 +106,7 @@ function Reviews() {
           </label>
 
           <input
+            ref={inputRef}
             onChange={handleRatingChange}
             className="form__rating-input visually-hidden"
             name="rating"
@@ -110,6 +125,7 @@ function Reviews() {
           </label>
 
           <input
+            ref={inputRef}
             onChange={handleRatingChange}
             className="form__rating-input visually-hidden"
             name="rating"
@@ -128,6 +144,7 @@ function Reviews() {
           </label>
 
           <input
+            ref={inputRef}
             onChange={handleRatingChange}
             className="form__rating-input visually-hidden"
             name="rating"
@@ -146,6 +163,7 @@ function Reviews() {
           </label>
 
           <input
+            ref={inputRef}
             onChange={handleRatingChange}
             className="form__rating-input visually-hidden"
             name="rating"
