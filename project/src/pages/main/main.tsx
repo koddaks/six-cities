@@ -1,6 +1,6 @@
 import PlacesCardList from '../../components/cities-card-list/place-card-list';
 import Locations from '../../components/locations/locations';
-import PlacesSortig from '../../components/plases-sorting/places-sorting';
+import PlacesSorting from '../../components/plases-sorting/places-sorting';
 import { Offer } from '../../types';
 
 type MainProps = {
@@ -64,7 +64,7 @@ function Main({ offers }: MainProps): JSX.Element {
               <b className="places__found">
                 {offers.length} places to stay in Amsterdam
               </b>
-              <PlacesSortig/>
+              <PlacesSorting/>
               <PlacesCardList offers={offers} />
             </section>
             <div className="cities__right-section">

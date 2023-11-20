@@ -42,4 +42,4 @@ function PlacesSorting() {
   );
 }
 
-export default PlacesSortig;
+export default PlacesSorting;
