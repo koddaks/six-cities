@@ -1,4 +1,5 @@
-import { Navigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useEffect } from 'react';
 import { Offer } from '../../types';
 import PropertyDescriptionList from '../../components/property-description-list/property-description-list';
 import Reviews from '../../components/reviews/reviews';
@@ -9,12 +10,17 @@ type PropertyProps = {
 
 function Property({ offers }: PropertyProps): JSX.Element {
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
 
   const property = offers.find((offer) => offer.id.toString() === id);
 
-  return !property ? (
-    <Navigate to="/404" />
-  ) : (
+  useEffect(() => {
+    if (!property) {
+      navigate('/404');
+    }
+  }, [property, id, navigate]);
+
+  return (
     <div className="page">
       <header className="header">
         <div className="container">
@@ -104,7 +110,7 @@ function Property({ offers }: PropertyProps): JSX.Element {
             </div>
           </div>
           <div className="property__container container">
-            <PropertyDescriptionList offer={property} />
+            {property ? <PropertyDescriptionList offer={property} /> : null}
             <Reviews />
           </div>
 

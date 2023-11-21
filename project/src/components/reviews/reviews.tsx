@@ -3,27 +3,22 @@ import { useState } from 'react';
 function Reviews() {
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
-  const [submitDisabled, setSubmitDisabled] = useState(true);
   const minCommentLength = 5;
+  const submitIsEnabled = comment.length >= minCommentLength && rating !== 0;
 
   const handleRatingChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = parseInt(e.target.value, 10);
+    const value = Number(e.target.value);
     setRating(value);
-    handleSubmitStatus(value, comment);
   };
 
   const handleCommentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const value = e.target.value;
     setComment(value);
-    handleSubmitStatus(rating, value);
   };
 
-  const handleSubmitStatus = (newRating: number, newComment: string) => {
-    const isValid = newComment.length >= minCommentLength && newRating !== 0;
-    setSubmitDisabled(!isValid);
-  };
-
-  const handleSubmit: React.FormEventHandler<HTMLFormElement> | undefined = (event) => {
+  const handleSubmit: React.FormEventHandler<HTMLFormElement> | undefined = (
+    event
+  ) => {
     event.preventDefault();
   };
 
@@ -180,7 +175,7 @@ function Reviews() {
           <button
             className="reviews__submit form__submit button"
             type="submit"
-            disabled={submitDisabled}
+            disabled={!submitIsEnabled}
           >
             Submit
           </button>
