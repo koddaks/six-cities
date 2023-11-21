@@ -9,7 +9,7 @@ function PropertyDescriptionList({ offer }: PropertyDescriptionListProps) {
     id,
     premium,
     cardName,
-    bookmark,
+    isFavorite,
     rating,
     housingType,
     bedrooms,
@@ -27,13 +27,13 @@ function PropertyDescriptionList({ offer }: PropertyDescriptionListProps) {
         <h1 className="property__name">{cardName}</h1>
         <button
           className={`property__bookmark-button button ${
-            bookmark ? 'property__bookmark-button--active' : ''
+            isFavorite ? 'property__bookmark-button--active' : ''
           }`}
           type="button"
         >
           <svg
             className={`${
-              bookmark ? 'place-card__bookmark-icon' : 'property__bookmark-icon'
+              isFavorite ? 'place-card__bookmark-icon' : 'property__bookmark-icon'
             }`}
             width="31"
             height="33"
