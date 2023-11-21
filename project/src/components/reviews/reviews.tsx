@@ -3,7 +3,7 @@ import { useState } from 'react';
 function Reviews() {
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
-  const [submitStatus, setSubmitStatus] = useState(true);
+  const [submitStatus, setSubmitStatus] = useState(false);
 
   const handleRatingChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseInt(e.target.value, 10);
