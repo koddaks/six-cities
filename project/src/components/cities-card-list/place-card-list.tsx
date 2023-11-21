@@ -9,10 +9,10 @@ type PlacesCardListProps = {
 };
 
 const PlacesCardList = ({ offers }: PlacesCardListProps) => {
-  const [activeCard, setActiveCard] = useState<number | null>(null);
+  const [activeCardId, setActiveCardID] = useState<number | null>(null);
 
   const handleSetActiveCard = (id: number) => {
-    setActiveCard(id);
+    setActiveCardID(id);
   };
 
   return (
@@ -23,7 +23,7 @@ const PlacesCardList = ({ offers }: PlacesCardListProps) => {
             key={offer.id}
             offer={offer}
             setActiveCard={handleSetActiveCard}
-            isActive={activeCard === offer.id}
+            isActive={activeCardId === offer.id}
           />
         </Link>
       ))}
