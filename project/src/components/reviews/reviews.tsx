@@ -3,8 +3,8 @@ import { useState } from 'react';
 function Reviews() {
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
-  const [submitStatus, setSubmitStatus] = useState(false);
-  const minCommentLength = 50;
+  const [submitDisabled, setSubmitDisabled] = useState(true);
+  const minCommentLength = 5;
 
   const handleRatingChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseInt(e.target.value, 10);
@@ -20,7 +20,7 @@ function Reviews() {
 
   const handleSubmitStatus = (newRating: number, newComment: string) => {
     const isValid = newComment.length >= minCommentLength && newRating !== 0;
-    setSubmitStatus(!isValid);
+    setSubmitDisabled(!isValid);
   };
 
   const handleSubmit: React.FormEventHandler<HTMLFormElement> | undefined = (event) => {
@@ -180,7 +180,7 @@ function Reviews() {
           <button
             className="reviews__submit form__submit button"
             type="submit"
-            disabled={submitStatus}
+            disabled={submitDisabled}
           >
             Submit
           </button>
