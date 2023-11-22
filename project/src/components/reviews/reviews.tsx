@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 function Reviews() {
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
   const minCommentLength = 5;
   const submitIsEnabled = comment.length >= minCommentLength && rating !== 0;
+  const inputRef = useRef(null);
 
   const handleRatingChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = Number(e.target.value);
@@ -20,6 +21,17 @@ function Reviews() {
     event
   ) => {
     event.preventDefault();
+
+    if (inputRef.current) {
+      const formData = new FormData(inputRef.current);
+      // eslint-disable-next-line no-console
+      console.log(formData.get('rating'));
+      // eslint-disable-next-line no-console
+      console.log(formData.get('review'));
+    } else {
+      // eslint-disable-next-line no-console
+      console.error('inputRef.current is null');
+    }
   };
 
   return (
@@ -60,6 +72,7 @@ function Reviews() {
         </li>
       </ul>
       <form
+        ref={inputRef}
         onSubmit={handleSubmit}
         className="reviews__form form"
         action="#"
