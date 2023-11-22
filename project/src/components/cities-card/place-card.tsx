@@ -11,7 +11,7 @@ function PlaceCard(props: PlaceCardProps): JSX.Element {
     premium,
     src,
     value,
-    bookmark,
+    isFavorite,
     housingType,
     cardName,
     cardLink,
@@ -48,7 +48,7 @@ function PlaceCard(props: PlaceCardProps): JSX.Element {
           </div>
           <button
             className={`place-card__bookmark-button button ${
-              bookmark ? 'place-card__bookmark-button--active' : ''
+              isFavorite ? 'place-card__bookmark-button--active' : ''
             }`}
             type="button"
           >

@@ -1,10 +1,10 @@
 import { Offer } from '../../types';
 
 type FavoritesListProps = {
-  filteredOffers: Offer[];
+  favoriteOffers: Offer[];
 };
 
-function FavoritesList({ filteredOffers }: FavoritesListProps) {
+function FavoritesList({ favoriteOffers }: FavoritesListProps) {
   return (
     <section className="favorites">
       <h1 className="favorites__title">Saved listing</h1>
@@ -18,7 +18,7 @@ function FavoritesList({ filteredOffers }: FavoritesListProps) {
             </div>
           </div>
           <div className="favorites__places">
-            {filteredOffers.map((filteredOffer) => (
+            {favoriteOffers.map((filteredOffer) => (
               <article
                 key={filteredOffer.id}
                 className="favorites__card place-card"
@@ -52,7 +52,7 @@ function FavoritesList({ filteredOffers }: FavoritesListProps) {
                     </div>
                     <button
                       className={`place-card__bookmark-button button ${
-                        filteredOffer.bookmark
+                        filteredOffer.isFavorite
                           ? 'place-card__bookmark-button--active'
                           : ''
                       }`}

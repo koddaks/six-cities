@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-function PlacesSortig() {
+function PlacesSorting() {
   const [placesOptionActive, setPlacesOptionActive] = useState(false);
 
   const handleSetPlacesOptionToggle = () => {
@@ -42,4 +42,4 @@ function PlacesSortig() {
   );
 }
 
-export default PlacesSortig;
+export default PlacesSorting;
