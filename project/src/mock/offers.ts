@@ -11,6 +11,10 @@ export const placeCardsMock: Offer[] = [
     cardLink: '#',
     rating: 80,
     id: 1,
+    location: {
+      longitude: 52.3909553943508,
+      latitude: 4.85309666406198,
+    },
   },
   {
     premium: false,
