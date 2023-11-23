@@ -16,4 +16,5 @@ export type Offer = {
 export type PropertiesLocation = {
   latitude: number;
   longitude: number;
+  zoom: number;
 };
