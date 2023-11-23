@@ -10,4 +10,10 @@ export type Offer = {
   id: number;
   bedrooms?: number;
   maxAdults?: number;
+  location?: PropertiesLocation;
+};
+
+export type PropertiesLocation = {
+  latitude: number;
+  longitude: number;
 };
