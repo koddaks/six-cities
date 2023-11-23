@@ -14,6 +14,7 @@ export const placeCardsMock: Offer[] = [
     location: {
       longitude: 52.3909553943508,
       latitude: 4.85309666406198,
+      zoom: 10,
     },
   },
   {
