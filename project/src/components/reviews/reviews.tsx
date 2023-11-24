@@ -9,7 +9,7 @@ type ReviewsProps = {
 function Reviews({ reviews }: ReviewsProps) {
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
-  const minCommentLength = 5;
+  const minCommentLength = 50;
   const submitIsEnabled = comment.length >= minCommentLength && rating !== 0;
 
   const handleRatingChange = (e: React.ChangeEvent<HTMLInputElement>) => {
