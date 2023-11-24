@@ -16,6 +16,28 @@ export const placeCardsMock: Offer[] = [
       longitude: 4.85309666406198,
       zoom: 10,
     },
+    reviews: [
+      {
+        id: 1,
+        userId: 1,
+        username: 'Max',
+        userPhoto: 'img/avatar-max.jpg',
+        date: new Date('2023-11-24'),
+        rating: 80,
+        comment:
+          'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.',
+      },
+      {
+        id: 2,
+        userId: 2,
+        username: 'Angel',
+        userPhoto: 'img/avatar-angelina.jpg',
+        date: new Date('2023-11-24'),
+        rating: 100,
+        comment:
+          'Charming apartments with a view – perfect living space!',
+      },
+    ],
   },
   {
     premium: false,
