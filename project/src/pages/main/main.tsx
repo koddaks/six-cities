@@ -9,10 +9,10 @@ type MainProps = {
 };
 
 function Main({ offers }: MainProps): JSX.Element {
-  const [hoveredCardId, setHoveredCardId] = useState<number | null>(null);
+  const [hoveredPlaceCardId, setHoveredPlaceCardId] = useState<number | null>(null);
 
   const handleCardHover = (id: number | null) => {
-    setHoveredCardId(id);
+    setHoveredPlaceCardId(id);
   };
 
 
