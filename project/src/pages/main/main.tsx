@@ -3,18 +3,21 @@ import PlacesCardList from '../../components/cities-card-list/place-card-list';
 import Locations from '../../components/locations/locations';
 import PlacesSorting from '../../components/plases-sorting/places-sorting';
 import { Offer } from '../../types';
+import Map from '../../components/map/map';
+import { CITY } from '../../mock/city';
 
 type MainProps = {
   offers: Offer[];
 };
 
 function Main({ offers }: MainProps): JSX.Element {
-  const [hoveredPlaceCardId, setHoveredPlaceCardId] = useState<number | null>(null);
+  const [hoveredPlaceCardId, setHoveredPlaceCardId] = useState<number | null>(
+    null
+  );
 
   const handleCardHover = (id: number | null) => {
     setHoveredPlaceCardId(id);
   };
-
 
   return (
     <div className="page page--gray page--main">
@@ -63,7 +66,7 @@ function Main({ offers }: MainProps): JSX.Element {
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
-          <Locations/>
+          <Locations />
         </div>
         <div className="cities">
           <div className="cities__places-container container">
@@ -72,11 +75,12 @@ function Main({ offers }: MainProps): JSX.Element {
               <b className="places__found">
                 {offers.length} places to stay in Amsterdam
               </b>
-              <PlacesSorting/>
+              <PlacesSorting />
               <PlacesCardList offers={offers} onCardHover={handleCardHover} />
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              {/* <section className="cities__map map"></section> */}
+              <Map city={CITY}/>
             </div>
           </div>
         </div>
