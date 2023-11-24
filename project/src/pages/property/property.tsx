@@ -14,9 +14,9 @@ function Property({ offers }: PropertyProps): JSX.Element {
   const navigate = useNavigate();
 
   const property = offers.find((offer) => offer.id.toString() === id);
-  // const propertiesInNeighbourhood = offers.filter(
-  //   (offer) => offer.id.toString() !== id
-  // );
+  const propertiesInNeighbourhood = offers.filter(
+    (offer) => offer.id.toString() !== id
+  );
 
   useEffect(() => {
     if (!property) {
@@ -121,7 +121,7 @@ function Property({ offers }: PropertyProps): JSX.Element {
           <section className="property__map map"></section>
         </section>
         <div className="container">
-          <NearPlaces />
+          <NearPlaces propertiesInNeighbourhood={propertiesInNeighbourhood} />
         </div>
       </main>
     </div>
