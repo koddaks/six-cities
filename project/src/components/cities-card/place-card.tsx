@@ -5,23 +5,46 @@ import { AppRoute } from '../../const';
 export type PlaceCardProps = {
   offer: Offer;
   onCardHover: (id: number | null) => void;
+  cardType?: 'cities' | 'favorites' | 'nearPlaces';
 };
 
-function PlaceCard(props: PlaceCardProps): JSX.Element {
+function PlaceCard({
+  offer,
+  onCardHover,
+  cardType = 'cities',
+}: PlaceCardProps): JSX.Element {
   const { premium, src, value, isFavorite, housingType, cardName, rating, id } =
-    props.offer;
+    offer;
+
+  const cardArticleTypeClass =
+    {
+      cities: 'cities__card',
+      nearPlaces: 'near-places__card',
+      favorites: 'favorites__card',
+    }[cardType] || 'cities__card';
+
+  const articleClassNames = `${cardArticleTypeClass} place-card`;
+
+  const imageWrapperTypeClass =
+    {
+      cities: 'cities__image-wrapper',
+      nearPlaces: 'near-places__image-wrapper',
+      favorites: 'favorites__image-wrapper',
+    }[cardType] || 'cities__card';
+
+  const imageWrapperClassNames = `${imageWrapperTypeClass} place-card__image-wrapper`;
 
   const handleMouseOver = () => {
-    props.onCardHover(id);
+    onCardHover(id);
   };
 
   const handleMouseLeave = () => {
-    props.onCardHover(null);
+    onCardHover(null);
   };
 
   return (
     <article
-      className="cities__card place-card"
+      className={articleClassNames}
       onMouseOver={handleMouseOver}
       onMouseLeave={handleMouseLeave}
     >
@@ -30,7 +53,7 @@ function PlaceCard(props: PlaceCardProps): JSX.Element {
           <span>Premium</span>
         </div>
       )}
-      <div className="cities__image-wrapper place-card__image-wrapper">
+      <div className={imageWrapperClassNames}>
         <Link key={id} to={`${AppRoute.Property}/${id}`}>
           <img
             className="place-card__image"
