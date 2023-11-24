@@ -22,7 +22,7 @@ export const placeCardsMock: Offer[] = [
         userId: 1,
         username: 'Max',
         userPhoto: 'img/avatar-max.jpg',
-        date: new Date('2023-11-24'),
+        date: '2023-11-24',
         rating: 80,
         comment:
           'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.',
@@ -32,7 +32,7 @@ export const placeCardsMock: Offer[] = [
         userId: 2,
         username: 'Angel',
         userPhoto: 'img/avatar-angelina.jpg',
-        date: new Date('2023-11-24'),
+        date: '2023-11-24',
         rating: 100,
         comment:
           'Charming apartments with a view – perfect living space!',
