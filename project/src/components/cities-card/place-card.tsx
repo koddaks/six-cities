@@ -1,4 +1,6 @@
+import { Link } from 'react-router-dom';
 import { Offer } from '../../types';
+import { AppRoute } from '../../const';
 
 export type PlaceCardProps = {
   offer: Offer;
@@ -6,17 +8,8 @@ export type PlaceCardProps = {
 };
 
 function PlaceCard(props: PlaceCardProps): JSX.Element {
-  const {
-    premium,
-    src,
-    value,
-    isFavorite,
-    housingType,
-    cardName,
-    cardLink,
-    rating,
-    id,
-  } = props.offer;
+  const { premium, src, value, isFavorite, housingType, cardName, rating, id } =
+    props.offer;
 
   const handleMouseOver = () => {
     props.onCardHover(id);
@@ -38,7 +31,7 @@ function PlaceCard(props: PlaceCardProps): JSX.Element {
         </div>
       )}
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <a href={cardLink}>
+        <Link key={id} to={`${AppRoute.Property}/${id}`}>
           <img
             className="place-card__image"
             src={src}
@@ -46,7 +39,7 @@ function PlaceCard(props: PlaceCardProps): JSX.Element {
             height="200"
             alt="Place view"
           />
-        </a>
+        </Link>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
@@ -73,7 +66,9 @@ function PlaceCard(props: PlaceCardProps): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href={cardLink}>{cardName}</a>
+          <Link key={id} to={`${AppRoute.Property}/${id}`}>
+            {cardName}
+          </Link>
         </h2>
         <p className="place-card__type">{housingType}</p>
       </div>
