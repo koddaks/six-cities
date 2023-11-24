@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import PlacesCardList from '../../components/cities-card-list/place-card-list';
 import Locations from '../../components/locations/locations';
 import PlacesSorting from '../../components/plases-sorting/places-sorting';
@@ -8,6 +9,13 @@ type MainProps = {
 };
 
 function Main({ offers }: MainProps): JSX.Element {
+  const [hoveredCardId, setHoveredCardId] = useState<number | null>(null);
+
+  const handleCardHover = (id: number | null) => {
+    setHoveredCardId(id);
+  };
+
+
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -65,7 +73,7 @@ function Main({ offers }: MainProps): JSX.Element {
                 {offers.length} places to stay in Amsterdam
               </b>
               <PlacesSorting/>
-              <PlacesCardList offers={offers} />
+              <PlacesCardList offers={offers} onCardHover={handleCardHover} />
             </section>
             <div className="cities__right-section">
               <section className="cities__map map"></section>
