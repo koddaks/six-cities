@@ -1,4 +1,6 @@
+import { Link } from 'react-router-dom';
 import { Offer } from '../../types';
+import { AppRoute } from '../../const';
 
 type FavoritesListProps = {
   favoriteOffers: Offer[];
@@ -30,7 +32,10 @@ function FavoritesList({ favoriteOffers }: FavoritesListProps) {
                 )}
 
                 <div className="favorites__image-wrapper place-card__image-wrapper">
-                  <a href={filteredOffer.cardLink}>
+                  <Link
+                    key={filteredOffer.id}
+                    to={`${AppRoute.Property}/${filteredOffer.id}`}
+                  >
                     <img
                       className="place-card__image"
                       src={filteredOffer.src}
@@ -38,7 +43,7 @@ function FavoritesList({ favoriteOffers }: FavoritesListProps) {
                       height="110"
                       alt="Place"
                     />
-                  </a>
+                  </Link>
                 </div>
                 <div className="favorites__card-info place-card__info">
                   <div className="place-card__price-wrapper">
@@ -75,9 +80,12 @@ function FavoritesList({ favoriteOffers }: FavoritesListProps) {
                     </div>
                   </div>
                   <h2 className="place-card__name">
-                    <a href={filteredOffer.cardLink}>
+                    <Link
+                      key={filteredOffer.id}
+                      to={`${AppRoute.Property}/${filteredOffer.id}`}
+                    >
                       {filteredOffer.cardName}
-                    </a>
+                    </Link>
                   </h2>
                   <p className="place-card__type">
                     {filteredOffer.housingType}
