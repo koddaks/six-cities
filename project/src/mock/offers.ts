@@ -12,8 +12,8 @@ export const placeCardsMock: Offer[] = [
     rating: 80,
     id: 1,
     location: {
-      longitude: 52.3909553943508,
-      latitude: 4.85309666406198,
+      latitude: 52.3909553943508,
+      longitude: 4.85309666406198,
       zoom: 10,
     },
   },
@@ -29,6 +29,11 @@ export const placeCardsMock: Offer[] = [
     id: 2,
     bedrooms: 5,
     maxAdults: 5,
+    location: {
+      latitude: 52.3609553943508,
+      longitude: 4.85309666406198,
+      zoom: 10,
+    },
   },
   {
     premium: false,
@@ -40,6 +45,11 @@ export const placeCardsMock: Offer[] = [
     cardLink: '#',
     rating: 80,
     id: 3,
+    location: {
+      latitude: 52.3909553943508,
+      longitude: 4.929309666406198,
+      zoom: 10,
+    },
   },
   {
     premium: true,
@@ -51,16 +61,10 @@ export const placeCardsMock: Offer[] = [
     cardLink: '#',
     rating: 100,
     id: 4,
-  },
-  {
-    premium: false,
-    src: 'img/room.jpg',
-    value: 80,
-    isFavorite: false,
-    housingType: 'Private room',
-    cardName: 'Wood and stone place',
-    cardLink: '#',
-    rating: 80,
-    id: 5,
+    location: {
+      latitude: 52.3809553943508,
+      longitude: 4.939309666406198,
+      zoom: 10,
+    },
   },
 ];
