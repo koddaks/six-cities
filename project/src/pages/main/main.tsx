@@ -79,8 +79,9 @@ function Main({ offers }: MainProps): JSX.Element {
               <PlacesCardList offers={offers} onCardHover={handleCardHover} />
             </section>
             <div className="cities__right-section">
-              {/* <section className="cities__map map"></section> */}
-              <Map city={CITY}/>
+              <section className="cities__map map">
+                <Map city={CITY} />
+              </section>
             </div>
           </div>
         </div>
