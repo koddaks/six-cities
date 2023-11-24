@@ -111,7 +111,7 @@ function Property({ offers }: PropertyProps): JSX.Element {
           </div>
           <div className="property__container container">
             {property ? <PropertyDescriptionList offer={property} /> : null}
-            <Reviews />
+            <Reviews reviews={property?.reviews}/>
           </div>
 
           <section className="property__map map"></section>
