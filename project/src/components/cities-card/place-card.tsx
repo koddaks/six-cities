@@ -6,12 +6,14 @@ export type PlaceCardProps = {
   offer: Offer;
   setActiveCard: (id: number | null) => void;
   cardType?: 'cities' | 'favorites' | 'nearPlaces';
+  onClick?: () => void;
 };
 
 function PlaceCard({
   offer,
   setActiveCard,
   cardType = 'cities',
+  onClick,
 }: PlaceCardProps): JSX.Element {
   const { premium, src, value, isFavorite, housingType, cardName, rating, id } =
     offer;
@@ -47,6 +49,7 @@ function PlaceCard({
       className={articleClassNames}
       onMouseOver={handleMouseOver}
       onMouseLeave={handleMouseLeave}
+      onClick={onClick}
     >
       {premium && (
         <div className="place-card__mark">

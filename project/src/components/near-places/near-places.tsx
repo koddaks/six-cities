@@ -9,6 +9,10 @@ type NearPlacesProps = {
 function NearPlaces({ propertiesInNeighbourhood, setActiveCard }: NearPlacesProps) {
   // console.log(propertiesInNeighbourhood);
 
+  const handleScrollPageToTop = () => {
+    window.scrollTo(0, 0);
+  };
+
   return (
     <section className="near-places places">
       <h2 className="near-places__title">Other places in the neighbourhood</h2>
@@ -19,6 +23,8 @@ function NearPlaces({ propertiesInNeighbourhood, setActiveCard }: NearPlacesProp
               key={offer.id}
               offer={offer}
               setActiveCard={setActiveCard}
+              cardType='nearPlaces'
+              onClick={() => handleScrollPageToTop()}
             />
           ))}
       </div>
