@@ -2,7 +2,7 @@ import { Offer } from '../../types';
 import PlaceCard from '../cities-card/place-card';
 
 type NearPlacesProps = {
-  propertiesInNeighbourhood: Offer[] | undefined;
+  propertiesInNeighbourhood?: Offer[] | undefined;
 };
 
 function NearPlaces({ propertiesInNeighbourhood }: NearPlacesProps) {
@@ -12,9 +12,9 @@ function NearPlaces({ propertiesInNeighbourhood }: NearPlacesProps) {
     <section className="near-places places">
       <h2 className="near-places__title">Other places in the neighbourhood</h2>
       <div className="near-places__list places__list">
-        {propertiesInNeighbourhood.map((offer) => {
-          // <PlaceCard key={property.id} offer={offer} />;
-        })}
+        {propertiesInNeighbourhood && propertiesInNeighbourhood.map((offer) => (
+          <PlaceCard key={property.id} offer={offer} />;
+        ))}
       </div>
     </section>
   );
