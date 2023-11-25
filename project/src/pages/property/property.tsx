@@ -1,9 +1,11 @@
 import { useNavigate, useParams } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Offer } from '../../types';
 import PropertyDescriptionList from '../../components/property-description-list/property-description-list';
 import Reviews from '../../components/reviews/reviews';
 import NearPlaces from '../../components/near-places/near-places';
+import Map from '../../components/map/map';
+import { CITY } from '../../mock/city';
 
 type PropertyProps = {
   offers: Offer[];
@@ -13,6 +15,13 @@ type PropertyProps = {
 function Property({ offers, setActiveCard }: PropertyProps): JSX.Element {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const [hoveredPlaceCardId, setHoveredPlaceCardId] = useState<number | null>(
+    null
+  );
+
+  const handleCardHover = (cardId: number | null) => {
+    setHoveredPlaceCardId(cardId);
+  };
 
   const property = offers.find((offer) => offer.id.toString() === id);
   const propertiesInNeighbourhood = offers.filter(
@@ -119,10 +128,12 @@ function Property({ offers, setActiveCard }: PropertyProps): JSX.Element {
             <Reviews reviews={property?.reviews} />
           </div>
 
-          <section className="property__map map"></section>
+          <section className="property__map map">
+            <Map city={CITY} offers={propertiesInNeighbourhood} placeLocationId={hoveredPlaceCardId}/>
+          </section>
         </section>
         <div className="container">
-          <NearPlaces propertiesInNeighbourhood={propertiesInNeighbourhood} setActiveCard={setActiveCard} />
+          <NearPlaces propertiesInNeighbourhood={propertiesInNeighbourhood} setActiveCard={handleCardHover} />
         </div>
       </main>
     </div>

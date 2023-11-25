@@ -7,7 +7,7 @@ type NearPlacesProps = {
 };
 
 function NearPlaces({ propertiesInNeighbourhood, setActiveCard }: NearPlacesProps) {
-  // console.log(propertiesInNeighbourhood);
+  console.log(propertiesInNeighbourhood);
 
   const handleScrollPageToTop = () => {
     window.scrollTo({
