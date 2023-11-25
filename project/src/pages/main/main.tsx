@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import PlacesCardList from '../../components/cities-card-list/place-card-list';
 import Locations from '../../components/locations/locations';
 import PlacesSorting from '../../components/plases-sorting/places-sorting';
@@ -8,17 +7,15 @@ import { CITY } from '../../mock/city';
 
 type MainProps = {
   offers: Offer[];
+  setActiveCard(id: number | null): void;
+  hoveredPlaceCardId: number | null;
 };
 
-function Main({ offers }: MainProps): JSX.Element {
-  const [hoveredPlaceCardId, setHoveredPlaceCardId] = useState<number | null>(
-    null
-  );
-
-  const handleCardHover = (id: number | null) => {
-    setHoveredPlaceCardId(id);
-  };
-
+function Main({
+  offers,
+  setActiveCard,
+  hoveredPlaceCardId,
+}: MainProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -76,11 +73,15 @@ function Main({ offers }: MainProps): JSX.Element {
                 {offers.length} places to stay in Amsterdam
               </b>
               <PlacesSorting />
-              <PlacesCardList offers={offers} onCardHover={handleCardHover} />
+              <PlacesCardList offers={offers} setActiveCard={setActiveCard} />
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
-                <Map city={CITY} placeLocationId={hoveredPlaceCardId} offers={offers} />
+                <Map
+                  city={CITY}
+                  placeLocationId={hoveredPlaceCardId}
+                  offers={offers}
+                />
               </section>
             </div>
           </div>

@@ -4,13 +4,13 @@ import { AppRoute } from '../../const';
 
 export type PlaceCardProps = {
   offer: Offer;
-  onCardHover: (id: number | null) => void;
+  setActiveCard: (id: number | null) => void;
   cardType?: 'cities' | 'favorites' | 'nearPlaces';
 };
 
 function PlaceCard({
   offer,
-  onCardHover,
+  setActiveCard,
   cardType = 'cities',
 }: PlaceCardProps): JSX.Element {
   const { premium, src, value, isFavorite, housingType, cardName, rating, id } =
@@ -35,11 +35,11 @@ function PlaceCard({
   const imageWrapperClassNames = `${imageWrapperTypeClass} place-card__image-wrapper`;
 
   const handleMouseOver = () => {
-    onCardHover(id);
+    setActiveCard(id);
   };
 
   const handleMouseLeave = () => {
-    onCardHover(null);
+    setActiveCard(null);
   };
 
   return (

@@ -7,16 +7,24 @@ import Page404 from '../../pages/page404/page404';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import PrivateRoute from '../private-route/private-route';
 import { Offer } from '../../types';
+import { useState } from 'react';
 
 export type AppProps = {
   offers: Offer[];
 };
 
 function App({ offers }: AppProps): JSX.Element {
+  const [hoveredPlaceCardId, setHoveredPlaceCardId] = useState<number | null>(
+    null
+  );
+
+  const handleCardHover = (id: number | null) => {
+    setHoveredPlaceCardId(id);
+  };
   return (
     <BrowserRouter>
       <Routes>
-        <Route path={AppRoute.Root} element={<Main offers={offers} />} />
+        <Route path={AppRoute.Root} element={<Main offers={offers} setActiveCard={handleCardHover} hoveredPlaceCardId={hoveredPlaceCardId} />} />
         <Route path={AppRoute.Login} element={<LogIn />} />
         <Route
           path={AppRoute.Favorites}
@@ -28,7 +36,7 @@ function App({ offers }: AppProps): JSX.Element {
         />
         <Route
           path={`${AppRoute.Property}/:id`}
-          element={<Property offers={offers} />}
+          element={<Property offers={offers} setActiveCard={handleCardHover} />}
         />
         <Route path="*" element={<Page404 />} />
       </Routes>

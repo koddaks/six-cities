@@ -7,9 +7,10 @@ import NearPlaces from '../../components/near-places/near-places';
 
 type PropertyProps = {
   offers: Offer[];
+  setActiveCard(id: number | null): void;
 };
 
-function Property({ offers }: PropertyProps): JSX.Element {
+function Property({ offers, setActiveCard }: PropertyProps): JSX.Element {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
 
@@ -121,7 +122,7 @@ function Property({ offers }: PropertyProps): JSX.Element {
           <section className="property__map map"></section>
         </section>
         <div className="container">
-          <NearPlaces propertiesInNeighbourhood={propertiesInNeighbourhood} />
+          <NearPlaces propertiesInNeighbourhood={propertiesInNeighbourhood} setActiveCard={setActiveCard} />
         </div>
       </main>
     </div>
