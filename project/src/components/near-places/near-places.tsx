@@ -6,8 +6,10 @@ type NearPlacesProps = {
   setActiveCard(id: number | null): void;
 };
 
-function NearPlaces({ propertiesInNeighbourhood, setActiveCard }: NearPlacesProps) {
-
+function NearPlaces({
+  propertiesInNeighbourhood,
+  setActiveCard,
+}: NearPlacesProps) {
   const handleScrollPageToTop = () => {
     window.scrollTo({
       top: 0,
@@ -25,7 +27,7 @@ function NearPlaces({ propertiesInNeighbourhood, setActiveCard }: NearPlacesProp
               key={offer.id}
               offer={offer}
               setActiveCard={setActiveCard}
-              cardType='nearPlaces'
+              cardType="nearPlaces"
               handleScrollPageToTop={handleScrollPageToTop}
             />
           ))}
