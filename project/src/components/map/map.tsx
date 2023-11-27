@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import useMap from '../../hooks/useMap';
-import leaflet from 'leaflet';
+import leaflet, { latLng } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { URL_MARKER_CURRENT, URL_MARKER_DEFAULT } from '../../const';
 import { Offer } from '../../types';
@@ -39,6 +39,12 @@ function Map({ city, offers, placeLocationId }: MapProps) {
     };
 
     if (map) {
+      map.eachLayer((layer) => {
+        if (layer instanceof leaflet.Marker) {
+          map.removeLayer(layer);
+        }
+      });
+
       offers.forEach((point) => {
         leaflet
           .marker(
