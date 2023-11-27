@@ -61,13 +61,19 @@ function PlaceCard({
           <img
             className="place-card__image"
             src={src}
-            width="260"
-            height="200"
+            style={{
+              width: cardType === 'favorites' ? '150px' : '260px',
+              height: cardType === 'favorites' ? '110px' : '200px',
+            }}
             alt="Place view"
           />
         </Link>
       </div>
-      <div className="place-card__info">
+      <div
+        className={`${
+          cardType === 'favorites' ? 'favorites__card-info' : ''
+        } place-card__info`}
+      >
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;{value}</b>
@@ -92,9 +98,7 @@ function PlaceCard({
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={`${AppRoute.Property}/${id}`}>
-            {cardName}
-          </Link>
+          <Link to={`${AppRoute.Property}/${id}`}>{cardName}</Link>
         </h2>
         <p className="place-card__type">{housingType}</p>
       </div>
