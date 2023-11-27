@@ -47,7 +47,11 @@ function Map({ city, offers, placeLocationId }: MapProps) {
         }
       });
 
-      offers.forEach((point) => {
+      const propertiesInNeighbourhood = offers.filter(
+        (offer) => offer.id.toString() !== id
+      );
+
+      propertiesInNeighbourhood.forEach((point) => {
         leaflet
           .marker(
             {
@@ -64,37 +68,39 @@ function Map({ city, offers, placeLocationId }: MapProps) {
           .addTo(map);
       });
 
-      const currentProperty = offers.find(
-        (offer) => offer.id.toString() === id
-      );
-      if (currentProperty) {
-        leaflet
-          .circle(
-            {
-              lat: currentProperty.location.latitude,
-              lng: currentProperty.location.longitude,
-            },
-            {
-              color: 'steelblue',
-              radius: 5000,
-              fillColor: 'steelblue',
-              opacity: 0.5,
-            }
-          )
-          .addTo(map);
+      // Add circle by useRef id to current property which rendered on page
 
-        leaflet
-          .marker(
-            {
-              lat: currentProperty.location.latitude,
-              lng: currentProperty.location.longitude,
-            },
-            {
-              icon: leaflet.icon(currentCustomIcon),
-            }
-          )
-          .addTo(map);
-      }
+      // const currentProperty = offers.find(
+      //   (offer) => offer.id.toString() === id
+      // );
+      // if (currentProperty) {
+      //   leaflet
+      //     .circle(
+      //       {
+      //         lat: currentProperty.location.latitude,
+      //         lng: currentProperty.location.longitude,
+      //       },
+      //       {
+      //         color: 'steelblue',
+      //         radius: 5000,
+      //         fillColor: 'steelblue',
+      //         opacity: 0.5,
+      //       }
+      //     )
+      //     .addTo(map);
+
+      //   leaflet
+      //     .marker(
+      //       {
+      //         lat: currentProperty.location.latitude,
+      //         lng: currentProperty.location.longitude,
+      //       },
+      //       {
+      //         icon: leaflet.icon(currentCustomIcon),
+      //       }
+      //     )
+      //     .addTo(map);
+      // }
     }
   }, [map, offers, placeLocationId, id]);
 
@@ -102,7 +108,7 @@ function Map({ city, offers, placeLocationId }: MapProps) {
     <div
       style={{ height: '100%', maxWidth: '1144px', margin: '0 auto' }}
       ref={mapRef}
-    ></div>
+    />
   );
 }
 
