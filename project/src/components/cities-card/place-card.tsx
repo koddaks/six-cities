@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Offer } from '../../types';
-import { AppRoute } from '../../const';
+import { AppRoute, PLACE_CARD_CLASS_NAMES_MAP } from '../../const';
 
 export type PlaceCardProps = {
   offer: Offer;
@@ -18,23 +18,11 @@ function PlaceCard({
   const { premium, src, value, isFavorite, housingType, cardName, rating, id } =
     offer;
 
-  const cardArticleTypeClass =
-    {
-      cities: 'cities__card',
-      nearPlaces: 'near-places__card',
-      favorites: 'favorites__card',
-    }[cardType];
-
-  const articleClassNames = `${cardArticleTypeClass} place-card`;
-
-  const imageWrapperTypeClass =
-    {
-      cities: 'cities__image-wrapper',
-      nearPlaces: 'near-places__image-wrapper',
-      favorites: 'favorites__image-wrapper',
-    }[cardType];
-
-  const imageWrapperClassNames = `${imageWrapperTypeClass} place-card__image-wrapper`;
+  const articleClassNames =
+    PLACE_CARD_CLASS_NAMES_MAP[cardType]?.article || 'place-card';
+  const imageWrapperClassNames =
+    PLACE_CARD_CLASS_NAMES_MAP[cardType]?.imageWrapper ||
+    'place-card__image-wrapper';
 
   const handleMouseOver = () => {
     setActiveCard(id);
