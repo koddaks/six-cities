@@ -18,13 +18,22 @@ function App({ offers }: AppProps): JSX.Element {
     null
   );
 
-  const handleCardHover = (id: number | null) => {
+  const setActiveCard = (id: number | null) => {
     setHoveredPlaceCardId(id);
   };
   return (
     <BrowserRouter>
       <Routes>
-        <Route path={AppRoute.Root} element={<Main offers={offers} setActiveCard={handleCardHover} hoveredPlaceCardId={hoveredPlaceCardId} />} />
+        <Route
+          path={AppRoute.Root}
+          element={
+            <Main
+              offers={offers}
+              setActiveCard={setActiveCard}
+              hoveredPlaceCardId={hoveredPlaceCardId}
+            />
+          }
+        />
         <Route path={AppRoute.Login} element={<LogIn />} />
         <Route
           path={AppRoute.Favorites}
@@ -36,7 +45,7 @@ function App({ offers }: AppProps): JSX.Element {
         />
         <Route
           path={`${AppRoute.Property}/:id`}
-          element={<Property offers={offers} setActiveCard={handleCardHover} />}
+          element={<Property offers={offers} />}
         />
         <Route path="*" element={<Page404 />} />
       </Routes>
