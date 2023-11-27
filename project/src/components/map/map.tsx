@@ -4,6 +4,7 @@ import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { URL_MARKER_CURRENT, URL_MARKER_DEFAULT } from '../../const';
 import { Offer } from '../../types';
+import { useParams } from 'react-router-dom';
 type City = {
   lat: number;
   lng: number;
@@ -24,6 +25,7 @@ type CustomIconOptionsTemplate = {
 function Map({ city, offers, placeLocationId }: MapProps) {
   const mapRef = useRef(null);
   const map = useMap({ mapRef, city });
+  const { id } = useParams<{ id: string }>();
 
   useEffect(() => {
     const defaultCustomIcon: CustomIconOptionsTemplate = {
@@ -61,11 +63,47 @@ function Map({ city, offers, placeLocationId }: MapProps) {
           )
           .addTo(map);
       });
+
+      const currentProperty = offers.find(
+        (offer) => offer.id.toString() === id
+      );
+      if (currentProperty) {
+        leaflet
+          .circle(
+            {
+              lat: currentProperty.location.latitude,
+              lng: currentProperty.location.longitude,
+            },
+            {
+              color: 'steelblue',
+              radius: 5000,
+              fillColor: 'steelblue',
+              opacity: 0.5,
+            }
+          )
+          .addTo(map);
+
+        leaflet
+          .marker(
+            {
+              lat: currentProperty.location.latitude,
+              lng: currentProperty.location.longitude,
+            },
+            {
+              icon: leaflet.icon(currentCustomIcon),
+            }
+          )
+          .addTo(map);
+      }
     }
-  }, [map, offers, placeLocationId]);
+  }, [map, offers, placeLocationId, id]);
 
-  return <div style={{ height: '100%', maxWidth: '1144px', margin: '0 auto' }} ref={mapRef}></div>;
-
+  return (
+    <div
+      style={{ height: '100%', maxWidth: '1144px', margin: '0 auto' }}
+      ref={mapRef}
+    ></div>
+  );
 }
 
 export default Map;
