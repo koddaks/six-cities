@@ -129,7 +129,7 @@ function Property({ offers, setActiveCard }: PropertyProps): JSX.Element {
           </div>
 
           <section className="property__map map">
-            <Map city={CITY} offers={propertiesInNeighbourhood} placeLocationId={hoveredPlaceCardId}/>
+            <Map city={CITY} offers={offers} placeLocationId={hoveredPlaceCardId}/>
           </section>
         </section>
         <div className="container">
