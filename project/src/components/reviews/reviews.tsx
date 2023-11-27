@@ -31,9 +31,10 @@ function Reviews({ reviews }: ReviewsProps) {
   return (
     <section className="property__reviews reviews">
       <h2 className="reviews__title">
-        Reviews &middot; <span className="reviews__amount">{reviews?.length}</span>
+        Reviews &middot;{' '}
+        <span className="reviews__amount">{reviews?.length}</span>
       </h2>
-      <ReviewsList reviews={reviews}/>
+      <ReviewsList reviews={reviews} />
       <form
         onSubmit={handleSubmit}
         className="reviews__form form"

@@ -33,7 +33,9 @@ function PropertyDescriptionList({ offer }: PropertyDescriptionListProps) {
         >
           <svg
             className={`${
-              isFavorite ? 'place-card__bookmark-icon' : 'property__bookmark-icon'
+              isFavorite
+                ? 'place-card__bookmark-icon'
+                : 'property__bookmark-icon'
             }`}
             width="31"
             height="33"

@@ -128,11 +128,18 @@ function Property({ offers }: PropertyProps): JSX.Element {
           </div>
 
           <section className="property__map map">
-            <Map city={CITY} offers={offers} placeLocationId={hoveredPlaceCardId}/>
+            <Map
+              city={CITY}
+              offers={offers}
+              placeLocationId={hoveredPlaceCardId}
+            />
           </section>
         </section>
         <div className="container">
-          <NearPlaces propertiesInNeighbourhood={propertiesInNeighbourhood} setActiveCard={setActiveCard} />
+          <NearPlaces
+            propertiesInNeighbourhood={propertiesInNeighbourhood}
+            setActiveCard={setActiveCard}
+          />
         </div>
       </main>
     </div>

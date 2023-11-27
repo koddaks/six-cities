@@ -34,8 +34,7 @@ export const placeCardsMock: Offer[] = [
         userPhoto: 'img/avatar-angelina.jpg',
         date: '2023-12-24',
         rating: 80,
-        comment:
-          'Charming apartments with a view – perfect living space!',
+        comment: 'Charming apartments with a view – perfect living space!',
       },
     ],
   },
