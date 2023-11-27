@@ -64,7 +64,8 @@ function Map({ city, offers, placeLocationId }: MapProps) {
     }
   }, [map, offers, placeLocationId]);
 
-  return <div style={{ height: '100%' }} ref={mapRef}></div>;
+  return <div style={{ height: '100%', maxWidth: '1144px', margin: '0 auto' }} ref={mapRef}></div>;
+
 }
 
 export default Map;
