@@ -23,7 +23,7 @@ function PlaceCard({
       cities: 'cities__card',
       nearPlaces: 'near-places__card',
       favorites: 'favorites__card',
-    }[cardType] || 'cities__card';
+    }[cardType];
 
   const articleClassNames = `${cardArticleTypeClass} place-card`;
 
@@ -32,7 +32,7 @@ function PlaceCard({
       cities: 'cities__image-wrapper',
       nearPlaces: 'near-places__image-wrapper',
       favorites: 'favorites__image-wrapper',
-    }[cardType] || 'cities__card';
+    }[cardType];
 
   const imageWrapperClassNames = `${imageWrapperTypeClass} place-card__image-wrapper`;
 
