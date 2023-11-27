@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import useMap from '../../hooks/useMap';
-import leaflet, { latLng } from 'leaflet';
+import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { URL_MARKER_CURRENT, URL_MARKER_DEFAULT } from '../../const';
 import { Offer } from '../../types';
