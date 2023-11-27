@@ -9,17 +9,16 @@ import { CITY } from '../../mock/city';
 
 type PropertyProps = {
   offers: Offer[];
-  setActiveCard(id: number | null): void;
 };
 
-function Property({ offers, setActiveCard }: PropertyProps): JSX.Element {
+function Property({ offers }: PropertyProps): JSX.Element {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const [hoveredPlaceCardId, setHoveredPlaceCardId] = useState<number | null>(
     null
   );
 
-  const handleCardHover = (cardId: number | null) => {
+  const setActiveCard = (cardId: number | null) => {
     setHoveredPlaceCardId(cardId);
   };
 
@@ -133,7 +132,7 @@ function Property({ offers, setActiveCard }: PropertyProps): JSX.Element {
           </section>
         </section>
         <div className="container">
-          <NearPlaces propertiesInNeighbourhood={propertiesInNeighbourhood} setActiveCard={handleCardHover} />
+          <NearPlaces propertiesInNeighbourhood={propertiesInNeighbourhood} setActiveCard={setActiveCard} />
         </div>
       </main>
     </div>
