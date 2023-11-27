@@ -57,7 +57,7 @@ function PlaceCard({
         </div>
       )}
       <div className={imageWrapperClassNames}>
-        <Link key={id} to={`${AppRoute.Property}/${id}`}>
+        <Link to={`${AppRoute.Property}/${id}`}>
           <img
             className="place-card__image"
             src={src}
@@ -92,7 +92,7 @@ function PlaceCard({
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link key={id} to={`${AppRoute.Property}/${id}`}>
+          <Link to={`${AppRoute.Property}/${id}`}>
             {cardName}
           </Link>
         </h2>
