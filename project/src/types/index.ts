@@ -29,3 +29,9 @@ export type PropertiesLocation = {
   longitude: number;
   zoom: number;
 };
+
+export type City = {
+  lat: number;
+  lng: number;
+  zoom: number;
+};

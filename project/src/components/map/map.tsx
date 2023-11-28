@@ -3,13 +3,9 @@ import useMap from '../../hooks/useMap';
 import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { URL_MARKER_CURRENT, URL_MARKER_DEFAULT } from '../../const';
-import { Offer } from '../../types';
+import { City, Offer } from '../../types';
 import { useParams } from 'react-router-dom';
-type City = {
-  lat: number;
-  lng: number;
-  zoom: number;
-};
+
 
 type MapProps = {
   city: City;
