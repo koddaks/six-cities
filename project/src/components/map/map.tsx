@@ -6,7 +6,6 @@ import { URL_MARKER_CURRENT, URL_MARKER_DEFAULT } from '../../const';
 import { City, Offer } from '../../types';
 import { useParams } from 'react-router-dom';
 
-
 type MapProps = {
   city: City;
   placeLocationId: number | null;
@@ -63,40 +62,6 @@ function Map({ city, offers, placeLocationId }: MapProps) {
           )
           .addTo(map);
       });
-
-      // Add circle by useRef id to current property which rendered on page
-
-      // const currentProperty = offers.find(
-      //   (offer) => offer.id.toString() === id
-      // );
-      // if (currentProperty) {
-      //   leaflet
-      //     .circle(
-      //       {
-      //         lat: currentProperty.location.latitude,
-      //         lng: currentProperty.location.longitude,
-      //       },
-      //       {
-      //         color: 'steelblue',
-      //         radius: 5000,
-      //         fillColor: 'steelblue',
-      //         opacity: 0.5,
-      //       }
-      //     )
-      //     .addTo(map);
-
-      //   leaflet
-      //     .marker(
-      //       {
-      //         lat: currentProperty.location.latitude,
-      //         lng: currentProperty.location.longitude,
-      //       },
-      //       {
-      //         icon: leaflet.icon(currentCustomIcon),
-      //       }
-      //     )
-      //     .addTo(map);
-      // }
     }
   }, [map, offers, placeLocationId, id]);
 
