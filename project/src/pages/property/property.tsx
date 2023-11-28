@@ -23,15 +23,16 @@ function Property({ offers }: PropertyProps): JSX.Element {
   };
 
   const property = offers.find((offer) => offer.id.toString() === id);
-  const propertiesInNeighbourhood = offers.filter(
-    (offer) => offer.id.toString() !== id
-  );
 
   useEffect(() => {
     if (!property) {
       navigate('/404');
     }
   }, [property, id, navigate]);
+
+  const propertiesInNeighbourhood = offers.filter(
+    (offer) => offer.id.toString() !== id
+  );
 
   return (
     <div className="page">
