@@ -6,7 +6,7 @@ type FavoritesProps = {
 
 function Favorites({ setActiveCard }: FavoritesProps) {
   const favoriteOffers = placeCardsMock.filter(
-    (offer) => offer.isFavorite === true
+    (offer) => offer.isFavorite
   );
 
   return (
