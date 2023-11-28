@@ -2,12 +2,12 @@ import { Offer } from '../../types';
 import PlaceCard from '../cities-card/place-card';
 
 type NearPlacesProps = {
-  propertiesInNeighbourhood?: Offer[] | undefined;
+  offers?: Offer[] | undefined;
   setActiveCard(id: number | null): void;
 };
 
 function NearPlaces({
-  propertiesInNeighbourhood,
+  offers,
   setActiveCard,
 }: NearPlacesProps) {
   const handleScrollPageToTop = () => {
@@ -21,8 +21,8 @@ function NearPlaces({
     <section className="near-places places">
       <h2 className="near-places__title">Other places in the neighbourhood</h2>
       <div className="near-places__list places__list">
-        {propertiesInNeighbourhood &&
-          propertiesInNeighbourhood.map((offer) => (
+        {offers &&
+          offers.map((offer) => (
             <PlaceCard
               key={offer.id}
               offer={offer}

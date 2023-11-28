@@ -138,7 +138,7 @@ function Property({ offers }: PropertyProps): JSX.Element {
         </section>
         <div className="container">
           <NearPlaces
-            propertiesInNeighbourhood={propertiesInNeighbourhood}
+            offers={propertiesInNeighbourhood}
             setActiveCard={setActiveCard}
           />
         </div>
