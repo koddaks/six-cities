@@ -23,9 +23,6 @@ function Property({ offers }: PropertyProps): JSX.Element {
   };
 
   const property = offers.find((offer) => offer.id.toString() === id);
-  const locationOfRentalOffers = offers.filter(
-    (offer) => offer.id.toString() !== id
-  );
 
   useEffect(() => {
     if (!property) {
@@ -33,7 +30,7 @@ function Property({ offers }: PropertyProps): JSX.Element {
     }
   }, [property, id, navigate]);
 
-  const propertiesInNeighbourhood = offers.filter(
+  const locationOfRentalOffers = offers.filter(
     (offer) => offer.id.toString() !== id
   );
 
@@ -141,7 +138,7 @@ function Property({ offers }: PropertyProps): JSX.Element {
         </section>
         <div className="container">
           <NearPlaces
-            offers={propertiesInNeighbourhood}
+            offers={locationOfRentalOffers}
             setActiveCard={setActiveCard}
           />
         </div>
