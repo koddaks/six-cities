@@ -1,5 +1,6 @@
-import { ratingProperty } from '../../const';
+
 import { Review } from '../../types';
+import { ratingProperty } from '../../utils';
 
 type ReviewsListProps = {
   reviews?: Review[];

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
+import { AppRoute } from '../../const';
 import { Offer } from '../../types';
-import { AppRoute, ratingProperty } from '../../const';
+import { ratingProperty } from '../../utils';
 
 export type PlaceCardProps = {
   offer: Offer;

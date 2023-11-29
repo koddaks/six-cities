@@ -1,5 +1,5 @@
-import { ratingProperty } from '../../const';
 import { Offer } from '../../types';
+import { ratingProperty } from '../../utils';
 type PropertyDescriptionListProps = {
   offer: Offer;
 };
