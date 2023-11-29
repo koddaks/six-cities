@@ -42,11 +42,11 @@ function Map({ city, offers, placeLocationId }: MapProps) {
         }
       });
 
-      const propertiesInNeighbourhood = offers.filter(
+      const locationOfRentalOffers = offers.filter(
         (offer) => offer.id.toString() !== id
       );
 
-      propertiesInNeighbourhood.forEach((point) => {
+      locationOfRentalOffers.forEach((point) => {
         leaflet
           .marker(
             {
