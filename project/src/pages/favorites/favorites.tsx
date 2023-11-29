@@ -1,14 +1,16 @@
+import FavoritesEmpty from '../../components/favorites-empty/favorites-empty';
 import FavoritesList from '../../components/favorites-list/favorites-list';
 import { placeCardsMock } from '../../mock/offers';
 
-
 function Favorites() {
-  const favoriteOffers = placeCardsMock.filter(
-    (offer) => offer.isFavorite
-  );
+  const favoriteOffers = placeCardsMock.filter((offer) => offer.isFavorite);
 
   return (
-    <div className="page">
+    <div
+      className={`page ${
+        favoriteOffers.length === 0 ? 'page--favorites-empty' : ''
+      }`}
+    >
       <header className="header">
         <div className="container">
           <div className="header__wrapper">
@@ -48,11 +50,17 @@ function Favorites() {
         </div>
       </header>
 
-      <main className="page__main page__main--favorites">
+      <main
+        className={`page__main page__main--favorites ${
+          favoriteOffers.length === 0 ? 'page__main--favorites-empty' : ''
+        }`}
+      >
         <div className="page__favorites-container container">
-          <FavoritesList
-            favoriteOffers={favoriteOffers}
-          />
+          {favoriteOffers.length === 0 ? (
+            <FavoritesEmpty />
+          ) : (
+            <FavoritesList favoriteOffers={favoriteOffers} />
+          )}
         </div>
       </main>
       <footer className="footer container">
