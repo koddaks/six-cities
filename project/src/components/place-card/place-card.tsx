@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Offer } from '../../types';
-import { AppRoute } from '../../const';
+import { AppRoute, ratingProperty } from '../../const';
 
 export type PlaceCardProps = {
   offer: Offer;
@@ -30,7 +30,7 @@ function PlaceCard({
   cardType = 'cities',
   onCardClick,
 }: PlaceCardProps): JSX.Element {
-  const { premium, src, value, isFavorite, housingType, cardName, rating, id } =
+  const { isPremium, previewImage, price, isFavorite, type, title, rating, id } =
     offer;
 
   const articleClassNames = PLACE_CARD_CLASS_NAMES_MAP[cardType]?.article;
@@ -56,7 +56,7 @@ function PlaceCard({
       onMouseLeave={handleMouseLeave}
       onClick={onCardClick}
     >
-      {premium && (
+      {isPremium && (
         <div className="place-card__mark">
           <span>Premium</span>
         </div>
@@ -65,7 +65,7 @@ function PlaceCard({
         <Link to={`${AppRoute.Property}/${id}`}>
           <img
             className="place-card__image"
-            src={src}
+            src={previewImage}
             style={{
               width: cardType === 'favorites' ? '150px' : '260px',
               height: cardType === 'favorites' ? '110px' : '200px',
@@ -81,7 +81,7 @@ function PlaceCard({
       >
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
-            <b className="place-card__price-value">&euro;{value}</b>
+            <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
           <button
@@ -98,14 +98,14 @@ function PlaceCard({
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{ width: `${rating}%` }}></span>
+            <span style={{ width: `${ratingProperty(rating)}%` }}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={`${AppRoute.Property}/${id}`}>{cardName}</Link>
+          <Link to={`${AppRoute.Property}/${id}`}>{title}</Link>
         </h2>
-        <p className="place-card__type">{housingType}</p>
+        <p className="place-card__type">{type}</p>
       </div>
     </article>
   );

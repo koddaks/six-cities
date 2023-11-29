@@ -10,3 +10,6 @@ export enum AuthorizationStatus {
   NoAuth = 'NO_AUTH',
   Unknown = 'UNKNOWN',
 }
+
+export const ratingProperty = (rating: number): string =>
+  ((rating / 5) * 100).toFixed(1);

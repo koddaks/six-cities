@@ -6,6 +6,7 @@ import Reviews from '../../components/reviews/reviews';
 import NearPlaces from '../../components/near-places/near-places';
 import Map from '../../components/map/map';
 import { CITY } from '../../mock/city';
+import { reviews } from '../../mock/reviews';
 
 type PropertyProps = {
   offers: Offer[];
@@ -23,6 +24,7 @@ function Property({ offers }: PropertyProps): JSX.Element {
   };
 
   const rentalOffer = offers.find((offer) => offer.id.toString() === id);
+
 
   useEffect(() => {
     if (!rentalOffer) {
@@ -125,7 +127,7 @@ function Property({ offers }: PropertyProps): JSX.Element {
           </div>
           <div className="property__container container">
             {rentalOffer ? <PropertyDescriptionList offer={rentalOffer} /> : null}
-            <Reviews reviews={rentalOffer?.reviews} />
+            <Reviews reviews={reviews} offerId={id} />
           </div>
 
           <section className="property__map map">

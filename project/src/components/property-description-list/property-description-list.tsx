@@ -1,30 +1,29 @@
+import { ratingProperty } from '../../const';
 import { Offer } from '../../types';
 type PropertyDescriptionListProps = {
   offer: Offer;
 };
 function PropertyDescriptionList({ offer }: PropertyDescriptionListProps) {
-  const ratingProperty = (rating: number): string =>
-    ((rating * 5) / 100).toFixed(1);
   const {
     id,
-    premium,
-    cardName,
+    title,
+    isPremium,
     isFavorite,
     rating,
-    housingType,
+    type,
     bedrooms,
     maxAdults,
-    value,
+    price,
   } = offer;
   return (
     <div key={id} className="property__wrapper">
-      {premium && (
+      {isPremium && (
         <div className="property__mark">
           <span>Premium</span>
         </div>
       )}
       <div className="property__name-wrapper">
-        <h1 className="property__name">{cardName}</h1>
+        <h1 className="property__name">{title}</h1>
         <button
           className={`property__bookmark-button button ${
             isFavorite ? 'property__bookmark-button--active' : ''
@@ -47,17 +46,13 @@ function PropertyDescriptionList({ offer }: PropertyDescriptionListProps) {
       </div>
       <div className="property__rating rating">
         <div className="property__stars rating__stars">
-          <span style={{ width: `${rating}%` }}></span>
+          <span style={{ width: `${ratingProperty(rating)}%` }}></span>
           <span className="visually-hidden">Rating</span>
         </div>
-        <span className="property__rating-value rating__value">
-          {ratingProperty(rating)}
-        </span>
+        <span className="property__rating-value rating__value">{rating}</span>
       </div>
       <ul className="property__features">
-        <li className="property__feature property__feature--entire">
-          {housingType}
-        </li>
+        <li className="property__feature property__feature--entire">{type}</li>
         <li className="property__feature property__feature--bedrooms">
           {bedrooms
             ? `${bedrooms} ${bedrooms > 1 ? 'Bedrooms' : 'Bedroom'}`
@@ -71,7 +66,7 @@ function PropertyDescriptionList({ offer }: PropertyDescriptionListProps) {
         </li>
       </ul>
       <div className="property__price">
-        <b className="property__price-value">&euro;{value}</b>
+        <b className="property__price-value">&euro;{price}</b>
         <span className="property__price-text">&nbsp;night</span>
       </div>
       <div className="property__inside">
