@@ -1,7 +1,7 @@
 import { Review } from '../../types';
 
 type ReviewsListProps = {
-  reviews: Review[] | undefined;
+  reviews?: Review[];
 };
 
 function ReviewsList({ reviews }: ReviewsListProps) {
