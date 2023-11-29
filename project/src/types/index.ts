@@ -59,6 +59,19 @@ export type Review = {
   comment: string;
 };
 
+export type NewReview = {
+  comment: string;
+  date: string;
+  id: number;
+  rating: number;
+  user: {
+    avatarUrl: string;
+    id: number;
+    isPro: boolean;
+    name: string;
+  };
+};
+
 export type PropertiesLocation = {
   latitude: number;
   longitude: number;
