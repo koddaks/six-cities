@@ -1,12 +1,27 @@
 import { Link } from 'react-router-dom';
 import { Offer } from '../../types';
-import { AppRoute, PLACE_CARD_CLASS_NAMES_MAP } from '../../const';
+import { AppRoute} from '../../const';
 
 export type PlaceCardProps = {
   offer: Offer;
   setActiveCard: (id: number | null) => void;
   cardType?: 'cities' | 'favorites' | 'nearPlaces';
   handleScrollPageToTop?: () => void;
+};
+
+export const PLACE_CARD_CLASS_NAMES_MAP = {
+  cities: {
+    article: 'cities__card place-card',
+    imageWrapper: 'cities__image-wrapper place-card__image-wrapper',
+  },
+  nearPlaces: {
+    article: 'near-places__card place-card',
+    imageWrapper: 'near-places__image-wrapper place-card__image-wrapper',
+  },
+  favorites: {
+    article: 'favorites__card place-card',
+    imageWrapper: 'favorites__image-wrapper place-card__image-wrapper',
+  },
 };
 
 function PlaceCard({
@@ -19,10 +34,9 @@ function PlaceCard({
     offer;
 
   const articleClassNames =
-    PLACE_CARD_CLASS_NAMES_MAP[cardType]?.article || 'place-card';
+    PLACE_CARD_CLASS_NAMES_MAP[cardType]?.article;
   const imageWrapperClassNames =
-    PLACE_CARD_CLASS_NAMES_MAP[cardType]?.imageWrapper ||
-    'place-card__image-wrapper';
+    PLACE_CARD_CLASS_NAMES_MAP[cardType]?.imageWrapper;
 
   const handleMouseOver = () => {
     setActiveCard(id);
