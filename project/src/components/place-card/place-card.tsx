@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Offer } from '../../types';
-import { AppRoute} from '../../const';
+import { AppRoute } from '../../const';
 
 export type PlaceCardProps = {
   offer: Offer;
@@ -11,16 +11,16 @@ export type PlaceCardProps = {
 
 export const PLACE_CARD_CLASS_NAMES_MAP = {
   cities: {
-    article: 'cities__card place-card',
-    imageWrapper: 'cities__image-wrapper place-card__image-wrapper',
+    article: 'cities__card',
+    imageWrapper: 'cities__image-wrapper',
   },
   nearPlaces: {
-    article: 'near-places__card place-card',
-    imageWrapper: 'near-places__image-wrapper place-card__image-wrapper',
+    article: 'near-places__card',
+    imageWrapper: 'near-places__image-wrapper',
   },
   favorites: {
-    article: 'favorites__card place-card',
-    imageWrapper: 'favorites__image-wrapper place-card__image-wrapper',
+    article: 'favorites__card',
+    imageWrapper: 'favorites__image-wrapper',
   },
 };
 
@@ -33,8 +33,7 @@ function PlaceCard({
   const { premium, src, value, isFavorite, housingType, cardName, rating, id } =
     offer;
 
-  const articleClassNames =
-    PLACE_CARD_CLASS_NAMES_MAP[cardType]?.article;
+  const articleClassNames = PLACE_CARD_CLASS_NAMES_MAP[cardType]?.article;
   const imageWrapperClassNames =
     PLACE_CARD_CLASS_NAMES_MAP[cardType]?.imageWrapper;
 
@@ -48,7 +47,7 @@ function PlaceCard({
 
   return (
     <article
-      className={articleClassNames}
+      className={`${articleClassNames} place-card`}
       onMouseOver={handleMouseOver}
       onMouseLeave={handleMouseLeave}
       onClick={handleScrollPageToTop}
@@ -58,7 +57,7 @@ function PlaceCard({
           <span>Premium</span>
         </div>
       )}
-      <div className={imageWrapperClassNames}>
+      <div className={`${imageWrapperClassNames} place-card__image-wrapper`}>
         <Link to={`${AppRoute.Property}/${id}`}>
           <img
             className="place-card__image"
