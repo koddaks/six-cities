@@ -4,7 +4,7 @@ import { AppRoute } from '../../const';
 
 export type PlaceCardProps = {
   offer: Offer;
-  setActiveCard: (id: number | null) => void;
+  setActiveCard?: (id: number | null) => void;
   cardType?: 'cities' | 'favorites' | 'nearPlaces';
   handleScrollPageToTop?: () => void;
 };
@@ -38,11 +38,15 @@ function PlaceCard({
     PLACE_CARD_CLASS_NAMES_MAP[cardType]?.imageWrapper;
 
   const handleMouseOver = () => {
-    setActiveCard(id);
+    if(setActiveCard) {
+      setActiveCard(id);
+    }
   };
 
   const handleMouseLeave = () => {
-    setActiveCard(null);
+    if(setActiveCard) {
+      setActiveCard(id);
+    }
   };
 
   return (
