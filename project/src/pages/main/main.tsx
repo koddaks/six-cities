@@ -1,4 +1,4 @@
-import PlacesCardList from '../../components/cities-card-list/place-card-list';
+import PlacesCardList from '../../components/place-card-list/place-card-list';
 import Locations from '../../components/locations/locations';
 import PlacesSorting from '../../components/plases-sorting/places-sorting';
 import { Offer } from '../../types';

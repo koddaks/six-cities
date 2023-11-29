@@ -1,15 +1,12 @@
 import { Offer } from '../../types';
-import PlaceCard from '../cities-card/place-card';
+import PlaceCard from '../place-card/place-card';
 
 type NearPlacesProps = {
   offers?: Offer[] | undefined;
   setActiveCard(id: number | null): void;
 };
 
-function NearPlaces({
-  offers,
-  setActiveCard,
-}: NearPlacesProps) {
+function NearPlaces({ offers, setActiveCard }: NearPlacesProps) {
   const handleScrollPageToTop = () => {
     window.scrollTo({
       top: 0,
