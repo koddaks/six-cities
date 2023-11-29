@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import useMap from '../../hooks/useMap';
-import leaflet from 'leaflet';
+import { Icon, Marker } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { URL_MARKER_CURRENT, URL_MARKER_DEFAULT } from './const';
 import { City, Offer } from '../../types';
@@ -10,23 +10,18 @@ type MapProps = {
   placeLocationId: number | null;
   offers: Offer[];
 };
-type CustomIconOptionsTemplate = {
-  iconUrl: string;
-  iconSize: [number, number];
-  iconAnchor: [number, number];
-};
 
-const defaultCustomIcon: CustomIconOptionsTemplate = {
+const defaultCustomIcon = new Icon({
   iconUrl: URL_MARKER_DEFAULT,
   iconSize: [40, 40],
   iconAnchor: [20, 40],
-};
+});
 
-const currentCustomIcon: CustomIconOptionsTemplate = {
+const currentCustomIcon = new Icon({
   iconUrl: URL_MARKER_CURRENT,
   iconSize: [40, 40],
   iconAnchor: [20, 40],
-};
+});
 
 function Map({ city, offers, placeLocationId }: MapProps) {
   const mapRef = useRef(null);
@@ -35,26 +30,20 @@ function Map({ city, offers, placeLocationId }: MapProps) {
   useEffect(() => {
     if (map) {
       map.eachLayer((layer) => {
-        if (layer instanceof leaflet.Marker) {
+        if (layer instanceof Marker) {
           map.removeLayer(layer);
         }
       });
 
-      offers.forEach((point) => {
-        leaflet
-          .marker(
-            {
-              lat: point.location.latitude,
-              lng: point.location.longitude,
-            },
-            {
-              icon:
-                point.id === placeLocationId
-                  ? leaflet.icon(currentCustomIcon)
-                  : leaflet.icon(defaultCustomIcon),
-            }
-          )
-          .addTo(map);
+      offers.forEach((offer) => {
+        const marker = new Marker({
+          lat: offer.location.latitude,
+          lng: offer.location.longitude,
+        });
+        const icon =
+          offer.id === placeLocationId ? currentCustomIcon : defaultCustomIcon;
+
+        marker.setIcon(icon).addTo(map);
       });
     }
   }, [map, offers, placeLocationId]);
