@@ -1,10 +1,8 @@
 import FavoritesList from '../../components/favorites-list/favorites-list';
 import { placeCardsMock } from '../../mock/offers';
-type FavoritesProps = {
-  setActiveCard: (id: number | null) => void;
-};
 
-function Favorites({ setActiveCard }: FavoritesProps) {
+
+function Favorites() {
   const favoriteOffers = placeCardsMock.filter(
     (offer) => offer.isFavorite
   );
@@ -54,7 +52,6 @@ function Favorites({ setActiveCard }: FavoritesProps) {
         <div className="page__favorites-container container">
           <FavoritesList
             favoriteOffers={favoriteOffers}
-            setActiveCard={setActiveCard}
           />
         </div>
       </main>

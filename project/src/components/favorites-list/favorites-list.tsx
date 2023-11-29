@@ -3,10 +3,9 @@ import PlaceCard from '../place-card/place-card';
 
 type FavoritesListProps = {
   favoriteOffers: Offer[];
-  setActiveCard: (id: number | null) => void;
 };
 
-function FavoritesList({ favoriteOffers, setActiveCard }: FavoritesListProps) {
+function FavoritesList({ favoriteOffers }: FavoritesListProps) {
   return (
     <section className="favorites">
       <h1 className="favorites__title">Saved listing</h1>
@@ -25,7 +24,6 @@ function FavoritesList({ favoriteOffers, setActiveCard }: FavoritesListProps) {
                 key={offer.id}
                 cardType="favorites"
                 offer={offer}
-                setActiveCard={setActiveCard}
               />
             ))}
           </div>
