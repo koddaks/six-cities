@@ -7,20 +7,12 @@ import Page404 from '../../pages/page404/page404';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import PrivateRoute from '../private-route/private-route';
 import { Offer } from '../../types';
-import { useState } from 'react';
 
 export type AppProps = {
   offers: Offer[];
 };
 
 function App({ offers }: AppProps): JSX.Element {
-  const [hoveredPlaceCardId, setHoveredPlaceCardId] = useState<number | null>(
-    null
-  );
-
-  const setActiveCard = (id: number | null) => {
-    setHoveredPlaceCardId(id);
-  };
   return (
     <BrowserRouter>
       <Routes>
@@ -29,8 +21,6 @@ function App({ offers }: AppProps): JSX.Element {
           element={
             <Main
               offers={offers}
-              setActiveCard={setActiveCard}
-              hoveredPlaceCardId={hoveredPlaceCardId}
             />
           }
         />

@@ -4,18 +4,20 @@ import PlacesSorting from '../../components/plases-sorting/places-sorting';
 import { Offer } from '../../types';
 import Map from '../../components/map/map';
 import { CITY } from '../../mock/city';
+import { useState } from 'react';
 
 type MainProps = {
   offers: Offer[];
-  setActiveCard(id: number | null): void;
-  hoveredPlaceCardId: number | null;
 };
 
-function Main({
-  offers,
-  setActiveCard,
-  hoveredPlaceCardId,
-}: MainProps): JSX.Element {
+function Main({ offers }: MainProps): JSX.Element {
+  const [hoveredPlaceCardId, setHoveredPlaceCardId] = useState<number | null>(
+    null
+  );
+
+  const setActiveCard = (id: number | null) => {
+    setHoveredPlaceCardId(id);
+  };
   return (
     <div className="page page--gray page--main">
       <header className="header">
