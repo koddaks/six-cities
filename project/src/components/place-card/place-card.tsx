@@ -6,7 +6,7 @@ export type PlaceCardProps = {
   offer: Offer;
   setActiveCard?: (id: number | null) => void;
   cardType?: 'cities' | 'favorites' | 'nearPlaces';
-  handleScrollPageToTop?: () => void;
+  onCardClick?: () => void;
 };
 
 export const PLACE_CARD_CLASS_NAMES_MAP = {
@@ -28,7 +28,7 @@ function PlaceCard({
   offer,
   setActiveCard,
   cardType = 'cities',
-  handleScrollPageToTop,
+  onCardClick,
 }: PlaceCardProps): JSX.Element {
   const { premium, src, value, isFavorite, housingType, cardName, rating, id } =
     offer;
@@ -54,7 +54,7 @@ function PlaceCard({
       className={`${articleClassNames} place-card`}
       onMouseOver={handleMouseOver}
       onMouseLeave={handleMouseLeave}
-      onClick={handleScrollPageToTop}
+      onClick={onCardClick}
     >
       {premium && (
         <div className="place-card__mark">

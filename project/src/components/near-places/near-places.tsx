@@ -7,7 +7,7 @@ type NearPlacesProps = {
 };
 
 function NearPlaces({ offers, setActiveCard }: NearPlacesProps) {
-  const handleScrollPageToTop = () => {
+  const handleCardClick = () => {
     window.scrollTo({
       top: 0,
       behavior: 'smooth',
@@ -25,7 +25,7 @@ function NearPlaces({ offers, setActiveCard }: NearPlacesProps) {
               offer={offer}
               setActiveCard={setActiveCard}
               cardType="nearPlaces"
-              handleScrollPageToTop={handleScrollPageToTop}
+              onCardClick={handleCardClick}
             />
           ))}
       </div>
