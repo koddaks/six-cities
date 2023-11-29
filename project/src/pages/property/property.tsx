@@ -23,6 +23,9 @@ function Property({ offers }: PropertyProps): JSX.Element {
   };
 
   const property = offers.find((offer) => offer.id.toString() === id);
+  const locationOfRentalOffers = offers.filter(
+    (offer) => offer.id.toString() !== id
+  );
 
   useEffect(() => {
     if (!property) {
@@ -131,7 +134,7 @@ function Property({ offers }: PropertyProps): JSX.Element {
           <section className="property__map map">
             <Map
               city={CITY}
-              offers={offers}
+              offers={locationOfRentalOffers}
               placeLocationId={hoveredPlaceCardId}
             />
           </section>

@@ -4,7 +4,6 @@ import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { URL_MARKER_CURRENT, URL_MARKER_DEFAULT } from '../../const';
 import { City, Offer } from '../../types';
-import { useParams } from 'react-router-dom';
 
 type MapProps = {
   city: City;
@@ -32,7 +31,6 @@ const currentCustomIcon: CustomIconOptionsTemplate = {
 function Map({ city, offers, placeLocationId }: MapProps) {
   const mapRef = useRef(null);
   const map = useMap({ mapRef, city });
-  const { id } = useParams<{ id: string }>();
 
   useEffect(() => {
     if (map) {
@@ -42,11 +40,7 @@ function Map({ city, offers, placeLocationId }: MapProps) {
         }
       });
 
-      const locationOfRentalOffers = offers.filter(
-        (offer) => offer.id.toString() !== id
-      );
-
-      locationOfRentalOffers.forEach((point) => {
+      offers.forEach((point) => {
         leaflet
           .marker(
             {
@@ -63,7 +57,7 @@ function Map({ city, offers, placeLocationId }: MapProps) {
           .addTo(map);
       });
     }
-  }, [map, offers, placeLocationId, id]);
+  }, [map, offers, placeLocationId]);
 
   return (
     <div
