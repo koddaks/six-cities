@@ -1,13 +1,23 @@
-import PlacesCardList from '../../components/cities-card-list/place-card-list';
+import PlacesCardList from '../../components/place-card-list/place-card-list';
 import Locations from '../../components/locations/locations';
 import PlacesSorting from '../../components/plases-sorting/places-sorting';
 import { Offer } from '../../types';
+import Map from '../../components/map/map';
+import { CITY } from '../../mock/city';
+import { useState } from 'react';
 
 type MainProps = {
   offers: Offer[];
 };
 
 function Main({ offers }: MainProps): JSX.Element {
+  const [hoveredPlaceCardId, setHoveredPlaceCardId] = useState<number | null>(
+    null
+  );
+
+  const setActiveCard = (id: number | null) => {
+    setHoveredPlaceCardId(id);
+  };
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -55,7 +65,7 @@ function Main({ offers }: MainProps): JSX.Element {
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
-          <Locations/>
+          <Locations />
         </div>
         <div className="cities">
           <div className="cities__places-container container">
@@ -64,11 +74,17 @@ function Main({ offers }: MainProps): JSX.Element {
               <b className="places__found">
                 {offers.length} places to stay in Amsterdam
               </b>
-              <PlacesSorting/>
-              <PlacesCardList offers={offers} />
+              <PlacesSorting />
+              <PlacesCardList offers={offers} setActiveCard={setActiveCard} />
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              <section className="cities__map map">
+                <Map
+                  city={CITY}
+                  placeLocationId={hoveredPlaceCardId}
+                  offers={offers}
+                />
+              </section>
             </div>
           </div>
         </div>

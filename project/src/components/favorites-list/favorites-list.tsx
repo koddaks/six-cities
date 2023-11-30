@@ -1,4 +1,5 @@
 import { Offer } from '../../types';
+import PlaceCard from '../place-card/place-card';
 
 type FavoritesListProps = {
   favoriteOffers: Offer[];
@@ -18,72 +19,12 @@ function FavoritesList({ favoriteOffers }: FavoritesListProps) {
             </div>
           </div>
           <div className="favorites__places">
-            {favoriteOffers.map((filteredOffer) => (
-              <article
-                key={filteredOffer.id}
-                className="favorites__card place-card"
-              >
-                {filteredOffer.premium && (
-                  <div className="place-card__mark">
-                    <span>Premium</span>
-                  </div>
-                )}
-
-                <div className="favorites__image-wrapper place-card__image-wrapper">
-                  <a href={filteredOffer.cardLink}>
-                    <img
-                      className="place-card__image"
-                      src={filteredOffer.src}
-                      width="150"
-                      height="110"
-                      alt="Place"
-                    />
-                  </a>
-                </div>
-                <div className="favorites__card-info place-card__info">
-                  <div className="place-card__price-wrapper">
-                    <div className="place-card__price">
-                      <b className="place-card__price-value">
-                        &euro;{filteredOffer.value}
-                      </b>
-                      <span className="place-card__price-text">
-                        &#47;&nbsp;night
-                      </span>
-                    </div>
-                    <button
-                      className={`place-card__bookmark-button button ${
-                        filteredOffer.isFavorite
-                          ? 'place-card__bookmark-button--active'
-                          : ''
-                      }`}
-                      type="button"
-                    >
-                      <svg
-                        className="place-card__bookmark-icon"
-                        width="18"
-                        height="19"
-                      >
-                        <use href="#icon-bookmark"></use>
-                      </svg>
-                      <span className="visually-hidden">In bookmarks</span>
-                    </button>
-                  </div>
-                  <div className="place-card__rating rating">
-                    <div className="place-card__stars rating__stars">
-                      <span style={{ width: `${filteredOffer.rating}%` }} />
-                      <span className="visually-hidden">Rating</span>
-                    </div>
-                  </div>
-                  <h2 className="place-card__name">
-                    <a href={filteredOffer.cardLink}>
-                      {filteredOffer.cardName}
-                    </a>
-                  </h2>
-                  <p className="place-card__type">
-                    {filteredOffer.housingType}
-                  </p>
-                </div>
-              </article>
+            {favoriteOffers.map((offer) => (
+              <PlaceCard
+                key={offer.id}
+                cardType="favorites"
+                offer={offer}
+              />
             ))}
           </div>
         </li>

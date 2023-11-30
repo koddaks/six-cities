@@ -16,7 +16,14 @@ function App({ offers }: AppProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path={AppRoute.Root} element={<Main offers={offers} />} />
+        <Route
+          path={AppRoute.Root}
+          element={
+            <Main
+              offers={offers}
+            />
+          }
+        />
         <Route path={AppRoute.Login} element={<LogIn />} />
         <Route
           path={AppRoute.Favorites}
