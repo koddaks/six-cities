@@ -16,11 +16,10 @@ const initialState = {
 
 const reducer = createReducer(initialState, (builder) => {
   builder.addCase(changeCity, (state, action) => {
-    const { offers } = action.payload;
     const { name } = action.payload.city;
 
     state.city.name = name;
-    state.offers = offers.filter((item) => item.city.name === name);
+    state.offers = state.offers.filter((item) => item.city.name === name);
   });
 });
 
