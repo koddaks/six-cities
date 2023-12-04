@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { useAppDispatch, useAppSelector } from '../../hooks';
+import { useAppDispatch} from '../../hooks';
+import { changeCity } from '../../store/action';
 
 const locations = [
   'Paris',
@@ -17,11 +18,11 @@ function Locations() {
     null
   );
 
-  const city = useAppSelector((state) => state.city.name);
   const dispatch = useAppDispatch();
 
   const handleSetActiveLink = (location: LocationType) => {
     setActiveLocation(location === activeLocation ? null : location);
+    dispatch(changeCity({ city: { name: location } }));
   };
 
   return (
