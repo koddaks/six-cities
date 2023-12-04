@@ -16,6 +16,8 @@ function Locations() {
     null
   );
 
+  // const city = useAppSelector((state) => state.city)
+
   const handleSetActiveLink = (location: LocationType) => {
     setActiveLocation(location === activeLocation ? null : location);
   };
