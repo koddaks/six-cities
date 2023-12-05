@@ -34,7 +34,7 @@ export const placeCardsMock: Offer[] = [
     type: 'apartment',
     bedrooms: 4,
     maxAdults: 8,
-    price: 313,
+    price: 284,
     goods: [
       'Breakfast',
       'Air conditioning',
@@ -91,7 +91,7 @@ export const placeCardsMock: Offer[] = [
     type: 'apartment',
     bedrooms: 2,
     maxAdults: 10,
-    price: 313,
+    price: 389,
     goods: [
       'Breakfast',
       'Air conditioning',
@@ -148,7 +148,7 @@ export const placeCardsMock: Offer[] = [
     type: 'apartment',
     bedrooms: 2,
     maxAdults: 10,
-    price: 313,
+    price: 124,
     goods: [
       'Breakfast',
       'Air conditioning',
@@ -205,7 +205,7 @@ export const placeCardsMock: Offer[] = [
     type: 'apartment',
     bedrooms: 2,
     maxAdults: 10,
-    price: 313,
+    price: 290,
     goods: [
       'Breakfast',
       'Air conditioning',
