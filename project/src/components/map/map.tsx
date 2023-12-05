@@ -55,7 +55,7 @@ function Map({ city, offers, placeLocationId }: MapProps) {
             [selectedOffer.location.latitude, selectedOffer.location.longitude],
             city.zoom,
             {
-              duration: 1, // Adjust the duration as needed
+              duration: 1,
             }
           );
         }
