@@ -1,5 +1,4 @@
 import { createAction } from '@reduxjs/toolkit';
-import { Offer } from '../types';
 
 type City = {
   location: {
@@ -10,6 +9,4 @@ type City = {
   name: string;
 };
 
-export const changeCity = createAction<{ city: City; offers: Offer[] }>(
-  'location/changeCity'
-);
+export const changeCity = createAction<{ city: City }>('location/changeCity');

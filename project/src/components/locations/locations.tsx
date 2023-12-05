@@ -1,43 +1,34 @@
-import { useState } from 'react';
-import { useAppDispatch} from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { changeCity } from '../../store/action';
 
-const locations = [
-  'Paris',
-  'Cologne',
-  'Brussels',
-  'Amsterdam',
-  'Hamburg',
-  'Dusseldorf',
-] as const;
-
-type LocationType = (typeof locations)[number];
-
 function Locations() {
-  const [activeLocation, setActiveLocation] = useState<LocationType | null>(
-    null
-  );
-
   const dispatch = useAppDispatch();
 
-  const handleSetActiveLink = (location: LocationType) => {
-    setActiveLocation(location === activeLocation ? null : location);
-    dispatch(changeCity({ city: { name: location } }));
+  const activeCity = useAppSelector((state) => state.city);
+  const offers = useAppSelector((state) => state.offers);
+  const cities = [...new Set(offers.map((offer) => offer.city.name))];
+
+  const handleSetActiveLink = (city: string) => {
+    const selectedCityOffer = offers.find((offer) => offer.city.name === city);
+
+    if (selectedCityOffer) {
+      dispatch(changeCity({ city: selectedCityOffer.city }));
+    }
   };
 
   return (
     <section className="locations container">
       <ul className="locations__list tabs__list">
-        {locations.map((location) => (
-          <li key={location} className="locations__item">
+        {cities.map((city) => (
+          <li key={city} className="locations__item">
             <a
               className={`locations__item-link tabs__item ${
-                activeLocation === location ? 'tabs__item--active' : ''
+                activeCity.name === city ? 'tabs__item--active' : ''
               }`}
               href="#todo"
-              onClick={() => handleSetActiveLink(location)}
+              onClick={() => handleSetActiveLink(city)}
             >
-              <span>{location}</span>
+              <span>{city}</span>
             </a>
           </li>
         ))}

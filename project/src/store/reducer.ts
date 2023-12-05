@@ -12,18 +12,13 @@ const initialState = {
     },
   },
   offers: placeCardsMock,
-  filteredOffers: placeCardsMock.filter((item) => item.city.name === 'Paris'),
 };
 
 const reducer = createReducer(initialState, (builder) => {
   builder.addCase(changeCity, (state, action) => {
-    const { name } = action.payload.city;
+    const { name, location } = action.payload.city;
 
-    state.city.name = name;
-
-    state.filteredOffers = state.offers.filter(
-      (item) => item.city.name === name
-    );
+    state.city = {name, location};
   });
 });
 
