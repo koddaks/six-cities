@@ -1,16 +1,17 @@
 import PlacesCardList from '../../components/place-card-list/place-card-list';
 import Locations from '../../components/locations/locations';
 import PlacesSorting from '../../components/plases-sorting/places-sorting';
-import { Offer } from '../../types';
 import Map from '../../components/map/map';
-import { CITY } from '../../mock/city';
 import { useState } from 'react';
+import { useAppSelector } from '../../hooks';
 
-type MainProps = {
-  offers: Offer[];
-};
+function Main(): JSX.Element {
+  const storeOffers = useAppSelector((state) => state.offers);
+  const activeCity = useAppSelector((state) => state.city);
+  const offers = storeOffers.filter(
+    (offer) => offer.city.name === activeCity.name
+  );
 
-function Main({ offers }: MainProps): JSX.Element {
   const [hoveredPlaceCardId, setHoveredPlaceCardId] = useState<number | null>(
     null
   );
@@ -72,15 +73,15 @@ function Main({ offers }: MainProps): JSX.Element {
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">
-                {offers.length} places to stay in Amsterdam
+                {offers.length} places to stay in {activeCity.name}
               </b>
               <PlacesSorting />
-              <PlacesCardList offers={offers} setActiveCard={setActiveCard} />
+              <PlacesCardList setActiveCard={setActiveCard} />
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
                 <Map
-                  city={CITY}
+                  city={activeCity.location}
                   placeLocationId={hoveredPlaceCardId}
                   offers={offers}
                 />
