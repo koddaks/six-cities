@@ -45,6 +45,21 @@ function Map({ city, offers, placeLocationId }: MapProps) {
 
         marker.setIcon(icon).addTo(map);
       });
+
+      if (placeLocationId) {
+        const selectedOffer = offers.find(
+          (offer) => offer.id === placeLocationId
+        );
+        if (selectedOffer) {
+          map.flyTo(
+            [selectedOffer.location.latitude, selectedOffer.location.longitude],
+            city.zoom,
+            {
+              duration: 1, // Adjust the duration as needed
+            }
+          );
+        }
+      }
     }
   }, [map, offers, placeLocationId]);
 
