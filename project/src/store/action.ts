@@ -1,12 +1,7 @@
 import { createAction } from '@reduxjs/toolkit';
-
-type City = {
-  location: {
-    latitude: number;
-    longitude: number;
-    zoom: number;
-  };
-  name: string;
-};
+import { City } from '../types';
 
 export const changeCity = createAction<{ city: City }>('location/changeCity');
+export const setSortType = createAction<{ sortType: string }>(
+  'place-card-list/setSortType'
+);

@@ -6,6 +6,7 @@ import NearPlaces from '../../components/near-places/near-places';
 import Map from '../../components/map/map';
 import { reviews } from '../../mock/reviews';
 import { useAppSelector } from '../../hooks';
+import PropertyGallery from '../../components/property-gallery/property-gallery';
 
 function Property(): JSX.Element {
   const offers = useAppSelector((state) => state.offers);
@@ -20,15 +21,15 @@ function Property(): JSX.Element {
     setHoveredPlaceCardId(cardId);
   };
 
-  const rentalOffer = offers.find((offer) => offer.id.toString() === id);
+  const currentOffer = offers.find((offer) => offer.id.toString() === id);
 
   useEffect(() => {
-    if (!rentalOffer) {
+    if (!currentOffer) {
       navigate('/404');
     }
-  }, [rentalOffer, id, navigate]);
+  }, [currentOffer, id, navigate]);
 
-  const rentalOffersNearby = offers.filter(
+  const currentOffersNearby = offers.filter(
     (offer) => offer.id.toString() !== id
   );
 
@@ -75,70 +76,25 @@ function Property(): JSX.Element {
 
       <main className="page__main page__main--property">
         <section className="property">
-          <div className="property__gallery-container container">
-            <div className="property__gallery">
-              <div className="property__image-wrapper">
-                <img
-                  className="property__image"
-                  src="img/room.jpg"
-                  alt="Studio"
-                />
-              </div>
-              <div className="property__image-wrapper">
-                <img
-                  className="property__image"
-                  src="img/apartment-01.jpg"
-                  alt="Studio"
-                />
-              </div>
-              <div className="property__image-wrapper">
-                <img
-                  className="property__image"
-                  src="img/apartment-02.jpg"
-                  alt="Studio"
-                />
-              </div>
-              <div className="property__image-wrapper">
-                <img
-                  className="property__image"
-                  src="img/apartment-03.jpg"
-                  alt="Studio"
-                />
-              </div>
-              <div className="property__image-wrapper">
-                <img
-                  className="property__image"
-                  src="img/studio-01.jpg"
-                  alt="Studio"
-                />
-              </div>
-              <div className="property__image-wrapper">
-                <img
-                  className="property__image"
-                  src="img/apartment-01.jpg"
-                  alt="Studio"
-                />
-              </div>
-            </div>
-          </div>
+          <PropertyGallery offer={currentOffer} />
           <div className="property__container container">
-            {rentalOffer ? (
-              <PropertyDescriptionList offer={rentalOffer} />
+            {currentOffer ? (
+              <PropertyDescriptionList offer={currentOffer} />
             ) : null}
             <Reviews reviews={reviews} offerId={id} />
           </div>
 
           <section className="property__map map">
             <Map
-              city={activeCity.location}
-              offers={rentalOffersNearby}
+              city={activeCity}
+              offers={currentOffersNearby}
               placeLocationId={hoveredPlaceCardId}
             />
           </section>
         </section>
         <div className="container">
           <NearPlaces
-            offers={rentalOffersNearby}
+            offers={currentOffersNearby}
             setActiveCard={setActiveCard}
           />
         </div>
