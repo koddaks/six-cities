@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { setSortType } from '../../store/action';
+import { SORT_TYPES, SortTypes } from '../../const';
 
 function PlacesSorting() {
   const dispatch = useAppDispatch();
@@ -8,7 +9,7 @@ function PlacesSorting() {
 
   const [placesOptionActive, setPlacesOptionActive] = useState(false);
 
-  const handleSortOptionClick = (selectedSortType: string) => {
+  const handleSortOptionClick = (selectedSortType: SortTypes) => {
     dispatch(setSortType({ sortType: selectedSortType }));
     setPlacesOptionActive(false);
   };
@@ -35,42 +36,18 @@ function PlacesSorting() {
           placesOptionActive ? 'places__options--opened' : ''
         }`}
       >
-        <li
-          className={`places__option ${
-            sortType === 'Popular' ? 'places__option--active' : ''
-          }`}
-          tabIndex={0}
-          onClick={() => handleSortOptionClick('Popular')}
-        >
-          Popular
-        </li>
-        <li
-          className={`places__option ${
-            sortType === 'Price: low to high' ? 'places__option--active' : ''
-          }`}
-          tabIndex={0}
-          onClick={() => handleSortOptionClick('Price: low to high')}
-        >
-          Price: low to high
-        </li>
-        <li
-          className={`places__option ${
-            sortType === 'Price: high to low' ? 'places__option--active' : ''
-          }`}
-          tabIndex={0}
-          onClick={() => handleSortOptionClick('Price: high to low')}
-        >
-          Price: high to low
-        </li>
-        <li
-          className={`places__option ${
-            sortType === 'Top rated first' ? 'places__option--active' : ''
-          }`}
-          tabIndex={0}
-          onClick={() => handleSortOptionClick('Top rated first')}
-        >
-          Top rated first
-        </li>
+        {Object.values(SORT_TYPES).map((type) => (
+          <li
+            key={type}
+            className={`places__option ${
+              sortType === type ? 'places__option--active' : ''
+            }`}
+            tabIndex={0}
+            onClick={() => handleSortOptionClick(type)}
+          >
+            {type}
+          </li>
+        ))}
       </ul>
     </form>
   );

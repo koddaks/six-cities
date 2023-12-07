@@ -2,11 +2,12 @@ import { City, Offer } from './../types/index';
 import { createReducer } from '@reduxjs/toolkit';
 import { changeCity, setSortType } from './action';
 import { placeCardsMock } from '../mock/offers';
+import { SortTypes } from '../const';
 
 type InitialState = {
   city: City;
   offers: Offer[];
-  sortType: string;
+  sortType: SortTypes;
 };
 
 const initialState: InitialState = {
