@@ -2,7 +2,7 @@ import { City, Offer } from './../types/index';
 import { createReducer } from '@reduxjs/toolkit';
 import { changeCity, setSortType } from './action';
 import { placeCardsMock } from '../mock/offers';
-import { SortTypes } from '../const';
+import { SORT_TYPES, SortTypes } from '../const';
 
 type InitialState = {
   city: City;
@@ -20,7 +20,7 @@ const initialState: InitialState = {
     },
   },
   offers: placeCardsMock,
-  sortType: 'Popular',
+  sortType: SORT_TYPES.POPULAR,
 };
 
 const reducer = createReducer(initialState, (builder) => {
