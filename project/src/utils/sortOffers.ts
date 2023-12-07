@@ -1,6 +1,7 @@
+import { SortTypes } from '../const';
 import { Offer } from '../types';
 
-export const sortOffers = (offers: Offer[], sortType: string): Offer[] => {
+export const sortOffers = (offers: Offer[], sortType: SortTypes): Offer[] => {
   let sortedOffers = [...offers];
 
   switch (sortType) {
