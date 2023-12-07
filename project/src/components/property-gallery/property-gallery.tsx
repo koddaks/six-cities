@@ -15,7 +15,7 @@ function PropertyGallery({ offer }: PropertyGalleryProps): JSX.Element {
             <img
               className="property__image"
               src={image}
-              alt="Studio"
+              alt={offer?.title}
             />
           </div>
         ))}
