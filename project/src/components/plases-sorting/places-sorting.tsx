@@ -36,16 +36,16 @@ function PlacesSorting() {
           placesOptionActive ? 'places__options--opened' : ''
         }`}
       >
-        {Object.values(SORT_TYPES).map((type) => (
+        {Object.entries(SORT_TYPES).map(([key, value]) => (
           <li
-            key={type}
+            key={key}
             className={`places__option ${
-              sortType === type ? 'places__option--active' : ''
+              sortType === value ? 'places__option--active' : ''
             }`}
             tabIndex={0}
-            onClick={() => handleSortOptionClick(type)}
+            onClick={() => handleSortOptionClick(value as SortTypes)}
           >
-            {type}
+            {value}
           </li>
         ))}
       </ul>
