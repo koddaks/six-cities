@@ -1,9 +1,10 @@
 import FavoritesEmpty from '../../components/favorites-empty/favorites-empty';
 import FavoritesList from '../../components/favorites-list/favorites-list';
-import { placeCardsMock } from '../../mock/offers';
+import { useAppSelector } from '../../hooks';
 
 function Favorites() {
-  const favoriteOffers = placeCardsMock.filter((offer) => offer.isFavorite);
+  const offers = useAppSelector((state) => state.offers);
+  const favoriteOffers = offers.filter((offer) => offer.isFavorite);
 
   return (
     <div
