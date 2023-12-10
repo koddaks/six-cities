@@ -1,7 +1,6 @@
 import { City, Offer } from './../types/index';
 import { createReducer } from '@reduxjs/toolkit';
 import { changeCity, getOffers, requireAuthorization, setSortType } from './action';
-import { placeCardsMock } from '../mock/offers';
 import { AuthorizationStatus, SORT_TYPES, SortTypes } from '../const';
 
 type InitialState = {
