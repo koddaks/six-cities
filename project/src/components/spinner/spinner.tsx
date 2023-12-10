@@ -23,8 +23,8 @@ const Spinner = () => (
         keySplines="0 0.2 0.8 1"
         calcMode="spline"
         begin="0s"
-      >
-      </animate>
+      />
+
       <animate
         attributeName="opacity"
         repeatCount="indefinite"
@@ -34,8 +34,7 @@ const Spinner = () => (
         keySplines="0.2 0 0.8 1"
         calcMode="spline"
         begin="0s"
-      >
-      </animate>
+      />
     </circle>
     <circle cx="50" cy="50" r="0" fill="none" stroke="#46dff0" strokeWidth="2">
       <animate
@@ -47,8 +46,8 @@ const Spinner = () => (
         keySplines="0 0.2 0.8 1"
         calcMode="spline"
         begin="-0.5s"
-      >
-      </animate>
+      />
+
       <animate
         attributeName="opacity"
         repeatCount="indefinite"
@@ -58,8 +57,7 @@ const Spinner = () => (
         keySplines="0.2 0 0.8 1"
         calcMode="spline"
         begin="-0.5s"
-      >
-      </animate>
+      />
     </circle>
   </svg>
 );

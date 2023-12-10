@@ -10,3 +10,6 @@ export const getOffers = createAction<{ offers: Offer[] }>('data/getOffers');
 export const requireAuthorization = createAction<AuthorizationStatus>(
   'user/requireAuthorization'
 );
+export const setDataLoadingStatus = createAction<{ isDataLoaded: boolean }>(
+  'data/setDataLoadingStatus'
+);

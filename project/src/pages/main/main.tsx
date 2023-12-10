@@ -4,6 +4,7 @@ import PlacesSorting from '../../components/plases-sorting/places-sorting';
 import Map from '../../components/map/map';
 import { useState } from 'react';
 import { useAppSelector } from '../../hooks';
+import Spinner from '../../components/spinner/spinner';
 
 function Main(): JSX.Element {
   const storeOffers = useAppSelector((state) => state.offers);
@@ -11,6 +12,7 @@ function Main(): JSX.Element {
   const offers = storeOffers.filter(
     (offer) => offer.city.name === activeCity.name
   );
+  const loading = useAppSelector((state) => state.isDataLoaded);
 
   const [hoveredPlaceCardId, setHoveredPlaceCardId] = useState<number | null>(
     null
@@ -71,12 +73,18 @@ function Main(): JSX.Element {
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
-              <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">
-                {offers.length} places to stay in {activeCity.name}
-              </b>
-              <PlacesSorting />
-              <PlacesCardList setActiveCard={setActiveCard} />
+              {loading ? (
+                <Spinner />
+              ) : (
+                <>
+                  <h2 className="visually-hidden">Places</h2>
+                  <b className="places__found">
+                    {offers.length} places to stay in {activeCity.name}
+                  </b>
+                  <PlacesSorting />
+                  <PlacesCardList setActiveCard={setActiveCard} />
+                </>
+              )}
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
