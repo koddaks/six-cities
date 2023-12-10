@@ -8,6 +8,7 @@ type InitialState = {
   offers: Offer[];
   sortType: SortTypes;
   authorizationStatus: AuthorizationStatus;
+  isDataLoaded: boolean;
 };
 
 const initialState: InitialState = {
@@ -21,7 +22,8 @@ const initialState: InitialState = {
   },
   offers: [],
   sortType: SORT_TYPES.POPULAR,
-  authorizationStatus: AuthorizationStatus.Unknown
+  authorizationStatus: AuthorizationStatus.Unknown,
+  isDataLoaded: false,
 };
 
 const reducer = createReducer(initialState, (builder) => {
