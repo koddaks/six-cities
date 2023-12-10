@@ -1,13 +1,14 @@
 import { City, Offer } from './../types/index';
 import { createReducer } from '@reduxjs/toolkit';
-import { changeCity, getOffers, setSortType } from './action';
+import { changeCity, getOffers, requireAuthorization, setSortType } from './action';
 import { placeCardsMock } from '../mock/offers';
-import { SORT_TYPES, SortTypes } from '../const';
+import { AuthorizationStatus, SORT_TYPES, SortTypes } from '../const';
 
 type InitialState = {
   city: City;
   offers: Offer[];
   sortType: SortTypes;
+  authorizationStatus: AuthorizationStatus;
 };
 
 const initialState: InitialState = {
@@ -19,8 +20,9 @@ const initialState: InitialState = {
       zoom: 13,
     },
   },
-  offers: placeCardsMock,
+  offers: [],
   sortType: SORT_TYPES.POPULAR,
+  authorizationStatus: AuthorizationStatus.Unknown
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -35,6 +37,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(getOffers, (state, action) => {
       state.offers = action.payload.offers;
+    })
+    .addCase(requireAuthorization, (state, action) => {
+      state.authorizationStatus = action.payload;
     });
 });
 
