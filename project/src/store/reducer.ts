@@ -1,12 +1,20 @@
 import { City, Offer } from './../types/index';
 import { createReducer } from '@reduxjs/toolkit';
-import { changeCity, setSortType } from './action';
-import { placeCardsMock } from '../mock/offers';
+import {
+  changeCity,
+  getOffers,
+  requireAuthorization,
+  setDataLoadingStatus,
+  setSortType,
+} from './action';
+import { AuthorizationStatus, SORT_TYPES, SortTypes } from '../const';
 
 type InitialState = {
   city: City;
   offers: Offer[];
-  sortType: string;
+  sortType: SortTypes;
+  authorizationStatus: AuthorizationStatus;
+  isDataLoaded: boolean;
 };
 
 const initialState: InitialState = {
@@ -18,8 +26,10 @@ const initialState: InitialState = {
       zoom: 13,
     },
   },
-  offers: placeCardsMock,
-  sortType: 'Popular',
+  offers: [],
+  sortType: SORT_TYPES.POPULAR,
+  authorizationStatus: AuthorizationStatus.Unknown,
+  isDataLoaded: true,
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -31,6 +41,15 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setSortType, (state, action) => {
       state.sortType = action.payload.sortType;
+    })
+    .addCase(getOffers, (state, action) => {
+      state.offers = action.payload.offers;
+    })
+    .addCase(requireAuthorization, (state, action) => {
+      state.authorizationStatus = action.payload;
+    })
+    .addCase(setDataLoadingStatus, (state, action) => {
+      state.isDataLoaded = action.payload.isDataLoaded;
     });
 });
 
