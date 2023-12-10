@@ -11,6 +11,11 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
+export enum APIRoute {
+  Offers = '/hotels',
+  Favorites = '/favorite'
+}
+
 
 export const SORT_TYPES = {
   POPULAR: 'Popular',
