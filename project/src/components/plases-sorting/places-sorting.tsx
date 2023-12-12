@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { setSortType } from '../../store/action';
-import { SORT_TYPES, SortTypes } from '../../const';
+import { SORT_TYPE, SortTypes } from '../../const';
 
 function PlacesSorting() {
   const dispatch = useAppDispatch();
@@ -36,7 +36,7 @@ function PlacesSorting() {
           placesOptionActive ? 'places__options--opened' : ''
         }`}
       >
-        {Object.entries(SORT_TYPES).map(([key, value]) => (
+        {Object.entries(SORT_TYPE).map(([key, value]) => (
           <li
             key={key}
             className={`places__option ${

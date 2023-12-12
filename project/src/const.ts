@@ -17,8 +17,7 @@ export enum APIRoute {
   Login = '/login',
 }
 
-
-export const SORT_TYPES = {
+export const SORT_TYPE = {
   POPULAR: 'Popular',
   PRICE_LOW_TO_HIGH: 'Price: low to high',
   PRICE_HIGH_TO_LOW: 'Price: high to low',
@@ -27,4 +26,4 @@ export const SORT_TYPES = {
 
 type SortTypesValues<T> = T[keyof T];
 
-export type SortTypes = SortTypesValues<typeof SORT_TYPES>;
+export type SortTypes = SortTypesValues<typeof SORT_TYPE>;
