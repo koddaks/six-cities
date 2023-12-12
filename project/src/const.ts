@@ -26,4 +26,4 @@ export const SORT_TYPE = {
 
 type SortTypesValues<T> = T[keyof T];
 
-export type SortTypes = SortTypesValues<typeof SORT_TYPE>;
+export type SortType = SortTypesValues<typeof SORT_TYPE>;

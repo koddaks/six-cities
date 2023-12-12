@@ -7,12 +7,12 @@ import {
   setDataLoadingStatus,
   setSortType,
 } from './action';
-import { AuthorizationStatus, SORT_TYPE, SortTypes } from '../const';
+import { AuthorizationStatus, SORT_TYPE, SortType } from '../const';
 
 type InitialState = {
   city: City;
   offers: Offer[];
-  sortType: SortTypes;
+  sortType: SortType;
   authorizationStatus: AuthorizationStatus;
   isDataLoaded: boolean;
 };

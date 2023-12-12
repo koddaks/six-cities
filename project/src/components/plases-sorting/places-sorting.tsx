@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { setSortType } from '../../store/action';
-import { SORT_TYPE, SortTypes } from '../../const';
+import { SORT_TYPE, SortType } from '../../const';
 
 function PlacesSorting() {
   const dispatch = useAppDispatch();
@@ -9,7 +9,7 @@ function PlacesSorting() {
 
   const [placesOptionActive, setPlacesOptionActive] = useState(false);
 
-  const handleSortOptionClick = (selectedSortType: SortTypes) => {
+  const handleSortOptionClick = (selectedSortType: SortType) => {
     dispatch(setSortType({ sortType: selectedSortType }));
     setPlacesOptionActive(false);
   };
@@ -43,7 +43,7 @@ function PlacesSorting() {
               sortType === value ? 'places__option--active' : ''
             }`}
             tabIndex={0}
-            onClick={() => handleSortOptionClick(value as SortTypes)}
+            onClick={() => handleSortOptionClick(value as SortType)}
           >
             {value}
           </li>
