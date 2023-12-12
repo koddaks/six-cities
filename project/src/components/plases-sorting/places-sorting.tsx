@@ -26,7 +26,7 @@ function PlacesSorting() {
         tabIndex={0}
         onClick={handleSetPlacesOptionToggle}
       >
-        {sortType}
+        {SORT_TYPE[sortType]}
         <svg className="places__sorting-arrow" width="7" height="4">
           <use href="#icon-arrow-select"></use>
         </svg>
@@ -40,10 +40,10 @@ function PlacesSorting() {
           <li
             key={key}
             className={`places__option ${
-              sortType === value ? 'places__option--active' : ''
+              sortType === key ? 'places__option--active' : ''
             }`}
             tabIndex={0}
-            onClick={() => handleSortOptionClick(value as SortType)}
+            onClick={() => handleSortOptionClick(key as SortType)}
           >
             {value}
           </li>

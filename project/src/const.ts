@@ -24,6 +24,4 @@ export const SORT_TYPE = {
   TOP_RATED_FIRST: 'Top rated first',
 } as const;
 
-type SortTypesValues<T> = T[keyof T];
-
-export type SortType = SortTypesValues<typeof SORT_TYPE>;
+export type SortType = keyof typeof SORT_TYPE;

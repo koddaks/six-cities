@@ -7,7 +7,7 @@ import {
   setDataLoadingStatus,
   setSortType,
 } from './action';
-import { AuthorizationStatus, SORT_TYPE, SortType } from '../const';
+import { AuthorizationStatus, SortType } from '../const';
 
 type InitialState = {
   city: City;
@@ -27,7 +27,7 @@ const initialState: InitialState = {
     },
   },
   offers: [],
-  sortType: SORT_TYPE.POPULAR,
+  sortType: 'POPULAR',
   authorizationStatus: AuthorizationStatus.Unknown,
   isDataLoaded: true,
 };
