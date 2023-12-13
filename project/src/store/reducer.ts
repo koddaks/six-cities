@@ -29,7 +29,7 @@ const initialState: InitialState = {
   offers: [],
   sortType: 'POPULAR',
   authorizationStatus: AuthorizationStatus.Unknown,
-  isOffersLoading: true,
+  isOffersLoading: false,
 };
 
 const reducer = createReducer(initialState, (builder) => {
