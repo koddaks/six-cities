@@ -12,7 +12,7 @@ function Main(): JSX.Element {
   const offers = storeOffers.filter(
     (offer) => offer.city.name === activeCity.name
   );
-  const loading = useAppSelector((state) => state.isDataLoaded);
+  const isOffersLoading = useAppSelector((state) => state.isOffersLoading);
 
   const [hoveredPlaceCardId, setHoveredPlaceCardId] = useState<number | null>(
     null
@@ -73,7 +73,7 @@ function Main(): JSX.Element {
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
-              {loading ? (
+              {isOffersLoading ? (
                 <Spinner />
               ) : (
                 <>

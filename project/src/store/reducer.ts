@@ -4,7 +4,7 @@ import {
   changeCity,
   getOffers,
   requireAuthorization,
-  setDataLoadingStatus,
+  setIsOffersLoadingStatus,
   setSortType,
 } from './action';
 import { AuthorizationStatus, SortType } from '../const';
@@ -14,7 +14,7 @@ type InitialState = {
   offers: Offer[];
   sortType: SortType;
   authorizationStatus: AuthorizationStatus;
-  isDataLoaded: boolean;
+  isOffersLoading: boolean;
 };
 
 const initialState: InitialState = {
@@ -29,7 +29,7 @@ const initialState: InitialState = {
   offers: [],
   sortType: 'POPULAR',
   authorizationStatus: AuthorizationStatus.Unknown,
-  isDataLoaded: true,
+  isOffersLoading: true,
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -48,8 +48,8 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(requireAuthorization, (state, action) => {
       state.authorizationStatus = action.payload;
     })
-    .addCase(setDataLoadingStatus, (state, action) => {
-      state.isDataLoaded = action.payload.isDataLoaded;
+    .addCase(setIsOffersLoadingStatus, (state, action) => {
+      state.isOffersLoading = action.payload.isOffersLoading;
     });
 });
 
