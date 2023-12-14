@@ -8,6 +8,9 @@ import {
   requireAuthorization,
   setIsOffersLoadingStatus,
 } from './action';
+import { AuthData } from '../types/auth-data';
+import { UserData } from '../types/user-data';
+import { dropToken, saveToken } from '../services/token';
 
 export const getOffersAction = createAsyncThunk<
   void,
@@ -39,4 +42,37 @@ export const checkAuthAction = createAsyncThunk<
   } catch {
     dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
   }
+});
+
+export const loginAction = createAsyncThunk<
+  void,
+  AuthData,
+  {
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+  }
+>(
+  'user/login',
+  async ({ login: email, password }, { dispatch, extra: api }) => {
+    const {
+      data: { token },
+    } = await api.post<UserData>(APIRoute.Login, { email, password });
+    saveToken(token);
+    dispatch(requireAuthorization(AuthorizationStatus.Auth));
+  }
+);
+
+export const logoutAction = createAsyncThunk<
+  void,
+  undefined,
+  {
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+  }
+>('user/login', async (_arg, { dispatch, extra: api }) => {
+  await api.delete(APIRoute.Logout);
+  dropToken();
+  dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
 });
