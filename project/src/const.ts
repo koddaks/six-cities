@@ -18,6 +18,8 @@ export enum APIRoute {
   Logout = '/logout'
 }
 
+export const TIMEOUT_SHOW_ERROR = 2000;
+
 export const SORT_TYPE = {
   POPULAR: 'Popular',
   PRICE_LOW_TO_HIGH: 'Price: low to high',
