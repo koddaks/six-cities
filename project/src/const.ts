@@ -1,3 +1,5 @@
+
+
 export enum AppRoute {
   Root = '/',
   Favorites = '/favorites',
@@ -15,7 +17,11 @@ export enum APIRoute {
   Offers = '/hotels',
   Favorites = '/favorite',
   Login = '/login',
-  Logout = '/logout'
+  Logout = '/logout',
+}
+
+export type ErrorResponse = {
+  error?: string | undefined;
 }
 
 export const TIMEOUT_SHOW_ERROR = 2000;
