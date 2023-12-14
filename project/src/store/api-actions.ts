@@ -80,5 +80,8 @@ export const logoutAction = createAsyncThunk<
 });
 
 export const clearErrorAction = createAsyncThunk('app/clearError', () => {
-  setTimeout(() => store.dispatch(setError({error: null})), TIMEOUT_SHOW_ERROR);
+  setTimeout(
+    () => store.dispatch(setError({ error: null })),
+    TIMEOUT_SHOW_ERROR
+  );
 });
