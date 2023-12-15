@@ -1,12 +1,29 @@
-import { FormEvent, useRef } from 'react';
+import { FormEvent, useEffect, useRef } from 'react';
 import { AuthData } from '../../types/auth-data';
-import { useAppDispatch } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { loginAction } from '../../store/api-actions';
+import { AppRoute, AuthorizationStatus } from '../../const';
+import { useNavigate } from 'react-router-dom';
 
 function LogIn() {
+  const authorizationStatus = useAppSelector(
+    (state) => state.authorizationStatus
+  );
   const dispatch = useAppDispatch();
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
+
+  const navigate = useNavigate();
+
+  const handleRedirectToMainPage = () => {
+    if (authorizationStatus === AuthorizationStatus.Auth) {
+      navigate(AppRoute.Root);
+    }
+  };
+
+  useEffect(() => {
+    handleRedirectToMainPage();
+  }, [authorizationStatus]);
 
   const onSubmit = (authData: AuthData) => {
     dispatch(loginAction(authData));
@@ -78,6 +95,9 @@ function LogIn() {
               <button
                 className="login__submit form__submit button"
                 type="submit"
+                onClick={() => {
+                  handleRedirectToMainPage();
+                }}
               >
                 Sign in
               </button>
