@@ -1,6 +1,6 @@
 import { createAction } from '@reduxjs/toolkit';
 import { City, Offer } from '../types';
-import { AuthorizationStatus, SortType } from '../const';
+import { AppRoute, AuthorizationStatus, SortType } from '../const';
 
 export const changeCity = createAction<{ city: City }>('location/changeCity');
 export const setSortType = createAction<{ sortType: SortType }>(
@@ -14,3 +14,4 @@ export const setIsOffersLoadingStatus = createAction<{
   isOffersLoading: boolean;
 }>('data/setDataLoadingStatus');
 export const setError = createAction<{ error: string | null }>('app/error');
+export const redirectToRoute = createAction<AppRoute>('game/redirectToRoute');
