@@ -21,10 +21,10 @@ function HeaderNavigation() {
               <span className="header__user-name user__name">
                 Oliver.conner@gmail.com
               </span>
-              <Link to={AppRoute.Favorites}>
-                <span className="header__favorite-count">3</span>
-              </Link>
             </a>
+            <Link to={AppRoute.Favorites}>
+              <span className="header__favorite-count">3</span>
+            </Link>
           </li>
           <li className="header__nav-item">
             <Link
