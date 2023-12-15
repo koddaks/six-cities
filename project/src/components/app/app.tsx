@@ -6,10 +6,12 @@ import Property from '../../pages/property/property';
 import Page404 from '../../pages/page404/page404';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import PrivateRoute from '../private-route/private-route';
+import HistoryRouter from '../history-route/history-route';
+import browserHistory from '../../browser-history';
 
 function App(): JSX.Element {
   return (
-    <BrowserRouter>
+    <HistoryRouter history={browserHistory}>
       <Routes>
         <Route path={AppRoute.Root} element={<Main />} />
         <Route path={AppRoute.Login} element={<LogIn />} />
@@ -24,7 +26,7 @@ function App(): JSX.Element {
         <Route path={`${AppRoute.Property}/:id`} element={<Property />} />
         <Route path="*" element={<Page404 />} />
       </Routes>
-    </BrowserRouter>
+    </HistoryRouter>
   );
 }
 
