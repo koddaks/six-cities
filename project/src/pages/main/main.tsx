@@ -5,6 +5,7 @@ import Map from '../../components/map/map';
 import { useState } from 'react';
 import { useAppSelector } from '../../hooks';
 import Spinner from '../../components/spinner/spinner';
+import HeaderNavigation from '../../components/header-navigation/header-navigation';
 
 function Main(): JSX.Element {
   const storeOffers = useAppSelector((state) => state.offers);
@@ -40,27 +41,7 @@ function Main(): JSX.Element {
                 />
               </a>
             </div>
-            <nav className="header__nav">
-              <ul className="header__nav-list">
-                <li className="header__nav-item user">
-                  <a
-                    className="header__nav-link header__nav-link--profile"
-                    href="#todo"
-                  >
-                    <div className="header__avatar-wrapper user__avatar-wrapper"></div>
-                    <span className="header__user-name user__name">
-                      Oliver.conner@gmail.com
-                    </span>
-                    <span className="header__favorite-count">3</span>
-                  </a>
-                </li>
-                <li className="header__nav-item">
-                  <a className="header__nav-link" href="#todo">
-                    <span className="header__signout">Sign out</span>
-                  </a>
-                </li>
-              </ul>
-            </nav>
+            <HeaderNavigation />
           </div>
         </div>
       </header>
