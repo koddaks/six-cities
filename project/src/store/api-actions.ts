@@ -6,19 +6,17 @@ import {
   APIRoute,
   AppRoute,
   AuthorizationStatus,
-  TIMEOUT_SHOW_ERROR,
+
 } from '../const';
 import {
   getOffers,
   redirectToRoute,
   requireAuthorization,
-  setError,
   setIsOffersLoadingStatus,
 } from './action';
 import { AuthData } from '../types/auth-data';
 import { UserData } from '../types/user-data';
 import { dropToken, saveToken } from '../services/token';
-import { store } from '.';
 
 export const getOffersAction = createAsyncThunk<
   void,
@@ -84,11 +82,4 @@ export const logoutAction = createAsyncThunk<
   await api.delete(APIRoute.Logout);
   dropToken();
   dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
-});
-
-export const clearErrorAction = createAsyncThunk('app/clearError', () => {
-  setTimeout(
-    () => store.dispatch(setError({ error: null })),
-    TIMEOUT_SHOW_ERROR
-  );
 });
