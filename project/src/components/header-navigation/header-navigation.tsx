@@ -2,12 +2,10 @@ import { Link } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { logoutAction } from '../../store/api-actions';
+import { getAuthorizationStatus } from '../../store/selectors';
 
 function HeaderNavigation() {
-  const authorizationStatus = useAppSelector(
-    (state) => state.authorizationStatus
-  );
-
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const dispatch = useAppDispatch();
 
   return (
@@ -23,7 +21,9 @@ function HeaderNavigation() {
               <span className="header__user-name user__name">
                 Oliver.conner@gmail.com
               </span>
-              <span className="header__favorite-count">3</span>
+              <Link to={AppRoute.Favorites}>
+                <span className="header__favorite-count">3</span>
+              </Link>
             </a>
           </li>
           <li className="header__nav-item">
