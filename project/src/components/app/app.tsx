@@ -4,12 +4,16 @@ import Favorites from '../../pages/favorites/favorites';
 import LogIn from '../../pages/login/login';
 import Property from '../../pages/property/property';
 import Page404 from '../../pages/page404/page404';
-import { AppRoute, AuthorizationStatus } from '../../const';
+import { AppRoute } from '../../const';
 import PrivateRoute from '../private-route/private-route';
 import HistoryRouter from '../history-route/history-route';
 import browserHistory from '../../browser-history';
+import { useAppSelector } from '../../hooks';
+import { getAuthorizationStatus } from '../../store/selectors';
 
 function App(): JSX.Element {
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+
   return (
     <HistoryRouter history={browserHistory}>
       <Routes>
@@ -18,7 +22,7 @@ function App(): JSX.Element {
         <Route
           path={AppRoute.Favorites}
           element={
-            <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
+            <PrivateRoute authorizationStatus={authorizationStatus}>
               <Favorites />
             </PrivateRoute>
           }
