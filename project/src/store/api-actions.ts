@@ -9,6 +9,7 @@ import {
 
 } from '../const';
 import {
+  getOfferById,
   getOffers,
   redirectToRoute,
   requireAuthorization,
@@ -30,6 +31,21 @@ export const getOffersAction = createAsyncThunk<
   const { data } = await api.get<Offer[]>(APIRoute.Offers);
   dispatch(setIsOffersLoadingStatus({ isOffersLoading: true }));
   dispatch(getOffers({ offers: data }));
+  dispatch(setIsOffersLoadingStatus({ isOffersLoading: false }));
+});
+
+export const getOfferByIdAction = createAsyncThunk<
+  void,
+  string,
+  {
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+  }
+>('data/getOfferById', async (hotelId, { dispatch, extra: api }) => {
+  const { data } = await api.get<Offer>(`${APIRoute.Offers}/${hotelId}`);
+  dispatch(setIsOffersLoadingStatus({ isOffersLoading: true }));
+  dispatch(getOfferById({ offer: data }));
   dispatch(setIsOffersLoadingStatus({ isOffersLoading: false }));
 });
 
