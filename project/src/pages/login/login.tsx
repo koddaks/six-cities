@@ -40,6 +40,7 @@ function LogIn() {
     ) {
       toast.warn('Password should not contain spaces.');
     } else if (loginRef.current !== null && passwordRef.current !== null) {
+      toast.success('You are logged in!');
       onSubmit({
         login: loginRef.current.value,
         password: passwordRef.current.value,
