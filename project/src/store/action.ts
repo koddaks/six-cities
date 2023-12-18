@@ -7,6 +7,7 @@ export const setSortType = createAction<{ sortType: SortType }>(
   'place-card-list/setSortType'
 );
 export const getOffers = createAction<{ offers: Offer[] }>('data/getOffers');
+export const getOfferById = createAction<{ offer: Offer }>('data/getOfferById');
 export const requireAuthorization = createAction<AuthorizationStatus>(
   'user/requireAuthorization'
 );
