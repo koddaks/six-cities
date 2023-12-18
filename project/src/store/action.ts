@@ -14,4 +14,4 @@ export const setIsOffersLoadingStatus = createAction<{
   isOffersLoading: boolean;
 }>('data/setDataLoadingStatus');
 export const setError = createAction<{ error: string | null }>('app/error');
-export const redirectToRoute = createAction<AppRoute>('game/redirectToRoute');
+export const redirectToRoute = createAction<AppRoute>('app/redirectToRoute');
