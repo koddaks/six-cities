@@ -7,6 +7,7 @@ import Map from '../../components/map/map';
 import { reviews } from '../../mock/reviews';
 import { useAppSelector } from '../../hooks';
 import PropertyGallery from '../../components/property-gallery/property-gallery';
+import HeaderNavigation from '../../components/header-navigation/header-navigation';
 
 function Property(): JSX.Element {
   const offers = useAppSelector((state) => state.offers);
@@ -49,27 +50,7 @@ function Property(): JSX.Element {
                 />
               </a>
             </div>
-            <nav className="header__nav">
-              <ul className="header__nav-list">
-                <li className="header__nav-item user">
-                  <a
-                    className="header__nav-link header__nav-link--profile"
-                    href="#todo"
-                  >
-                    <div className="header__avatar-wrapper user__avatar-wrapper"></div>
-                    <span className="header__user-name user__name">
-                      Oliver.conner@gmail.com
-                    </span>
-                    <span className="header__favorite-count">3</span>
-                  </a>
-                </li>
-                <li className="header__nav-item">
-                  <a className="header__nav-link" href="#todo">
-                    <span className="header__signout">Sign out</span>
-                  </a>
-                </li>
-              </ul>
-            </nav>
+            <HeaderNavigation />
           </div>
         </div>
       </header>
