@@ -44,9 +44,7 @@ export const getOfferByIdAction = createAsyncThunk<
   }
 >('data/getOfferById', async (hotelId, { dispatch, extra: api }) => {
   const { data } = await api.get<Offer>(`${APIRoute.Offers}/${hotelId}`);
-  dispatch(setIsOffersLoadingStatus({ isOffersLoading: true }));
   dispatch(getOfferById({ offer: data }));
-  dispatch(setIsOffersLoadingStatus({ isOffersLoading: false }));
 });
 
 export const checkAuthAction = createAsyncThunk<
