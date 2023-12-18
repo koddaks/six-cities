@@ -5,6 +5,7 @@ import { loginAction } from '../../store/api-actions';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import { useNavigate } from 'react-router-dom';
 import { getAuthorizationStatus } from '../../store/selectors';
+import { toast } from 'react-toastify';
 
 function LogIn() {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
@@ -31,7 +32,14 @@ function LogIn() {
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
-    if (loginRef.current !== null && passwordRef.current !== null) {
+    const isAnySpaces = (password: string) => /\s/.test(password);
+
+    if (
+      passwordRef.current !== null &&
+      isAnySpaces(passwordRef.current.value)
+    ) {
+      toast.warn('Password should not contain spaces.');
+    } else if (loginRef.current !== null && passwordRef.current !== null) {
       onSubmit({
         login: loginRef.current.value,
         password: passwordRef.current.value,
