@@ -1,3 +1,5 @@
+
+
 export enum AppRoute {
   Root = '/',
   Favorites = '/favorites',
@@ -15,16 +17,18 @@ export enum APIRoute {
   Offers = '/hotels',
   Favorites = '/favorite',
   Login = '/login',
+  Logout = '/logout',
 }
 
+export type ErrorResponse = {
+  error?: string | undefined;
+}
 
-export const SORT_TYPES = {
+export const SORT_TYPE = {
   POPULAR: 'Popular',
   PRICE_LOW_TO_HIGH: 'Price: low to high',
   PRICE_HIGH_TO_LOW: 'Price: high to low',
   TOP_RATED_FIRST: 'Top rated first',
 } as const;
 
-type SortTypesValues<T> = T[keyof T];
-
-export type SortTypes = SortTypesValues<typeof SORT_TYPES>;
+export type SortType = keyof typeof SORT_TYPE;

@@ -1,5 +1,17 @@
-import axios, { AxiosInstance } from 'axios';
+import axios, { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
 import { getToken } from './token';
+import { StatusCodes } from 'http-status-codes';
+import { ErrorResponse } from '../const';
+import { toast } from 'react-toastify';
+
+const StatusCodeMapping: Record<number, boolean> = {
+  [StatusCodes.BAD_REQUEST]: true,
+  [StatusCodes.UNAUTHORIZED]: true,
+  [StatusCodes.NOT_FOUND]: true,
+};
+
+const shouldDisplayError = (response: AxiosResponse) =>
+  !!StatusCodeMapping[response.status];
 
 const BASE_URL = 'https://11.react.pages.academy/six-cities';
 const REQUEST_TIMEOUT = 5000;
@@ -22,6 +34,22 @@ export const createAPI = (): AxiosInstance => {
     }
     return config;
   });
+
+  api.interceptors.response.use(
+    (response) => response,
+    (error: AxiosError) => {
+      if (
+        error.response &&
+        shouldDisplayError(error.response) &&
+        error.response.data
+      ) {
+        const data = error.response.data as ErrorResponse;
+        toast.warn(data.error || null);
+      }
+
+      throw error;
+    }
+  );
 
   return api;
 };

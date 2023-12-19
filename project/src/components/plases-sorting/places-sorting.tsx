@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { setSortType } from '../../store/action';
-import { SORT_TYPES, SortTypes } from '../../const';
+import { SORT_TYPE, SortType } from '../../const';
 
 function PlacesSorting() {
   const dispatch = useAppDispatch();
@@ -9,7 +9,7 @@ function PlacesSorting() {
 
   const [placesOptionActive, setPlacesOptionActive] = useState(false);
 
-  const handleSortOptionClick = (selectedSortType: SortTypes) => {
+  const handleSortOptionClick = (selectedSortType: SortType) => {
     dispatch(setSortType({ sortType: selectedSortType }));
     setPlacesOptionActive(false);
   };
@@ -26,7 +26,7 @@ function PlacesSorting() {
         tabIndex={0}
         onClick={handleSetPlacesOptionToggle}
       >
-        {sortType}
+        {SORT_TYPE[sortType]}
         <svg className="places__sorting-arrow" width="7" height="4">
           <use href="#icon-arrow-select"></use>
         </svg>
@@ -36,14 +36,14 @@ function PlacesSorting() {
           placesOptionActive ? 'places__options--opened' : ''
         }`}
       >
-        {Object.entries(SORT_TYPES).map(([key, value]) => (
+        {Object.entries(SORT_TYPE).map(([key, value]) => (
           <li
             key={key}
             className={`places__option ${
-              sortType === value ? 'places__option--active' : ''
+              sortType === key ? 'places__option--active' : ''
             }`}
             tabIndex={0}
-            onClick={() => handleSortOptionClick(value as SortTypes)}
+            onClick={() => handleSortOptionClick(key as SortType)}
           >
             {value}
           </li>
