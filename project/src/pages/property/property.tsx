@@ -41,19 +41,25 @@ function Property(): JSX.Element {
   }, [dispatch, id, navigate]);
 
   useEffect(() => {
-    if (id && !localStorage.getItem('currentOfferId')) {
+    // Если есть id в URL, сохраняем его в localStorage
+    if (id) {
       localStorage.setItem('currentOfferId', id);
     }
   }, [id]);
 
   useEffect(() => {
+    // Пытаемся загрузить ранее открытый ID предложения из локального хранилища
     const storedOfferId = localStorage.getItem('currentOfferId');
-    if (
-      storedOfferId &&
-      offers.find((offer) => offer.id.toString() === storedOfferId)
-    ) {
+    const offerExists = offers.find((offer) => offer.id.toString() === storedOfferId);
+
+    if (storedOfferId && !offerExists) {
+      // Если сохраненный ID предложения не существует в текущем списке предложений, переходим на страницу 404
+      navigate('/404');
+    } else if (storedOfferId) {
+      // Если сохраненный ID предложения действителен, загружаем его детали
       dispatch(getOfferByIdAction(storedOfferId));
     } else if (!id || !offers.find((offer) => offer.id.toString() === id)) {
+      // Если идентификатор из URL отсутствует или не существует в списке предложений, переходим на страницу 404
       navigate('/404');
     }
   }, [dispatch, offers, navigate, id]);
