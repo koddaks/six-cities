@@ -29,7 +29,9 @@ function Property(): JSX.Element {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        await dispatch(getOfferByIdAction(id));
+        if (id) {
+          await dispatch(getOfferByIdAction(id));
+        }
       } catch (error) {
         navigate('/404');
       }
@@ -39,10 +41,22 @@ function Property(): JSX.Element {
   }, [dispatch, id, navigate]);
 
   useEffect(() => {
-    if (currentOffer === null && id) {
+    if (id && !localStorage.getItem('currentOfferId')) {
+      localStorage.setItem('currentOfferId', id);
+    }
+  }, [id]);
+
+  useEffect(() => {
+    const storedOfferId = localStorage.getItem('currentOfferId');
+    if (
+      storedOfferId &&
+      offers.find((offer) => offer.id.toString() === storedOfferId)
+    ) {
+      dispatch(getOfferByIdAction(storedOfferId));
+    } else if (!id || !offers.find((offer) => offer.id.toString() === id)) {
       navigate('/404');
     }
-  }, [currentOffer, id, navigate]);
+  }, [dispatch, offers, navigate, id]);
 
   const currentOffersNearby = offers.filter(
     (offer) => offer.id.toString() !== id
