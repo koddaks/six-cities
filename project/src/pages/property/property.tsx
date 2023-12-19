@@ -5,9 +5,10 @@ import Reviews from '../../components/reviews/reviews';
 import NearPlaces from '../../components/near-places/near-places';
 import Map from '../../components/map/map';
 import { reviews } from '../../mock/reviews';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import PropertyGallery from '../../components/property-gallery/property-gallery';
 import HeaderNavigation from '../../components/header-navigation/header-navigation';
+import { getOfferByIdAction } from '../../store/api-actions';
 
 function Property(): JSX.Element {
   const offers = useAppSelector((state) => state.offers);
@@ -18,14 +19,27 @@ function Property(): JSX.Element {
     null
   );
 
+  const dispatch = useAppDispatch();
+  const currentOffer = useAppSelector((state) => state.offerById);
+
   const setActiveCard = (cardId: number | null) => {
     setHoveredPlaceCardId(cardId);
   };
 
-  const currentOffer = offers.find((offer) => offer.id.toString() === id);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        await dispatch(getOfferByIdAction(id));
+      } catch (error) {
+        navigate('/404');
+      }
+    };
+
+    fetchData();
+  }, [dispatch, id, navigate]);
 
   useEffect(() => {
-    if (!currentOffer) {
+    if (currentOffer === null && id) {
       navigate('/404');
     }
   }, [currentOffer, id, navigate]);
