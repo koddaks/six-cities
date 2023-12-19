@@ -5,10 +5,8 @@ import Reviews from '../../components/reviews/reviews';
 import NearPlaces from '../../components/near-places/near-places';
 import Map from '../../components/map/map';
 import { reviews } from '../../mock/reviews';
-import { useAppDispatch, useAppSelector } from '../../hooks';
+import { useAppSelector } from '../../hooks';
 import PropertyGallery from '../../components/property-gallery/property-gallery';
-import HeaderNavigation from '../../components/header-navigation/header-navigation';
-import { getOfferByIdAction } from '../../store/api-actions';
 
 function Property(): JSX.Element {
   const offers = useAppSelector((state) => state.offers);
@@ -19,50 +17,17 @@ function Property(): JSX.Element {
     null
   );
 
-  const dispatch = useAppDispatch();
-  const currentOffer = useAppSelector((state) => state.offerById);
-
   const setActiveCard = (cardId: number | null) => {
     setHoveredPlaceCardId(cardId);
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        if (id) {
-          await dispatch(getOfferByIdAction(id));
-        }
-      } catch (error) {
-        navigate('/404');
-      }
-    };
-
-    fetchData();
-  }, [dispatch, id, navigate]);
+  const currentOffer = offers.find((offer) => offer.id.toString() === id);
 
   useEffect(() => {
-    // Если есть id в URL, сохраняем его в localStorage
-    if (id) {
-      localStorage.setItem('currentOfferId', id);
-    }
-  }, [id]);
-
-  useEffect(() => {
-    // Пытаемся загрузить ранее открытый ID предложения из локального хранилища
-    const storedOfferId = localStorage.getItem('currentOfferId');
-    const offerExists = offers.find((offer) => offer.id.toString() === storedOfferId);
-
-    if (storedOfferId && !offerExists) {
-      // Если сохраненный ID предложения не существует в текущем списке предложений, переходим на страницу 404
-      navigate('/404');
-    } else if (storedOfferId) {
-      // Если сохраненный ID предложения действителен, загружаем его детали
-      dispatch(getOfferByIdAction(storedOfferId));
-    } else if (!id || !offers.find((offer) => offer.id.toString() === id)) {
-      // Если идентификатор из URL отсутствует или не существует в списке предложений, переходим на страницу 404
+    if (!currentOffer) {
       navigate('/404');
     }
-  }, [dispatch, offers, navigate, id]);
+  }, [currentOffer, id, navigate]);
 
   const currentOffersNearby = offers.filter(
     (offer) => offer.id.toString() !== id
@@ -84,7 +49,27 @@ function Property(): JSX.Element {
                 />
               </a>
             </div>
-            <HeaderNavigation />
+            <nav className="header__nav">
+              <ul className="header__nav-list">
+                <li className="header__nav-item user">
+                  <a
+                    className="header__nav-link header__nav-link--profile"
+                    href="#todo"
+                  >
+                    <div className="header__avatar-wrapper user__avatar-wrapper"></div>
+                    <span className="header__user-name user__name">
+                      Oliver.conner@gmail.com
+                    </span>
+                    <span className="header__favorite-count">3</span>
+                  </a>
+                </li>
+                <li className="header__nav-item">
+                  <a className="header__nav-link" href="#todo">
+                    <span className="header__signout">Sign out</span>
+                  </a>
+                </li>
+              </ul>
+            </nav>
           </div>
         </div>
       </header>
