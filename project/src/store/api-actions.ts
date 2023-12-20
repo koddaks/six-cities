@@ -47,6 +47,7 @@ export const getOfferByIdAction = createAsyncThunk<
   dispatch(getOfferById({ offer: data }));
 });
 
+
 export const checkAuthAction = createAsyncThunk<
   void,
   undefined,
