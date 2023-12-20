@@ -8,7 +8,7 @@ import {
   getOffers,
   redirectToRoute,
   requireAuthorization,
-  setIsOffersLoadingStatus,
+  setIsLoadingStatus,
 } from './action';
 import { AuthData } from '../types/auth-data';
 import { UserData } from '../types/user-data';
@@ -23,10 +23,10 @@ export const getOffersAction = createAsyncThunk<
     extra: AxiosInstance;
   }
 >('data/getOffers', async (_arg, { dispatch, extra: api }) => {
-  dispatch(setIsOffersLoadingStatus({ isOffersLoading: true }));
+  dispatch(setIsLoadingStatus({ isLoading: true }));
   const { data } = await api.get<Offer[]>(APIRoute.Offers);
   dispatch(getOffers({ offers: data }));
-  dispatch(setIsOffersLoadingStatus({ isOffersLoading: false }));
+  dispatch(setIsLoadingStatus({ isLoading: false }));
 });
 
 export const getOfferByIdAction = createAsyncThunk<
@@ -38,10 +38,10 @@ export const getOfferByIdAction = createAsyncThunk<
     extra: AxiosInstance;
   }
 >('data/getOfferById', async (hotelId, { dispatch, extra: api }) => {
-  dispatch(setIsOffersLoadingStatus({ isOffersLoading: true }));
+  dispatch(setIsLoadingStatus({ isLoading: true }));
   const { data } = await api.get<Offer>(`${APIRoute.Offers}/${hotelId}`);
   dispatch(getOfferById({ offer: data }));
-  dispatch(setIsOffersLoadingStatus({ isOffersLoading: false }));
+  dispatch(setIsLoadingStatus({ isLoading: false }));
 });
 
 export const checkAuthAction = createAsyncThunk<
@@ -53,10 +53,10 @@ export const checkAuthAction = createAsyncThunk<
     extra: AxiosInstance;
   }
 >('user/checkAuth', async (_arg, { dispatch, extra: api }) => {
-  dispatch(setIsOffersLoadingStatus({ isOffersLoading: true }));
+  dispatch(setIsLoadingStatus({ isLoading: true }));
   try {
     await api.get(APIRoute.Login);
-    dispatch(setIsOffersLoadingStatus({ isOffersLoading: false }));
+    dispatch(setIsLoadingStatus({ isLoading: false }));
     dispatch(requireAuthorization(AuthorizationStatus.Auth));
   } catch {
     dispatch(requireAuthorization(AuthorizationStatus.NoAuth));

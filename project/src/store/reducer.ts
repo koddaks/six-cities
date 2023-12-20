@@ -5,7 +5,7 @@ import {
   getOfferById,
   getOffers,
   requireAuthorization,
-  setIsOffersLoadingStatus,
+  setIsLoadingStatus,
   setSortType,
 } from './action';
 import { AuthorizationStatus, SortType } from '../const';
@@ -54,8 +54,8 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(requireAuthorization, (state, action) => {
       state.authorizationStatus = action.payload;
     })
-    .addCase(setIsOffersLoadingStatus, (state, action) => {
-      state.isLoading = action.payload.isOffersLoading;
+    .addCase(setIsLoadingStatus, (state, action) => {
+      state.isLoading = action.payload.isLoading;
     });
 });
 

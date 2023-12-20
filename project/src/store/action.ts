@@ -11,8 +11,8 @@ export const getOfferById = createAction<{ offer: Offer }>('data/getOfferById');
 export const requireAuthorization = createAction<AuthorizationStatus>(
   'user/requireAuthorization'
 );
-export const setIsOffersLoadingStatus = createAction<{
-  isOffersLoading: boolean;
+export const setIsLoadingStatus = createAction<{
+  isLoading: boolean;
 }>('data/setDataLoadingStatus');
 export const setError = createAction<{ error: string | null }>('app/error');
 export const redirectToRoute = createAction<AppRoute>('app/redirectToRoute');
