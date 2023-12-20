@@ -17,7 +17,7 @@ function Favorites() {
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <a className="header__logo-link" href="main.html">
+              <a className="header__logo-link" href="/">
                 <img
                   className="header__logo"
                   src="img/logo.svg"
@@ -46,7 +46,7 @@ function Favorites() {
         </div>
       </main>
       <footer className="footer container">
-        <a className="footer__logo-link" href="main.html">
+        <a className="footer__logo-link" href="/">
           <img
             className="footer__logo"
             src="img/logo.svg"

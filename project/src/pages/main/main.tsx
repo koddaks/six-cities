@@ -36,7 +36,7 @@ function Main(): JSX.Element {
             <div className="header__left">
               <a
                 className="header__logo-link header__logo-link--active"
-                href="#todo"
+                href="/"
               >
                 <img
                   className="header__logo"
