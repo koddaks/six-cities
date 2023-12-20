@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import PropertyDescriptionList from '../../components/property-description-list/property-description-list';
 import Reviews from '../../components/reviews/reviews';
@@ -13,17 +13,17 @@ import Spinner from '../../components/spinner/spinner';
 
 function Property(): JSX.Element {
   const dispatch = useAppDispatch();
-  // const offers = useAppSelector((state) => state.offers);
+  const offers = useAppSelector((state) => state.offers);
   const activeCity = useAppSelector((state) => state.city);
   const { id } = useParams<{ id: string }>();
-  // const navigate = useNavigate();
-  // const [hoveredPlaceCardId, setHoveredPlaceCardId] = useState<number | null>(
-  //   null
-  // );
 
-  // const setActiveCard = (cardId: number | null) => {
-  //   setHoveredPlaceCardId(cardId);
-  // };
+  const [hoveredPlaceCardId, setHoveredPlaceCardId] = useState<number | null>(
+    null
+  );
+
+  const setActiveCard = (cardId: number | null) => {
+    setHoveredPlaceCardId(cardId);
+  };
 
   const currentOffer = useAppSelector((state) => state.offerById);
   const isOfferLoading = useAppSelector((state) => state.isLoading);
@@ -32,11 +32,11 @@ function Property(): JSX.Element {
     if (id) {
       dispatch(getOfferByIdAction(id));
     }
-  }, [id]);
+  }, [id, dispatch]);
 
-  // const currentOffersNearby = offers.filter(
-  //   (offer) => offer.id.toString() !== id
-  // );
+  const currentOffersNearby = offers.filter(
+    (offer) => offer.id.toString() !== id
+  );
 
   if (isOfferLoading) {
     return <Spinner />;
@@ -98,18 +98,18 @@ function Property(): JSX.Element {
           </div>
 
           <section className="property__map map">
-            {/* <Map
+            <Map
               city={activeCity}
               offers={currentOffersNearby}
               placeLocationId={hoveredPlaceCardId}
-            /> */}
+            />
           </section>
         </section>
         <div className="container">
-          {/* <NearPlaces
+          <NearPlaces
             offers={currentOffersNearby}
             setActiveCard={setActiveCard}
-          /> */}
+          />
         </div>
       </main>
     </div>

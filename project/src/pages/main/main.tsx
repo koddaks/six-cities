@@ -27,7 +27,7 @@ function Main(): JSX.Element {
 
   useEffect(() => {
     dispatch(getOffersAction());
-  }, []);
+  }, [dispatch]);
   return (
     <div className="page page--gray page--main">
       <header className="header">
