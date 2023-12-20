@@ -16,7 +16,7 @@ type InitialState = {
   offerById: Offer | null;
   sortType: SortType;
   authorizationStatus: AuthorizationStatus;
-  isOffersLoading: boolean;
+  isLoading: boolean;
 };
 
 const initialState: InitialState = {
@@ -32,7 +32,7 @@ const initialState: InitialState = {
   offerById: null,
   sortType: 'POPULAR',
   authorizationStatus: AuthorizationStatus.Unknown,
-  isOffersLoading: false,
+  isLoading: false,
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -55,7 +55,7 @@ const reducer = createReducer(initialState, (builder) => {
       state.authorizationStatus = action.payload;
     })
     .addCase(setIsOffersLoadingStatus, (state, action) => {
-      state.isOffersLoading = action.payload.isOffersLoading;
+      state.isLoading = action.payload.isOffersLoading;
     });
 });
 

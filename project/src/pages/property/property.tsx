@@ -5,33 +5,46 @@ import Reviews from '../../components/reviews/reviews';
 import NearPlaces from '../../components/near-places/near-places';
 import Map from '../../components/map/map';
 import { reviews } from '../../mock/reviews';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import PropertyGallery from '../../components/property-gallery/property-gallery';
+import { getOfferByIdAction } from '../../store/api-actions';
+import Page404 from '../page404/page404';
+import Spinner from '../../components/spinner/spinner';
 
 function Property(): JSX.Element {
-  const offers = useAppSelector((state) => state.offers);
+  const dispatch = useAppDispatch();
+  // const offers = useAppSelector((state) => state.offers);
   const activeCity = useAppSelector((state) => state.city);
   const { id } = useParams<{ id: string }>();
-  const navigate = useNavigate();
-  const [hoveredPlaceCardId, setHoveredPlaceCardId] = useState<number | null>(
-    null
-  );
+  // const navigate = useNavigate();
+  // const [hoveredPlaceCardId, setHoveredPlaceCardId] = useState<number | null>(
+  //   null
+  // );
 
-  const setActiveCard = (cardId: number | null) => {
-    setHoveredPlaceCardId(cardId);
-  };
+  // const setActiveCard = (cardId: number | null) => {
+  //   setHoveredPlaceCardId(cardId);
+  // };
 
-  const currentOffer = offers.find((offer) => offer.id.toString() === id);
+  const currentOffer = useAppSelector((state) => state.offerById);
+  const isOfferLoading = useAppSelector((state) => state.isLoading);
 
   useEffect(() => {
-    if (!currentOffer) {
-      navigate('/404');
+    if (id) {
+      dispatch(getOfferByIdAction(id));
     }
-  }, [currentOffer, id, navigate]);
+  }, [id]);
 
-  const currentOffersNearby = offers.filter(
-    (offer) => offer.id.toString() !== id
-  );
+  // const currentOffersNearby = offers.filter(
+  //   (offer) => offer.id.toString() !== id
+  // );
+
+  if (isOfferLoading) {
+    return <Spinner />;
+  }
+
+  if (!currentOffer) {
+    return <Page404 />;
+  }
 
   return (
     <div className="page">
@@ -85,18 +98,18 @@ function Property(): JSX.Element {
           </div>
 
           <section className="property__map map">
-            <Map
+            {/* <Map
               city={activeCity}
               offers={currentOffersNearby}
               placeLocationId={hoveredPlaceCardId}
-            />
+            /> */}
           </section>
         </section>
         <div className="container">
-          <NearPlaces
+          {/* <NearPlaces
             offers={currentOffersNearby}
             setActiveCard={setActiveCard}
-          />
+          /> */}
         </div>
       </main>
     </div>

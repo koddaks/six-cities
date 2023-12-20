@@ -2,12 +2,7 @@ import { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch, State } from '../types/state';
 import { Offer } from '../types';
-import {
-  APIRoute,
-  AppRoute,
-  AuthorizationStatus,
-
-} from '../const';
+import { APIRoute, AppRoute, AuthorizationStatus } from '../const';
 import {
   getOfferById,
   getOffers,
@@ -28,8 +23,8 @@ export const getOffersAction = createAsyncThunk<
     extra: AxiosInstance;
   }
 >('data/getOffers', async (_arg, { dispatch, extra: api }) => {
-  const { data } = await api.get<Offer[]>(APIRoute.Offers);
   dispatch(setIsOffersLoadingStatus({ isOffersLoading: true }));
+  const { data } = await api.get<Offer[]>(APIRoute.Offers);
   dispatch(getOffers({ offers: data }));
   dispatch(setIsOffersLoadingStatus({ isOffersLoading: false }));
 });
@@ -43,10 +38,11 @@ export const getOfferByIdAction = createAsyncThunk<
     extra: AxiosInstance;
   }
 >('data/getOfferById', async (hotelId, { dispatch, extra: api }) => {
+  dispatch(setIsOffersLoadingStatus({ isOffersLoading: true }));
   const { data } = await api.get<Offer>(`${APIRoute.Offers}/${hotelId}`);
   dispatch(getOfferById({ offer: data }));
+  dispatch(setIsOffersLoadingStatus({ isOffersLoading: false }));
 });
-
 
 export const checkAuthAction = createAsyncThunk<
   void,
@@ -57,8 +53,10 @@ export const checkAuthAction = createAsyncThunk<
     extra: AxiosInstance;
   }
 >('user/checkAuth', async (_arg, { dispatch, extra: api }) => {
+  dispatch(setIsOffersLoadingStatus({ isOffersLoading: true }));
   try {
     await api.get(APIRoute.Login);
+    dispatch(setIsOffersLoadingStatus({ isOffersLoading: false }));
     dispatch(requireAuthorization(AuthorizationStatus.Auth));
   } catch {
     dispatch(requireAuthorization(AuthorizationStatus.NoAuth));

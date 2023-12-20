@@ -1,7 +1,7 @@
 import { Offer } from '../../types';
 
 type PropertyGalleryProps = {
-  offer?: Offer;
+  offer?: Offer | null;
 };
 
 function PropertyGallery({ offer }: PropertyGalleryProps): JSX.Element {

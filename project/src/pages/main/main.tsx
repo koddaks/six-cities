@@ -2,18 +2,20 @@ import PlacesCardList from '../../components/place-card-list/place-card-list';
 import Locations from '../../components/locations/locations';
 import PlacesSorting from '../../components/plases-sorting/places-sorting';
 import Map from '../../components/map/map';
-import { useState } from 'react';
-import { useAppSelector } from '../../hooks';
+import { useEffect, useState } from 'react';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import Spinner from '../../components/spinner/spinner';
 import HeaderNavigation from '../../components/header-navigation/header-navigation';
+import { getOffersAction } from '../../store/api-actions';
 
 function Main(): JSX.Element {
+  const dispatch = useAppDispatch();
   const storeOffers = useAppSelector((state) => state.offers);
   const activeCity = useAppSelector((state) => state.city);
   const offers = storeOffers.filter(
     (offer) => offer.city.name === activeCity.name
   );
-  const isOffersLoading = useAppSelector((state) => state.isOffersLoading);
+  const isOffersLoading = useAppSelector((state) => state.isLoading);
 
   const [hoveredPlaceCardId, setHoveredPlaceCardId] = useState<number | null>(
     null
@@ -22,6 +24,10 @@ function Main(): JSX.Element {
   const setActiveCard = (id: number | null) => {
     setHoveredPlaceCardId(id);
   };
+
+  useEffect(() => {
+    dispatch(getOffersAction());
+  }, []);
   return (
     <div className="page page--gray page--main">
       <header className="header">
