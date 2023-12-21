@@ -11,7 +11,7 @@ export const getOfferById = createAction<{ offer: Offer }>('data/getOfferById');
 export const getOffersNearby = createAction<{ offersNearby: Offer[] }>(
   'data/getOffersNearby'
 );
-export const getReviewsbyId = createAction<{ offersNearby: Review[] }>(
+export const getReviewsbyId = createAction<{ reviews: Review[] }>(
   'data/getReviewsbyId'
 );
 
