@@ -8,9 +8,9 @@ function HeaderNavigation() {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const dispatch = useAppDispatch();
 
-  return (
-    <nav className="header__nav">
-      {authorizationStatus === AuthorizationStatus.Auth ? (
+  const getContent = () => {
+    if (authorizationStatus === AuthorizationStatus.Auth) {
+      return (
         <ul className="header__nav-list">
           <li className="header__nav-item user">
             <a
@@ -39,21 +39,25 @@ function HeaderNavigation() {
             </Link>
           </li>
         </ul>
-      ) : (
-        <ul className="header__nav-list">
-          <li className="header__nav-item user">
-            <Link
-              to={AppRoute.Login}
-              className="header__nav-link header__nav-link--profile"
-            >
-              <div className="header__avatar-wrapper user__avatar-wrapper"></div>
-              <span className="header__login">Sign in</span>
-            </Link>
-          </li>
-        </ul>
-      )}
-    </nav>
-  );
+      );
+    }
+
+    return (
+      <ul className="header__nav-list">
+        <li className="header__nav-item user">
+          <Link
+            to={AppRoute.Login}
+            className="header__nav-link header__nav-link--profile"
+          >
+            <div className="header__avatar-wrapper user__avatar-wrapper"></div>
+            <span className="header__login">Sign in</span>
+          </Link>
+        </li>
+      </ul>
+    );
+  };
+
+  return <nav className="header__nav">{getContent()}</nav>;
 }
 
 export default HeaderNavigation;
