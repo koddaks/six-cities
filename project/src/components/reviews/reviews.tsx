@@ -2,9 +2,6 @@ import { useState } from 'react';
 import ReviewsList from '../reviews-list/reviews-list';
 import { useAppSelector } from '../../hooks';
 
-
-
-
 function Reviews() {
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
