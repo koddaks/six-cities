@@ -4,12 +4,12 @@ import PropertyDescriptionList from '../../components/property-description-list/
 import Reviews from '../../components/reviews/reviews';
 import NearPlaces from '../../components/near-places/near-places';
 import Map from '../../components/map/map';
-import { reviews } from '../../mock/reviews';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import PropertyGallery from '../../components/property-gallery/property-gallery';
 import {
   getOfferByIdAction,
   getOffersNearbyAction,
+  getReviewsbyIdAction,
 } from '../../store/api-actions';
 import Page404 from '../page404/page404';
 import Spinner from '../../components/spinner/spinner';
@@ -35,6 +35,7 @@ function Property(): JSX.Element {
     if (id) {
       dispatch(getOfferByIdAction(id));
       dispatch(getOffersNearbyAction(id));
+      dispatch(getReviewsbyIdAction(id));
     }
   }, [id, dispatch]);
 
@@ -94,7 +95,7 @@ function Property(): JSX.Element {
             {currentOffer ? (
               <PropertyDescriptionList offer={currentOffer} />
             ) : null}
-            <Reviews reviews={reviews} offerId={id} />
+            <Reviews />
           </div>
 
           <section className="property__map map">
