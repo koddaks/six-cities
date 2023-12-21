@@ -1,21 +1,16 @@
 import { useState } from 'react';
 import ReviewsList from '../reviews-list/reviews-list';
-import { Review } from '../../types';
+import { useAppSelector } from '../../hooks';
 
-type ReviewsProps = {
-  reviews: Review[];
-  offerId?: string;
-};
 
-function Reviews({ reviews, offerId }: ReviewsProps) {
+
+
+function Reviews() {
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
   const minCommentLength = 50;
   const submitIsEnabled = comment.length >= minCommentLength && rating !== 0;
-
-  const reviewsData = reviews.filter(
-    (review) => offerId === review.id.toString()
-  );
+  const reviews = useAppSelector((state) => state.reviews);
 
   const handleRatingChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = Number(e.target.value);
@@ -37,9 +32,9 @@ function Reviews({ reviews, offerId }: ReviewsProps) {
     <section className="property__reviews reviews">
       <h2 className="reviews__title">
         Reviews &middot;{' '}
-        <span className="reviews__amount">{reviewsData?.length}</span>
+        <span className="reviews__amount">{reviews?.length}</span>
       </h2>
-      <ReviewsList reviews={reviewsData} />
+      <ReviewsList reviews={reviews} />
       <form
         onSubmit={handleSubmit}
         className="reviews__form form"
