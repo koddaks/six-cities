@@ -1,12 +1,13 @@
 import { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch, State } from '../types/state';
-import { Offer } from '../types';
+import { Offer, Review } from '../types';
 import { APIRoute, AppRoute, AuthorizationStatus } from '../const';
 import {
   getOfferById,
   getOffers,
   getOffersNearby,
+  getReviewsbyId,
   redirectToRoute,
   requireAuthorization,
   setIsLoadingStatus,
@@ -57,6 +58,21 @@ export const getOffersNearbyAction = createAsyncThunk<
   dispatch(setIsLoadingStatus({ isLoading: true }));
   const { data } = await api.get<Offer[]>(`${APIRoute.Offers}/${hotelId}/nearby`);
   dispatch(getOffersNearby({ offersNearby: data }));
+  dispatch(setIsLoadingStatus({ isLoading: false }));
+});
+
+export const getReviewsbyIdAction = createAsyncThunk<
+  void,
+  string,
+  {
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+  }
+>('data/getReviewsbyId', async (hotelId, { dispatch, extra: api }) => {
+  dispatch(setIsLoadingStatus({ isLoading: true }));
+  const { data } = await api.get<Review[]>(`${APIRoute.Reviews}/${hotelId}`);
+  dispatch(getReviewsbyId({ reviews: data }));
   dispatch(setIsLoadingStatus({ isLoading: false }));
 });
 
