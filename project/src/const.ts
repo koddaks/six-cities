@@ -1,5 +1,3 @@
-
-
 export enum AppRoute {
   Root = '/',
   Favorites = '/favorites',
@@ -18,11 +16,12 @@ export enum APIRoute {
   Favorites = '/favorite',
   Login = '/login',
   Logout = '/logout',
+  Reviews = '/comments',
 }
 
 export type ErrorResponse = {
   error?: string | undefined;
-}
+};
 
 export const SORT_TYPE = {
   POPULAR: 'Popular',
