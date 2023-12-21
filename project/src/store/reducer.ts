@@ -5,6 +5,7 @@ import {
   getOfferById,
   getOffers,
   getOffersNearby,
+  getReviewsbyId,
   requireAuthorization,
   setIsLoadingStatus,
   setSortType,
@@ -58,6 +59,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(getOffersNearby, (state, action) => {
       state.offersNearby = action.payload.offersNearby;
+    })
+    .addCase(getReviewsbyId, (state, action) => {
+      state.reviews = action.payload.reviews;
     })
     .addCase(requireAuthorization, (state, action) => {
       state.authorizationStatus = action.payload;
