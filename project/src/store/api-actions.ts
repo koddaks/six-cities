@@ -6,6 +6,7 @@ import { APIRoute, AppRoute, AuthorizationStatus } from '../const';
 import {
   getOfferById,
   getOffers,
+  getOffersNearby,
   redirectToRoute,
   requireAuthorization,
   setIsLoadingStatus,
@@ -41,6 +42,21 @@ export const getOfferByIdAction = createAsyncThunk<
   dispatch(setIsLoadingStatus({ isLoading: true }));
   const { data } = await api.get<Offer>(`${APIRoute.Offers}/${hotelId}`);
   dispatch(getOfferById({ offer: data }));
+  dispatch(setIsLoadingStatus({ isLoading: false }));
+});
+
+export const getOffersNearbyAction = createAsyncThunk<
+  void,
+  string,
+  {
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+  }
+>('data/getOfferById', async (hotelId, { dispatch, extra: api }) => {
+  dispatch(setIsLoadingStatus({ isLoading: true }));
+  const { data } = await api.get<Offer[]>(`${APIRoute.Offers}/${hotelId}/nearby`);
+  dispatch(getOffersNearby({ offersNearby: data }));
   dispatch(setIsLoadingStatus({ isLoading: false }));
 });
 
