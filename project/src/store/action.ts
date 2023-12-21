@@ -14,5 +14,4 @@ export const requireAuthorization = createAction<AuthorizationStatus>(
 export const setIsLoadingStatus = createAction<{
   isLoading: boolean;
 }>('data/setDataLoadingStatus');
-export const setError = createAction<{ error: string | null }>('app/error');
 export const redirectToRoute = createAction<AppRoute>('app/redirectToRoute');
