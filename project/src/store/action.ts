@@ -8,6 +8,9 @@ export const setSortType = createAction<{ sortType: SortType }>(
 );
 export const getOffers = createAction<{ offers: Offer[] }>('data/getOffers');
 export const getOfferById = createAction<{ offer: Offer }>('data/getOfferById');
+export const getOffersNearby = createAction<{ offersNearby: Offer[] }>(
+  'data/getOffersNearby'
+);
 export const requireAuthorization = createAction<AuthorizationStatus>(
   'user/requireAuthorization'
 );
