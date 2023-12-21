@@ -14,6 +14,7 @@ type InitialState = {
   city: City;
   offers: Offer[];
   offerById: Offer | null;
+  offersNearby: Offer[];
   sortType: SortType;
   authorizationStatus: AuthorizationStatus;
   isLoading: boolean;
@@ -30,6 +31,7 @@ const initialState: InitialState = {
   },
   offers: [],
   offerById: null,
+  offersNearby: [],
   sortType: 'POPULAR',
   authorizationStatus: AuthorizationStatus.Unknown,
   isLoading: false,
