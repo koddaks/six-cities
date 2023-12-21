@@ -1,4 +1,4 @@
-import { City, Offer } from './../types/index';
+import { City, Offer, Review } from './../types/index';
 import { createReducer } from '@reduxjs/toolkit';
 import {
   changeCity,
@@ -16,6 +16,7 @@ type InitialState = {
   offers: Offer[];
   offerById: Offer | null;
   offersNearby: Offer[];
+  reviews: Review[];
   sortType: SortType;
   authorizationStatus: AuthorizationStatus;
   isLoading: boolean;
@@ -33,6 +34,7 @@ const initialState: InitialState = {
   offers: [],
   offerById: null,
   offersNearby: [],
+  reviews: [],
   sortType: 'POPULAR',
   authorizationStatus: AuthorizationStatus.Unknown,
   isLoading: false,

@@ -1,5 +1,5 @@
 import { createAction } from '@reduxjs/toolkit';
-import { City, Offer } from '../types';
+import { City, Offer, Review } from '../types';
 import { AppRoute, AuthorizationStatus, SortType } from '../const';
 
 export const changeCity = createAction<{ city: City }>('location/changeCity');
@@ -11,6 +11,10 @@ export const getOfferById = createAction<{ offer: Offer }>('data/getOfferById');
 export const getOffersNearby = createAction<{ offersNearby: Offer[] }>(
   'data/getOffersNearby'
 );
+export const getReviewsbyId = createAction<{ offersNearby: Review[] }>(
+  'data/getReviewsbyId'
+);
+
 export const requireAuthorization = createAction<AuthorizationStatus>(
   'user/requireAuthorization'
 );
