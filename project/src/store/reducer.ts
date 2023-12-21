@@ -4,6 +4,7 @@ import {
   changeCity,
   getOfferById,
   getOffers,
+  getOffersNearby,
   requireAuthorization,
   setIsLoadingStatus,
   setSortType,
@@ -52,6 +53,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(getOfferById, (state, action) => {
       state.offerById = action.payload.offer;
+    })
+    .addCase(getOffersNearby, (state, action) => {
+      state.offersNearby = action.payload.offersNearby;
     })
     .addCase(requireAuthorization, (state, action) => {
       state.authorizationStatus = action.payload;
