@@ -103,9 +103,6 @@ function LogIn() {
               <button
                 className="login__submit form__submit button"
                 type="submit"
-                onClick={() => {
-                  handleRedirectToMainPage();
-                }}
               >
                 Sign in
               </button>
