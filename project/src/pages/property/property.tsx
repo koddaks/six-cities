@@ -7,13 +7,15 @@ import Map from '../../components/map/map';
 import { reviews } from '../../mock/reviews';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import PropertyGallery from '../../components/property-gallery/property-gallery';
-import { getOfferByIdAction } from '../../store/api-actions';
+import {
+  getOfferByIdAction,
+  getOffersNearbyAction,
+} from '../../store/api-actions';
 import Page404 from '../page404/page404';
 import Spinner from '../../components/spinner/spinner';
 
 function Property(): JSX.Element {
   const dispatch = useAppDispatch();
-  const offers = useAppSelector((state) => state.offers);
   const activeCity = useAppSelector((state) => state.city);
   const { id } = useParams<{ id: string }>();
 
@@ -27,16 +29,14 @@ function Property(): JSX.Element {
 
   const currentOffer = useAppSelector((state) => state.offerById);
   const isOfferLoading = useAppSelector((state) => state.isLoading);
+  const currentOffersNearby = useAppSelector((state) => state.offersNearby);
 
   useEffect(() => {
     if (id) {
       dispatch(getOfferByIdAction(id));
+      dispatch(getOffersNearbyAction(id));
     }
   }, [id, dispatch]);
-
-  const currentOffersNearby = offers.filter(
-    (offer) => offer.id.toString() !== id
-  );
 
   if (isOfferLoading) {
     return <Spinner />;
