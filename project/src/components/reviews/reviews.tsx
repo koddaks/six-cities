@@ -1,13 +1,20 @@
 import { useState } from 'react';
 import ReviewsList from '../reviews-list/reviews-list';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import {
+  getReviewsbyIdAction,
+  postReviewAction,
+} from '../../store/api-actions';
+import { useParams } from 'react-router-dom';
 
 function Reviews() {
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
   const minCommentLength = 50;
   const submitIsEnabled = comment.length >= minCommentLength && rating !== 0;
+  const { id } = useParams<{ id: string }>();
   const reviews = useAppSelector((state) => state.reviews);
+  const dispatch = useAppDispatch();
 
   const handleRatingChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = Number(e.target.value);
@@ -23,6 +30,12 @@ function Reviews() {
     event
   ) => {
     event.preventDefault();
+    if (id) {
+      dispatch(postReviewAction([{ comment, rating }, id]));
+      dispatch(getReviewsbyIdAction(id));
+      setComment('');
+      setRating(0);
+    }
   };
 
   return (
@@ -138,6 +151,7 @@ function Reviews() {
           id="review"
           name="review"
           placeholder="Tell how was your stay, what you like and what can be improved"
+          value={comment}
         />
         <div className="reviews__button-wrapper">
           <p className="reviews__help">

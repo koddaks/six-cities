@@ -73,10 +73,8 @@ export const getReviewsbyIdAction = createAsyncThunk<
     extra: AxiosInstance;
   }
 >('data/getReviewsbyId', async (hotelId, { dispatch, extra: api }) => {
-  dispatch(setIsLoadingStatus({ isLoading: true }));
   const { data } = await api.get<Review[]>(`${APIRoute.Reviews}/${hotelId}`);
   dispatch(getReviewsbyId({ reviews: data }));
-  dispatch(setIsLoadingStatus({ isLoading: false }));
 });
 
 export const postReviewAction = createAsyncThunk<
@@ -90,12 +88,10 @@ export const postReviewAction = createAsyncThunk<
 >(
   'data/postReview',
   async ([{ comment, rating }, hotelId], { dispatch, extra: api }) => {
-    dispatch(setIsLoadingStatus({ isLoading: true }));
     await api.post<Review>(`${APIRoute.Reviews}/${hotelId}`, {
       comment,
       rating,
     });
-    dispatch(setIsLoadingStatus({ isLoading: false }));
   }
 );
 
