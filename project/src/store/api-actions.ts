@@ -15,6 +15,7 @@ import {
 import { AuthData } from '../types/auth-data';
 import { UserData } from '../types/user-data';
 import { dropToken, saveToken } from '../services/token';
+import { ReviewData } from '../types/review-data';
 
 export const getOffersAction = createAsyncThunk<
   void,
@@ -56,7 +57,9 @@ export const getOffersNearbyAction = createAsyncThunk<
   }
 >('data/getOfferById', async (hotelId, { dispatch, extra: api }) => {
   dispatch(setIsLoadingStatus({ isLoading: true }));
-  const { data } = await api.get<Offer[]>(`${APIRoute.Offers}/${hotelId}/nearby`);
+  const { data } = await api.get<Offer[]>(
+    `${APIRoute.Offers}/${hotelId}/nearby`
+  );
   dispatch(getOffersNearby({ offersNearby: data }));
   dispatch(setIsLoadingStatus({ isLoading: false }));
 });
@@ -75,6 +78,26 @@ export const getReviewsbyIdAction = createAsyncThunk<
   dispatch(getReviewsbyId({ reviews: data }));
   dispatch(setIsLoadingStatus({ isLoading: false }));
 });
+
+export const postReviewAction = createAsyncThunk<
+  void,
+  [ReviewData, string],
+  {
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+  }
+>(
+  'data/postReview',
+  async ([{ comment, rating }, hotelId], { dispatch, extra: api }) => {
+    dispatch(setIsLoadingStatus({ isLoading: true }));
+    await api.post<Review>(`${APIRoute.Reviews}/${hotelId}`, {
+      comment,
+      rating,
+    });
+    dispatch(setIsLoadingStatus({ isLoading: false }));
+  }
+);
 
 export const checkAuthAction = createAsyncThunk<
   void,
