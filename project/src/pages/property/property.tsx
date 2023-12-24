@@ -1,18 +1,26 @@
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import PropertyDescriptionList from '../../components/property-description-list/property-description-list';
 import Reviews from '../../components/reviews/reviews';
 import NearPlaces from '../../components/near-places/near-places';
 import Map from '../../components/map/map';
-import { reviews } from '../../mock/reviews';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import PropertyGallery from '../../components/property-gallery/property-gallery';
+import {
+  getOfferByIdAction,
+  getOffersNearbyAction,
+  getReviewsbyIdAction,
+} from '../../store/api-actions';
+import Page404 from '../page404/page404';
+import Spinner from '../../components/spinner/spinner';
+import { AuthorizationStatus } from '../../const';
+import HeaderNavigation from '../../components/header-navigation/header-navigation';
 
 function Property(): JSX.Element {
-  const offers = useAppSelector((state) => state.offers);
+  const dispatch = useAppDispatch();
   const activeCity = useAppSelector((state) => state.city);
   const { id } = useParams<{ id: string }>();
-  const navigate = useNavigate();
+
   const [hoveredPlaceCardId, setHoveredPlaceCardId] = useState<number | null>(
     null
   );
@@ -21,17 +29,31 @@ function Property(): JSX.Element {
     setHoveredPlaceCardId(cardId);
   };
 
-  const currentOffer = offers.find((offer) => offer.id.toString() === id);
+  const authorizationStatus = useAppSelector(
+    (state) => state.authorizationStatus
+  );
+  const currentOffer = useAppSelector((state) => state.offerById);
+  const isOfferLoading = useAppSelector((state) => state.isLoading);
+  const currentOffersNearby = useAppSelector((state) => state.offersNearby);
+
+  const showReviewsWithAuth =
+    authorizationStatus === AuthorizationStatus.Auth ? <Reviews /> : null;
 
   useEffect(() => {
-    if (!currentOffer) {
-      navigate('/404');
+    if (id) {
+      dispatch(getOfferByIdAction(id));
+      dispatch(getOffersNearbyAction(id));
+      dispatch(getReviewsbyIdAction(id));
     }
-  }, [currentOffer, id, navigate]);
+  }, [id, dispatch]);
 
-  const currentOffersNearby = offers.filter(
-    (offer) => offer.id.toString() !== id
-  );
+  if (isOfferLoading) {
+    return <Spinner />;
+  }
+
+  if (!currentOffer) {
+    return <Page404 />;
+  }
 
   return (
     <div className="page">
@@ -39,7 +61,7 @@ function Property(): JSX.Element {
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <a className="header__logo-link" href="main.html">
+              <a className="header__logo-link" href="/">
                 <img
                   className="header__logo"
                   src="img/logo.svg"
@@ -49,27 +71,7 @@ function Property(): JSX.Element {
                 />
               </a>
             </div>
-            <nav className="header__nav">
-              <ul className="header__nav-list">
-                <li className="header__nav-item user">
-                  <a
-                    className="header__nav-link header__nav-link--profile"
-                    href="#todo"
-                  >
-                    <div className="header__avatar-wrapper user__avatar-wrapper"></div>
-                    <span className="header__user-name user__name">
-                      Oliver.conner@gmail.com
-                    </span>
-                    <span className="header__favorite-count">3</span>
-                  </a>
-                </li>
-                <li className="header__nav-item">
-                  <a className="header__nav-link" href="#todo">
-                    <span className="header__signout">Sign out</span>
-                  </a>
-                </li>
-              </ul>
-            </nav>
+            <HeaderNavigation />
           </div>
         </div>
       </header>
@@ -81,7 +83,7 @@ function Property(): JSX.Element {
             {currentOffer ? (
               <PropertyDescriptionList offer={currentOffer} />
             ) : null}
-            <Reviews reviews={reviews} offerId={id} />
+            {showReviewsWithAuth}
           </div>
 
           <section className="property__map map">
