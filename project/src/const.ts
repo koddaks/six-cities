@@ -31,3 +31,9 @@ export const SORT_TYPE = {
 } as const;
 
 export type SortType = keyof typeof SORT_TYPE;
+
+export enum NameSpace {
+  Data = 'DATA',
+  App = 'APP',
+  User = 'USER',
+}
