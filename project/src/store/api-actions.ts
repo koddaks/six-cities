@@ -45,7 +45,7 @@ export const getOffersNearbyAction = createAsyncThunk<
     state: State;
     extra: AxiosInstance;
   }
->('data/getOfferById', async (hotelId, { extra: api }) => {
+>('data/getOffersNearby', async (hotelId, { extra: api }) => {
   const { data } = await api.get<Offer[]>(
     `${APIRoute.Offers}/${hotelId}/nearby`
   );
