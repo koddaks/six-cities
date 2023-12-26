@@ -1,4 +1,6 @@
 import { useAppSelector } from '../../hooks';
+import { getOffers } from '../../store/app-data/selectors';
+import { getCurrentCity, getSortType } from '../../store/app-process/selectors';
 import { sortOffers } from '../../utils/sortOffers';
 import PlaceCard from '../place-card/place-card';
 
@@ -7,11 +9,11 @@ type PlacesCardListProps = {
 };
 
 const PlacesCardList = ({ setActiveCard }: PlacesCardListProps) => {
-  const offers = useAppSelector((state) => state.offers);
-  const activeCity = useAppSelector((state) => state.city.name);
-  const sortType = useAppSelector((state) => state.sortType);
+  const offers = useAppSelector(getOffers);
+  const activeCity = useAppSelector(getCurrentCity);
+  const sortType = useAppSelector(getSortType);
   const offersByActiveCity = offers.filter(
-    (offer) => offer.city.name === activeCity
+    (offer) => offer.city.name === activeCity.name
   );
 
   const sortedOffersBySortType = sortOffers(offersByActiveCity, sortType);

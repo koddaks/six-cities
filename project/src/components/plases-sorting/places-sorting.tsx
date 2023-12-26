@@ -1,16 +1,17 @@
 import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { setSortType } from '../../store/action';
 import { SORT_TYPE, SortType } from '../../const';
+import { getSortType } from '../../store/app-process/selectors';
+import { setSortType } from '../../store/app-process/app-process';
 
 function PlacesSorting() {
   const dispatch = useAppDispatch();
-  const sortType = useAppSelector((state) => state.sortType);
+  const sortType = useAppSelector(getSortType);
 
   const [placesOptionActive, setPlacesOptionActive] = useState(false);
 
   const handleSortOptionClick = (selectedSortType: SortType) => {
-    dispatch(setSortType({ sortType: selectedSortType }));
+    dispatch(setSortType(selectedSortType));
     setPlacesOptionActive(false);
   };
 

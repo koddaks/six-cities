@@ -6,6 +6,7 @@ import {
   postReviewAction,
 } from '../../store/api-actions';
 import { useParams } from 'react-router-dom';
+import { getReviews } from '../../store/app-data/selectors';
 
 function Reviews() {
   const [rating, setRating] = useState(0);
@@ -13,7 +14,7 @@ function Reviews() {
   const minCommentLength = 50;
   const submitIsEnabled = comment.length >= minCommentLength && rating !== 0;
   const { id } = useParams<{ id: string }>();
-  const reviews = useAppSelector((state) => state.reviews);
+  const reviews = useAppSelector(getReviews);
   const dispatch = useAppDispatch();
 
   const handleRatingChange = (e: React.ChangeEvent<HTMLInputElement>) => {
