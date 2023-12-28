@@ -5,7 +5,6 @@ import Map from '../../components/map/map';
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import Spinner from '../../components/spinner/spinner';
-import HeaderNavigation from '../../components/header-navigation/header-navigation';
 import { getOffersAction } from '../../store/api-actions';
 import { getLoadingStatus, getOffers } from '../../store/app-data/selectors';
 import { getCurrentCity } from '../../store/app-process/selectors';
