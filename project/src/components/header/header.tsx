@@ -2,6 +2,8 @@ import { AppRoute } from '../../const';
 import HeaderNavigation from '../header-navigation/header-navigation';
 
 function Header() {
+  const isShowHeaderNavigation = window.location.pathname !== AppRoute.Login;
+
   return (
     <header className="header">
       <div className="container">
@@ -17,7 +19,7 @@ function Header() {
               />
             </a>
           </div>
-          {window.location.pathname !== AppRoute.Login && <HeaderNavigation />}
+          {isShowHeaderNavigation && <HeaderNavigation />}
         </div>
       </div>
     </header>
