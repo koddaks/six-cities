@@ -1,3 +1,4 @@
+import { AppRoute } from '../../const';
 import HeaderNavigation from '../header-navigation/header-navigation';
 
 function Header() {
@@ -16,7 +17,7 @@ function Header() {
               />
             </a>
           </div>
-          <HeaderNavigation />
+          {window.location.pathname !== AppRoute.Login && <HeaderNavigation />}
         </div>
       </div>
     </header>
