@@ -1,3 +1,4 @@
+import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 
 import { getOffers } from '../../store/app-data/selectors';
@@ -39,4 +40,5 @@ function Locations() {
     </section>
   );
 }
-export default Locations;
+
+export default React.memo(Locations);

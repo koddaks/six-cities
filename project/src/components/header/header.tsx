@@ -1,3 +1,4 @@
+import React from 'react';
 import { AppRoute } from '../../const';
 import HeaderNavigation from '../header-navigation/header-navigation';
 
@@ -26,4 +27,4 @@ function Header() {
   );
 }
 
-export default Header;
+export default React.memo(Header);

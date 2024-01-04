@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { SORT_TYPE, SortType } from '../../const';
 import { getSortType } from '../../store/app-process/selectors';
@@ -54,4 +54,5 @@ function PlacesSorting() {
   );
 }
 
-export default PlacesSorting;
+export default React.memo(PlacesSorting);
+
