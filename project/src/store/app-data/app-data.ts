@@ -37,6 +37,9 @@ export const appData = createSlice({
         state.offerById = action.payload;
         state.isLoading = false;
       })
+      .addCase(getOfferByIdAction.rejected, (state) => {
+        state.isLoading = false;
+      })
       .addCase(getOffersNearbyAction.fulfilled, (state, action) => {
         state.offersNearby = action.payload;
       })
