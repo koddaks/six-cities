@@ -15,10 +15,17 @@ import Page404 from '../page404/page404';
 import Spinner from '../../components/spinner/spinner';
 import { AuthorizationStatus } from '../../const';
 import HeaderNavigation from '../../components/header-navigation/header-navigation';
+import { getCurrentCity } from '../../store/app-process/selectors';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
+import {
+  getCurrentOffer,
+  getLoadingStatus,
+  getOffersNearby,
+} from '../../store/app-data/selectors';
 
 function Property(): JSX.Element {
   const dispatch = useAppDispatch();
-  const activeCity = useAppSelector((state) => state.city);
+  const activeCity = useAppSelector(getCurrentCity);
   const { id } = useParams<{ id: string }>();
 
   const [hoveredPlaceCardId, setHoveredPlaceCardId] = useState<number | null>(
@@ -29,12 +36,10 @@ function Property(): JSX.Element {
     setHoveredPlaceCardId(cardId);
   };
 
-  const authorizationStatus = useAppSelector(
-    (state) => state.authorizationStatus
-  );
-  const currentOffer = useAppSelector((state) => state.offerById);
-  const isOfferLoading = useAppSelector((state) => state.isLoading);
-  const currentOffersNearby = useAppSelector((state) => state.offersNearby);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const currentOffer = useAppSelector(getCurrentOffer);
+  const isOfferLoading = useAppSelector(getLoadingStatus);
+  const currentOffersNearby = useAppSelector(getOffersNearby);
 
   const showReviewsWithAuth =
     authorizationStatus === AuthorizationStatus.Auth ? <Reviews /> : null;

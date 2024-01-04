@@ -1,3 +1,4 @@
+import React from 'react';
 import { Offer } from '../../types';
 
 type PropertyGalleryProps = {
@@ -12,11 +13,7 @@ function PropertyGallery({ offer }: PropertyGalleryProps): JSX.Element {
       <div className="property__gallery">
         {galleryImages?.map((image) => (
           <div key={image} className="property__image-wrapper">
-            <img
-              className="property__image"
-              src={image}
-              alt={offer?.title}
-            />
+            <img className="property__image" src={image} alt={offer?.title} />
           </div>
         ))}
       </div>
@@ -24,4 +21,7 @@ function PropertyGallery({ offer }: PropertyGalleryProps): JSX.Element {
   );
 }
 
-export default PropertyGallery;
+export default React.memo(
+  PropertyGallery,
+  (prevProps, nextProps) => prevProps.offer?.images === nextProps.offer?.images
+);

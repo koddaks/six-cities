@@ -31,3 +31,32 @@ export const SORT_TYPE = {
 } as const;
 
 export type SortType = keyof typeof SORT_TYPE;
+
+export enum NameSpace {
+  Data = 'DATA',
+  App = 'APP',
+  User = 'USER',
+}
+
+export const REVIEW_RATING = [
+  {
+    title: 'perfect',
+    value: 5,
+  },
+  {
+    title: 'good',
+    value: 4,
+  },
+  {
+    title: 'not bad',
+    value: 3,
+  },
+  {
+    title: 'badly',
+    value: 2,
+  },
+  {
+    title: 'terribly',
+    value: 1,
+  },
+];

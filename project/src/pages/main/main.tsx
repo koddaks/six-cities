@@ -5,17 +5,19 @@ import Map from '../../components/map/map';
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import Spinner from '../../components/spinner/spinner';
-import HeaderNavigation from '../../components/header-navigation/header-navigation';
 import { getOffersAction } from '../../store/api-actions';
+import { getLoadingStatus, getOffers } from '../../store/app-data/selectors';
+import { getCurrentCity } from '../../store/app-process/selectors';
+import Header from '../../components/header/header';
 
 function Main(): JSX.Element {
   const dispatch = useAppDispatch();
-  const storeOffers = useAppSelector((state) => state.offers);
-  const activeCity = useAppSelector((state) => state.city);
+  const storeOffers = useAppSelector(getOffers);
+  const activeCity = useAppSelector(getCurrentCity);
   const offers = storeOffers.filter(
     (offer) => offer.city.name === activeCity.name
   );
-  const isOffersLoading = useAppSelector((state) => state.isLoading);
+  const isOffersLoading = useAppSelector(getLoadingStatus);
 
   const [hoveredPlaceCardId, setHoveredPlaceCardId] = useState<number | null>(
     null
@@ -28,30 +30,10 @@ function Main(): JSX.Element {
   useEffect(() => {
     dispatch(getOffersAction());
   }, [dispatch]);
+
   return (
     <div className="page page--gray page--main">
-      <header className="header">
-        <div className="container">
-          <div className="header__wrapper">
-            <div className="header__left">
-              <a
-                className="header__logo-link header__logo-link--active"
-                href="/"
-              >
-                <img
-                  className="header__logo"
-                  src="img/logo.svg"
-                  alt="6 cities logo"
-                  width="81"
-                  height="41"
-                />
-              </a>
-            </div>
-            <HeaderNavigation />
-          </div>
-        </div>
-      </header>
-
+      <Header />
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
