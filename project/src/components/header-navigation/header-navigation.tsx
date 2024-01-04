@@ -3,6 +3,7 @@ import { AppRoute, AuthorizationStatus } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { logoutAction } from '../../store/api-actions';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
+import React from 'react';
 
 
 function HeaderNavigation() {
@@ -61,4 +62,6 @@ function HeaderNavigation() {
   return <nav className="header__nav">{getContent()}</nav>;
 }
 
-export default HeaderNavigation;
+
+export default React.memo(HeaderNavigation);
+
