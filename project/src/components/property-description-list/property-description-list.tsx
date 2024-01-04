@@ -108,7 +108,6 @@ function PropertyDescriptionList({ offer }: PropertyDescriptionListProps) {
   );
 }
 
-// export default PropertyDescriptionList;
 export default React.memo(
   PropertyDescriptionList,
   (prevProps, nextProps) => prevProps.offer === nextProps.offer
