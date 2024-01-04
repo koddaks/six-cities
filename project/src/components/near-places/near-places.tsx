@@ -1,3 +1,4 @@
+import React from 'react';
 import { Offer } from '../../types';
 import PlaceCard from '../place-card/place-card';
 
@@ -33,4 +34,7 @@ function NearPlaces({ offers, setActiveCard }: NearPlacesProps) {
   );
 }
 
-export default NearPlaces;
+export default React.memo(
+  NearPlaces,
+  (prevProps, nextProps) => prevProps.offers === nextProps.offers
+);

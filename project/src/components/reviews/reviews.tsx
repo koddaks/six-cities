@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import ReviewsList from '../reviews-list/reviews-list';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import {
@@ -83,4 +83,4 @@ function Reviews() {
     </section>
   );
 }
-export default Reviews;
+export default React.memo(Reviews);
