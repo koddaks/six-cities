@@ -20,6 +20,7 @@ export type AppData = {
   offerById: Offer | null;
   offersNearby: Offer[];
   reviews: Review[];
+  favorites: Offer[];
   isLoading: boolean;
   isFavorite: boolean;
 }
