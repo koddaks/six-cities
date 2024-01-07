@@ -15,6 +15,7 @@ const initialState: AppData = {
   offersNearby: [],
   reviews: [],
   isLoading: false,
+  isFavorite: false,
 };
 
 export const appData = createSlice({
