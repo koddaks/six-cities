@@ -1,11 +1,24 @@
+import { MouseEventHandler } from 'react';
+import { useAppDispatch } from '../../hooks';
 import { Offer } from '../../types';
 import PlaceCard from '../place-card/place-card';
+import { postFavoriteAction } from '../../store/api-actions';
+import { FavoriteStatus } from '../../const';
 
 type FavoritesListProps = {
   favoriteOffers: Offer[];
 };
 
 function FavoritesList({ favoriteOffers }: FavoritesListProps) {
+  const dispatch = useAppDispatch();
+
+  const handleSetFavorite = (IsStatusFavorite: boolean, offerId: number): MouseEventHandler<HTMLButtonElement> => (event) => {
+    event.preventDefault();
+
+    dispatch(postFavoriteAction([ IsStatusFavorite ? FavoriteStatus.Favorite : FavoriteStatus.NotFavorite , offerId]));
+
+  };
+
   return (
     <section className="favorites">
       <h1 className="favorites__title">Saved listing</h1>
@@ -24,6 +37,7 @@ function FavoritesList({ favoriteOffers }: FavoritesListProps) {
                 key={offer.id}
                 cardType="favorites"
                 offer={offer}
+                setFavorite={handleSetFavorite}
               />
             ))}
           </div>
