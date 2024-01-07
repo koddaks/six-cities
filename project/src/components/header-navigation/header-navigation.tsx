@@ -4,10 +4,11 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { logoutAction } from '../../store/api-actions';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
 import React from 'react';
-
+import { getFavorites } from '../../store/app-data/selectors';
 
 function HeaderNavigation() {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const favoriteCount = useAppSelector(getFavorites).length;
   const dispatch = useAppDispatch();
 
   const getContent = () => {
@@ -25,7 +26,7 @@ function HeaderNavigation() {
               </span>
             </a>
             <Link to={AppRoute.Favorites}>
-              <span className="header__favorite-count">3</span>
+              <span className="header__favorite-count">{favoriteCount}</span>
             </Link>
           </li>
           <li className="header__nav-item">
@@ -62,6 +63,4 @@ function HeaderNavigation() {
   return <nav className="header__nav">{getContent()}</nav>;
 }
 
-
 export default React.memo(HeaderNavigation);
-
