@@ -63,8 +63,9 @@ export const appData = createSlice({
         state.isFavoriteStatus = true;
       })
       .addCase(postFavoriteAction.fulfilled, (state, action) => {
-        state.favoriteOffers = [action.payload];
-        state.isFavoriteStatus = false;
+        action.payload.isFavorite
+          ? (state.favoriteOffers = [...state.favoriteOffers, action.payload])
+          : (state.isFavoriteStatus = false);
       });
   },
 });
