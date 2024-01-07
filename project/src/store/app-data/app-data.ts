@@ -18,7 +18,7 @@ const initialState: AppData = {
   reviews: [],
   favoriteOffers: [],
   isLoading: false,
-  isFavorite: false,
+  isFavoriteStatus: false,
 };
 
 export const appData = createSlice({
@@ -53,17 +53,18 @@ export const appData = createSlice({
       .addCase(getReviewsbyIdAction.fulfilled, (state, action) => {
         state.reviews = action.payload;
       })
-      .addCase(postFavoriteAction.pending, (state) => {
-        state.isFavorite = true;
-      })
-      .addCase(postFavoriteAction.rejected, (state) => {
-        state.isFavorite = false;
-      })
-      .addCase(postFavoriteAction.fulfilled, (state, action) => {
-        state.favoriteOffers = [...state.favoriteOffers, action.payload];
-      })
       .addCase(getFavoritesOffersAction.fulfilled, (state, action) => {
         state.favoriteOffers = action.payload;
+      })
+      .addCase(postFavoriteAction.pending, (state) => {
+        state.isFavoriteStatus = true;
+      })
+      .addCase(postFavoriteAction.rejected, (state) => {
+        state.isFavoriteStatus = true;
+      })
+      .addCase(postFavoriteAction.fulfilled, (state, action) => {
+        state.favoriteOffers = [action.payload];
+        state.isFavoriteStatus = false;
       });
   },
 });
