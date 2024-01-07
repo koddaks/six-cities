@@ -1,15 +1,22 @@
 import { Link } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { logoutAction } from '../../store/api-actions';
+import {
+  getFavoritesOffersAction,
+  logoutAction,
+} from '../../store/api-actions';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { getFavorites } from '../../store/app-data/selectors';
 
 function HeaderNavigation() {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
-  const favoriteCount = useAppSelector(getFavorites).length;
+  const favoriteCount = useAppSelector(getFavorites);
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(getFavoritesOffersAction());
+  }, [dispatch]);
 
   const getContent = () => {
     if (authorizationStatus === AuthorizationStatus.Auth) {
@@ -26,7 +33,9 @@ function HeaderNavigation() {
               </span>
             </a>
             <Link to={AppRoute.Favorites}>
-              <span className="header__favorite-count">{favoriteCount}</span>
+              <span className="header__favorite-count">
+                {favoriteCount.length}
+              </span>
             </Link>
           </li>
           <li className="header__nav-item">
