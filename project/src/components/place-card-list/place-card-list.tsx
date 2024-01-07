@@ -26,7 +26,6 @@ const PlacesCardList = ({ setActiveCard }: PlacesCardListProps) => {
     event.preventDefault();
 
     dispatch(postFavoriteAction([ !IsStatusFavorite ? FavoriteStatus.Favorite : FavoriteStatus.NotFavorite , offerId]));
-
   };
 
   return (
