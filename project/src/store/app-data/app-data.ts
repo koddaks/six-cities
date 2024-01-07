@@ -15,6 +15,7 @@ const initialState: AppData = {
   offerById: null,
   offersNearby: [],
   reviews: [],
+  favoriteOffers: [],
   isLoading: false,
   isFavorite: false,
 };
