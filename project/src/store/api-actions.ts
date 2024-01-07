@@ -131,7 +131,7 @@ export const logoutAction = createAsyncThunk<
 });
 
 export const postFavoriteAction = createAsyncThunk<
-  Offer[],
+  Offer,
   [number, number],
   {
     dispatch: AppDispatch;
@@ -139,13 +139,13 @@ export const postFavoriteAction = createAsyncThunk<
     extra: AxiosInstance;
   }
 >('data/postFavorite', async ([isFavorite, id], { extra: api }) => {
-  const { data } = await api.post<Offer[]>(
+  const { data } = await api.post<Offer>(
     `${APIRoute.Favorites}/${id}/${isFavorite}`
   );
   return data;
 });
 
-export const getFavoritesAction = createAsyncThunk<
+export const getFavoritesOfferAction = createAsyncThunk<
   Offer[],
   undefined,
   {
@@ -153,7 +153,7 @@ export const getFavoritesAction = createAsyncThunk<
     state: State;
     extra: AxiosInstance;
   }
->('data/getFavorites', async (_arg, { extra: api }) => {
+>('data/getFavoritesOffers', async (_arg, { extra: api }) => {
   const { data } = await api.get<Offer[]>(`${APIRoute.Favorites}`);
   return data;
 });
