@@ -65,3 +65,5 @@ export enum FavoriteStatus {
   Favorite = 1,
   NotFavorite = 0,
 }
+
+
