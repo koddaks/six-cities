@@ -6,6 +6,7 @@ import {
   getOffersAction,
   getOffersNearbyAction,
   getReviewsbyIdAction,
+  postFavoriteAction,
   postReviewAction,
 } from '../api-actions';
 
@@ -14,6 +15,7 @@ const initialState: AppData = {
   offerById: null,
   offersNearby: [],
   reviews: [],
+  favorites: [],
   isLoading: false,
   isFavorite: false,
 };
@@ -48,6 +50,9 @@ export const appData = createSlice({
         state.reviews = action.payload;
       })
       .addCase(getReviewsbyIdAction.fulfilled, (state, action) => {
+        state.reviews = action.payload;
+      })
+      .addCase(postFavoriteAction.fulfilled, (state, action) => {
         state.reviews = action.payload;
       });
   },
