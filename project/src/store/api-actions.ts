@@ -145,7 +145,7 @@ export const postFavoriteAction = createAsyncThunk<
   return data;
 });
 
-export const getFavoritesOfferAction = createAsyncThunk<
+export const getFavoritesOffersAction = createAsyncThunk<
   Offer[],
   undefined,
   {
