@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { AppData } from '../../types/state';
 import { NameSpace } from '../../const';
 import {
+  getFavoritesAction,
   getOfferByIdAction,
   getOffersAction,
   getOffersNearbyAction,
@@ -57,9 +58,12 @@ export const appData = createSlice({
       })
       .addCase(postFavoriteAction.rejected, (state) => {
         state.isFavorite = false;
+      })
+      .addCase(postFavoriteAction.fulfilled, (state, action) => {
+        state.favoriteOffers = action.payload;
+      })
+      .addCase(getFavoritesAction.fulfilled, (state, action) => {
+        state.favoriteOffers = action.payload;
       });
-    // .addCase(postFavoriteAction.fulfilled, (state, action) => {
-
-    // });
   },
 });
