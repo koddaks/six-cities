@@ -1,11 +1,19 @@
+import { useEffect } from 'react';
 import FavoritesEmpty from '../../components/favorites-empty/favorites-empty';
 import FavoritesList from '../../components/favorites-list/favorites-list';
 import HeaderNavigation from '../../components/header-navigation/header-navigation';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { getFavoritesOffersAction } from '../../store/api-actions';
 import { getFavorites } from '../../store/app-data/selectors';
 
 function Favorites() {
+  const dispatch = useAppDispatch();
+
   const favoriteOffers = useAppSelector(getFavorites);
+
+  useEffect(() => {
+    dispatch(getFavoritesOffersAction());
+  }, [dispatch]);
 
   return (
     <div
