@@ -21,4 +21,5 @@ export type AppData = {
   offersNearby: Offer[];
   reviews: Review[];
   isLoading: boolean;
+  isFavorite: boolean;
 }
