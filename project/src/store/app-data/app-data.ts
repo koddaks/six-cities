@@ -64,7 +64,16 @@ export const appData = createSlice({
         state.isFavoriteStatus = true;
       })
       .addCase(postFavoriteAction.fulfilled, (state, action) => {
-        state.favoriteOffers = [...state.favoriteOffers, action.payload];
+        if (
+          state.favoriteOffers.find((offer) => offer.id === action.payload.id)
+        ) {
+          state.favoriteOffers = state.favoriteOffers.filter(
+            (offer) => offer.id === action.payload.id
+          );
+        } else {
+          state.favoriteOffers = [...state.favoriteOffers, action.payload];
+        }
+
         state.offers = updateFavoriteStatus(
           state.offers,
           action.payload.id,
