@@ -9,14 +9,16 @@ import { getOffersAction } from '../../store/api-actions';
 import { getLoadingStatus, getOffers } from '../../store/app-data/selectors';
 import { getCurrentCity } from '../../store/app-process/selectors';
 import Header from '../../components/header/header';
+import MainEmpty from '../main-empty/main-empty';
 
 function Main(): JSX.Element {
   const dispatch = useAppDispatch();
-  const storeOffers = useAppSelector(getOffers);
+  const offers = useAppSelector(getOffers);
   const activeCity = useAppSelector(getCurrentCity);
-  const offers = storeOffers.filter(
+  const currentCityOffers = offers.filter(
     (offer) => offer.city.name === activeCity.name
   );
+
   const isOffersLoading = useAppSelector(getLoadingStatus);
 
   const [hoveredPlaceCardId, setHoveredPlaceCardId] = useState<number | null>(
@@ -30,6 +32,11 @@ function Main(): JSX.Element {
   useEffect(() => {
     dispatch(getOffersAction());
   }, [dispatch]);
+
+
+  if (currentCityOffers.length === 0 && !isOffersLoading) {
+    return <MainEmpty />;
+  }
 
   return (
     <div className="page page--gray page--main">
@@ -48,7 +55,8 @@ function Main(): JSX.Element {
                 <>
                   <h2 className="visually-hidden">Places</h2>
                   <b className="places__found">
-                    {offers.length} places to stay in {activeCity.name}
+                    {currentCityOffers.length} places to stay in{' '}
+                    {activeCity.name}
                   </b>
                   <PlacesSorting />
                   <PlacesCardList setActiveCard={setActiveCard} />
@@ -60,7 +68,7 @@ function Main(): JSX.Element {
                 <Map
                   city={activeCity}
                   placeLocationId={hoveredPlaceCardId}
-                  offers={offers}
+                  offers={currentCityOffers}
                 />
               </section>
             </div>
