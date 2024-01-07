@@ -129,3 +129,18 @@ export const logoutAction = createAsyncThunk<
   await api.delete(APIRoute.Logout);
   dropToken();
 });
+
+export const postFavoriteAction = createAsyncThunk<
+  Offer,
+  [number, number],
+  {
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+  }
+>('data/postFavorite', async ([isFavorite, id], { extra: api }) => {
+  const { data } = await api.post<Offer>(
+    `${APIRoute.Favorites}/${id}/${isFavorite}`
+  );
+  return data;
+});
