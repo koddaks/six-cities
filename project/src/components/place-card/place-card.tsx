@@ -64,10 +64,6 @@ function PlaceCard({
     }
   };
 
-  const [localIsFavorite, setLocalIsFavorite] = useState(false);
-  useEffect(() => {
-    setLocalIsFavorite(!localIsFavorite);
-  }, [isFavorite]);
 
   return (
     <article
@@ -106,7 +102,7 @@ function PlaceCard({
           </div>
           <button
             className={`place-card__bookmark-button button ${
-              localIsFavorite ? 'place-card__bookmark-button--active' : ''
+              isFavorite ? 'place-card__bookmark-button--active' : ''
             }`}
             type="button"
             onClick={setFavorite(isFavorite, id)}
