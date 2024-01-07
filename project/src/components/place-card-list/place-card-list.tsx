@@ -25,7 +25,7 @@ const PlacesCardList = ({ setActiveCard }: PlacesCardListProps) => {
   const handleSetFavorite = (IsStatusFavorite: boolean, offerId: number): MouseEventHandler<HTMLButtonElement> => (event) => {
     event.preventDefault();
 
-    dispatch(postFavoriteAction([ IsStatusFavorite ? FavoriteStatus.Favorite : FavoriteStatus.NotFavorite , offerId]));
+    dispatch(postFavoriteAction([ !IsStatusFavorite ? FavoriteStatus.Favorite : FavoriteStatus.NotFavorite , offerId]));
 
   };
 
