@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { Offer } from '../../types';
 import { ratingProperty } from '../../utils';
-import { MouseEventHandler } from 'react';
+import { MouseEventHandler, useEffect, useState } from 'react';
 
 export type PlaceCardProps = {
   offer: Offer;
@@ -64,6 +64,11 @@ function PlaceCard({
     }
   };
 
+  const [localIsFavorite, setLocalIsFavorite] = useState(false);
+  useEffect(() => {
+    setLocalIsFavorite(!localIsFavorite);
+  }, [isFavorite]);
+
   return (
     <article
       className={`${articleClassNames} place-card`}
@@ -101,7 +106,7 @@ function PlaceCard({
           </div>
           <button
             className={`place-card__bookmark-button button ${
-              isFavorite ? 'place-card__bookmark-button--active' : ''
+              localIsFavorite ? 'place-card__bookmark-button--active' : ''
             }`}
             type="button"
             onClick={setFavorite(isFavorite, id)}
