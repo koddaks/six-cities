@@ -10,6 +10,7 @@ import {
   postFavoriteAction,
   postReviewAction,
 } from '../api-actions';
+import { updateFavoriteStatus } from '../../utils';
 
 const initialState: AppData = {
   offers: [],
@@ -64,6 +65,11 @@ export const appData = createSlice({
       })
       .addCase(postFavoriteAction.fulfilled, (state, action) => {
         state.favoriteOffers = [...state.favoriteOffers, action.payload];
+        state.offers = updateFavoriteStatus(
+          state.offers,
+          action.payload.id,
+          action.payload.isFavorite
+        );
         state.isFavoriteStatus = false;
       });
   },
