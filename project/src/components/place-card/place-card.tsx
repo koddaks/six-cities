@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { Offer } from '../../types';
 import { ratingProperty } from '../../utils';
-import { MouseEventHandler, useEffect, useState } from 'react';
+import { MouseEventHandler} from 'react';
 
 export type PlaceCardProps = {
   offer: Offer;
