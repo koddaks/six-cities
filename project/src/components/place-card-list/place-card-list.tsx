@@ -1,4 +1,7 @@
-import { useAppSelector } from '../../hooks';
+import { MouseEventHandler } from 'react';
+import { FavoriteStatus } from '../../const';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { postFavoriteAction } from '../../store/api-actions';
 import { getOffers } from '../../store/app-data/selectors';
 import { getCurrentCity, getSortType } from '../../store/app-process/selectors';
 import { sortOffers } from '../../utils/sortOffers';
@@ -9,6 +12,7 @@ type PlacesCardListProps = {
 };
 
 const PlacesCardList = ({ setActiveCard }: PlacesCardListProps) => {
+  const dispatch = useAppDispatch();
   const offers = useAppSelector(getOffers);
   const activeCity = useAppSelector(getCurrentCity);
   const sortType = useAppSelector(getSortType);
@@ -18,10 +22,24 @@ const PlacesCardList = ({ setActiveCard }: PlacesCardListProps) => {
 
   const sortedOffersBySortType = sortOffers(offersByActiveCity, sortType);
 
+  const handleSetFavorite = (IsStatusFavorite: boolean, offerId: number): MouseEventHandler<HTMLButtonElement> => (event) => {
+    event.preventDefault();
+    if (IsStatusFavorite) {
+      dispatch(postFavoriteAction([FavoriteStatus.Favorite, offerId]));
+    } else if (!IsStatusFavorite) {
+      dispatch(postFavoriteAction([FavoriteStatus.NotFavorite, offerId]));
+    }
+  };
+
   return (
     <div className="cities__places-list places__list tabs__content">
       {sortedOffersBySortType.map((offer) => (
-        <PlaceCard key={offer.id} offer={offer} setActiveCard={setActiveCard} />
+        <PlaceCard
+          key={offer.id}
+          offer={offer}
+          setFavorite={handleSetFavorite}
+          setActiveCard={setActiveCard}
+        />
       ))}
     </div>
   );
