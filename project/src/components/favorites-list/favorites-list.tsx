@@ -45,14 +45,16 @@ function FavoritesList({ favoriteOffers }: FavoritesListProps) {
               </div>
             </div>
             <div className="favorites__places">
-              {favoriteOffers.map((offer) =>(
-                <PlaceCard
-                  key={offer.id}
-                  cardType="favorites"
-                  offer={offer}
-                  setFavorite={handleSetFavorite}
-                />
-              ))}
+              {favoriteOffers.map((offer) =>
+                city === offer.city.name ? (
+                  <PlaceCard
+                    key={offer.id}
+                    cardType="favorites"
+                    offer={offer}
+                    setFavorite={handleSetFavorite}
+                  />
+                ) : null
+              )}
             </div>
           </li>
         ))}
