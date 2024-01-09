@@ -1,10 +1,15 @@
-import React from 'react';
+import { MouseEventHandler } from 'react';
 import { Offer } from '../../types';
 import { ratingProperty } from '../../utils';
+
 type PropertyDescriptionListProps = {
   offer: Offer;
+  setFavorite: (
+    statusIsFavorite: boolean,
+    offerId: number
+  ) => MouseEventHandler<HTMLButtonElement> | undefined;
 };
-function PropertyDescriptionList({ offer }: PropertyDescriptionListProps) {
+function PropertyDescriptionList({ offer, setFavorite }: PropertyDescriptionListProps) {
   const {
     id,
     title,
@@ -19,6 +24,8 @@ function PropertyDescriptionList({ offer }: PropertyDescriptionListProps) {
     host,
     description,
   } = offer;
+
+
   return (
     <div key={id} className="property__wrapper">
       {isPremium && (
@@ -33,6 +40,7 @@ function PropertyDescriptionList({ offer }: PropertyDescriptionListProps) {
             isFavorite ? 'property__bookmark-button--active' : ''
           }`}
           type="button"
+          onClick={setFavorite(isFavorite, id)}
         >
           <svg
             className={`${
@@ -108,7 +116,4 @@ function PropertyDescriptionList({ offer }: PropertyDescriptionListProps) {
   );
 }
 
-export default React.memo(
-  PropertyDescriptionList,
-  (prevProps, nextProps) => prevProps.offer === nextProps.offer
-);
+export default PropertyDescriptionList;

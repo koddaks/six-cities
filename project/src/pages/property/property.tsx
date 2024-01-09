@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { MouseEventHandler, useEffect, useState } from 'react';
 import PropertyDescriptionList from '../../components/property-description-list/property-description-list';
 import Reviews from '../../components/reviews/reviews';
 import NearPlaces from '../../components/near-places/near-places';
@@ -10,10 +10,11 @@ import {
   getOfferByIdAction,
   getOffersNearbyAction,
   getReviewsbyIdAction,
+  postFavoriteAction,
 } from '../../store/api-actions';
 import Page404 from '../page404/page404';
 import Spinner from '../../components/spinner/spinner';
-import { AuthorizationStatus } from '../../const';
+import { AuthorizationStatus, FavoriteStatus } from '../../const';
 import HeaderNavigation from '../../components/header-navigation/header-navigation';
 import { getCurrentCity } from '../../store/app-process/selectors';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
@@ -52,6 +53,24 @@ function Property(): JSX.Element {
     }
   }, [id, dispatch]);
 
+  const handleSetFavorite =
+  (
+    IsStatusFavorite: boolean,
+    offerId: number
+  ): MouseEventHandler<HTMLButtonElement> =>
+    (event) => {
+      event.preventDefault();
+
+      dispatch(
+        postFavoriteAction([
+          !IsStatusFavorite
+            ? FavoriteStatus.Favorite
+            : FavoriteStatus.NotFavorite,
+          offerId,
+        ])
+      );
+    };
+
   if (isOfferLoading) {
     return <Spinner />;
   }
@@ -86,7 +105,7 @@ function Property(): JSX.Element {
           <PropertyGallery offer={currentOffer} />
           <div className="property__container container">
             {currentOffer ? (
-              <PropertyDescriptionList offer={currentOffer} />
+              <PropertyDescriptionList setFavorite={handleSetFavorite} offer={currentOffer} />
             ) : null}
             {showReviewsWithAuth}
           </div>
