@@ -64,37 +64,35 @@ export const appData = createSlice({
       .addCase(postFavoriteAction.rejected, (state) => {
         state.isFavoriteStatus = true;
       })
-      .addCase(
-        postFavoriteAction.fulfilled,
-        (state, action) => {
-          const { id, isFavorite } = action.payload;
-          const targetIndex = state.favoriteOffers.findIndex(
-            (offer) => offer.id === id
-          );
+      .addCase(postFavoriteAction.fulfilled,(state, action) => {
+        const { id, isFavorite } = action.payload;
+        const targetIndex = state.favoriteOffers.findIndex(
+          (offer) => offer.id === id
+        );
 
-          if (isFavorite) {
-            state.favoriteOffers =
-              targetIndex !== -1
-                ? [
-                  ...state.favoriteOffers.slice(0, targetIndex),
-                  { ...state.favoriteOffers[targetIndex], isFavorite },
-                  ...state.favoriteOffers.slice(targetIndex + 1),
-                ]
-                : [...state.favoriteOffers, { ...action.payload }];
-          } else {
-            state.favoriteOffers =
-              targetIndex !== -1
-                ? [
-                  ...state.favoriteOffers.slice(0, targetIndex),
-                  ...state.favoriteOffers.slice(targetIndex + 1),
-                ]
-                : state.favoriteOffers;
-          }
-
-          state.offers = updateFavoriteStatus(state.offers, id, isFavorite);
-
-          state.isFavoriteStatus = false;
+        if (isFavorite) {
+          state.favoriteOffers =
+            targetIndex !== -1
+              ? [
+                ...state.favoriteOffers.slice(0, targetIndex),
+                { ...state.favoriteOffers[targetIndex], isFavorite },
+                ...state.favoriteOffers.slice(targetIndex + 1),
+              ]
+              : [...state.favoriteOffers, { ...action.payload }];
+        } else {
+          state.favoriteOffers =
+            targetIndex !== -1
+              ? [
+                ...state.favoriteOffers.slice(0, targetIndex),
+                ...state.favoriteOffers.slice(targetIndex + 1),
+              ]
+              : state.favoriteOffers;
         }
+
+        state.offers = updateFavoriteStatus(state.offers, id, isFavorite);
+
+        state.isFavoriteStatus = false;
+      }
       );
   },
 });
