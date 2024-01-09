@@ -12,6 +12,7 @@ import {
 } from '../api-actions';
 import { updateFavoriteStatus } from '../../utils';
 
+
 const initialState: AppData = {
   offers: [],
   offerById: null,
@@ -63,23 +64,37 @@ export const appData = createSlice({
       .addCase(postFavoriteAction.rejected, (state) => {
         state.isFavoriteStatus = true;
       })
-      .addCase(postFavoriteAction.fulfilled, (state, action) => {
-        if (
-          state.favoriteOffers.find((offer) => offer.id === action.payload.id)
-        ) {
-          state.favoriteOffers = state.favoriteOffers.filter(
-            (offer) => offer.id === action.payload.id
+      .addCase(
+        postFavoriteAction.fulfilled,
+        (state, action) => {
+          const { id, isFavorite } = action.payload;
+          const targetIndex = state.favoriteOffers.findIndex(
+            (offer) => offer.id === id
           );
-        } else {
-          state.favoriteOffers = [...state.favoriteOffers, action.payload];
-        }
 
-        state.offers = updateFavoriteStatus(
-          state.offers,
-          action.payload.id,
-          action.payload.isFavorite
-        );
-        state.isFavoriteStatus = false;
-      });
+          if (isFavorite) {
+            state.favoriteOffers =
+              targetIndex !== -1
+                ? [
+                  ...state.favoriteOffers.slice(0, targetIndex),
+                  { ...state.favoriteOffers[targetIndex], isFavorite },
+                  ...state.favoriteOffers.slice(targetIndex + 1),
+                ]
+                : [...state.favoriteOffers, { ...action.payload }];
+          } else {
+            state.favoriteOffers =
+              targetIndex !== -1
+                ? [
+                  ...state.favoriteOffers.slice(0, targetIndex),
+                  ...state.favoriteOffers.slice(targetIndex + 1),
+                ]
+                : state.favoriteOffers;
+          }
+
+          state.offers = updateFavoriteStatus(state.offers, id, isFavorite);
+
+          state.isFavoriteStatus = false;
+        }
+      );
   },
 });
