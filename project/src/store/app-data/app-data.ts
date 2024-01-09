@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { AppData } from '../../types/state';
-import { NameSpace } from '../../const';
+import { AuthorizationStatus, NameSpace } from '../../const';
 import {
   getFavoritesOffersAction,
   getOfferByIdAction,
@@ -64,23 +64,32 @@ export const appData = createSlice({
         state.isFavoriteStatus = true;
       })
       .addCase(postFavoriteAction.fulfilled, (state, action) => {
-        const { id, isFavorite } = action.payload;
+        if (AuthorizationStatus.Auth) {
+          const { id, isFavorite } = action.payload;
 
-        state.favoriteOffers = state.favoriteOffers.map((offer) =>
-          offer.id === id ? { ...offer, isFavorite } : offer
-        );
+          state.favoriteOffers = state.favoriteOffers.map((offer) =>
+            offer.id === id ? { ...offer, isFavorite } : offer
+          );
 
-        if (!isFavorite) {
-          state.favoriteOffers = state.favoriteOffers.filter((offer) => offer.id !== id);
-        } else {
-          const existingIndex = state.favoriteOffers.findIndex((offer) => offer.id === id);
+          if (!isFavorite) {
+            state.favoriteOffers = state.favoriteOffers.filter(
+              (offer) => offer.id !== id
+            );
+          } else {
+            const existingIndex = state.favoriteOffers.findIndex(
+              (offer) => offer.id === id
+            );
 
-          if (existingIndex === -1) {
-            state.favoriteOffers = [...state.favoriteOffers, { ...action.payload }];
+            if (existingIndex === -1) {
+              state.favoriteOffers = [
+                ...state.favoriteOffers,
+                { ...action.payload },
+              ];
+            }
+            state.offers = updateFavoriteStatus(state.offers, id, isFavorite);
           }
+          state.isFavoriteStatus = true;
         }
-
-        state.offers = updateFavoriteStatus(state.offers, id, isFavorite);
 
         state.isFavoriteStatus = false;
       });
