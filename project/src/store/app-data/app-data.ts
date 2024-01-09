@@ -12,7 +12,6 @@ import {
 } from '../api-actions';
 import { updateFavoriteStatus } from '../../utils';
 
-
 const initialState: AppData = {
   offers: [],
   offerById: null,
@@ -64,35 +63,26 @@ export const appData = createSlice({
       .addCase(postFavoriteAction.rejected, (state) => {
         state.isFavoriteStatus = true;
       })
-      .addCase(postFavoriteAction.fulfilled,(state, action) => {
+      .addCase(postFavoriteAction.fulfilled, (state, action) => {
         const { id, isFavorite } = action.payload;
-        const targetIndex = state.favoriteOffers.findIndex(
-          (offer) => offer.id === id
+
+        state.favoriteOffers = state.favoriteOffers.map((offer) =>
+          offer.id === id ? { ...offer, isFavorite } : offer
         );
 
-        if (isFavorite) {
-          state.favoriteOffers =
-            targetIndex !== -1
-              ? [
-                ...state.favoriteOffers.slice(0, targetIndex),
-                { ...state.favoriteOffers[targetIndex], isFavorite },
-                ...state.favoriteOffers.slice(targetIndex + 1),
-              ]
-              : [...state.favoriteOffers, { ...action.payload }];
+        if (!isFavorite) {
+          state.favoriteOffers = state.favoriteOffers.filter((offer) => offer.id !== id);
         } else {
-          state.favoriteOffers =
-            targetIndex !== -1
-              ? [
-                ...state.favoriteOffers.slice(0, targetIndex),
-                ...state.favoriteOffers.slice(targetIndex + 1),
-              ]
-              : state.favoriteOffers;
+          const existingIndex = state.favoriteOffers.findIndex((offer) => offer.id === id);
+
+          if (existingIndex === -1) {
+            state.favoriteOffers = [...state.favoriteOffers, { ...action.payload }];
+          }
         }
 
         state.offers = updateFavoriteStatus(state.offers, id, isFavorite);
 
         state.isFavoriteStatus = false;
-      }
-      );
+      });
   },
 });
