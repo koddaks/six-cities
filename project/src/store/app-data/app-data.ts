@@ -72,6 +72,7 @@ export const appData = createSlice({
           state.favoriteOffers = state.favoriteOffers.filter(
             (offer) => offer.id !== id
           );
+          state.offers = updateFavoriteStatus(state.offers, id, isFavorite);
         } else {
           const existingIndex = state.favoriteOffers.findIndex(
             (offer) => offer.id === id
