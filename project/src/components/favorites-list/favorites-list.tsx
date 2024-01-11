@@ -21,7 +21,7 @@ function FavoritesList({ favoriteOffers }: FavoritesListProps) {
         event.preventDefault();
         dispatch(
           postFavoriteAction([
-            IsStatusFavorite
+            !IsStatusFavorite
               ? FavoriteStatus.Favorite
               : FavoriteStatus.NotFavorite,
             offerId,
