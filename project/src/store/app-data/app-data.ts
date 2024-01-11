@@ -66,15 +66,12 @@ export const appData = createSlice({
       .addCase(postFavoriteAction.fulfilled, (state, action) => {
         const { id, isFavorite } = action.payload;
 
-        state.favoriteOffers = state.favoriteOffers.map((offer) =>
-          offer.id === id ? { ...offer, isFavorite } : offer
-        );
+        state.favoriteOffers = updateFavoriteStatus(state.favoriteOffers, id, isFavorite);
 
         if (!isFavorite) {
           state.favoriteOffers = state.favoriteOffers.filter(
             (offer) => offer.id !== id
           );
-          state.offers = updateFavoriteStatus(state.offers, id, isFavorite);
         } else {
           const existingIndex = state.favoriteOffers.findIndex(
             (offer) => offer.id === id
