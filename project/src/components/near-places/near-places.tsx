@@ -1,30 +1,22 @@
 import React, { MouseEventHandler } from 'react';
 import { Offer } from '../../types';
 import PlaceCard from '../place-card/place-card';
-import { FavoriteStatus } from '../../const';
-import { useAppDispatch } from '../../hooks';
-import { postFavoriteAction } from '../../store/api-actions';
 
 type NearPlacesProps = {
   offers?: Offer[] | undefined;
   setActiveCard(id: number | null): void;
+  setFavorite: (
+    statusIsFavorite: boolean,
+    offerId: number
+  ) => MouseEventHandler<HTMLButtonElement> | undefined;
 };
 
-function NearPlaces({ offers, setActiveCard }: NearPlacesProps) {
-  const dispatch = useAppDispatch();
+function NearPlaces({ offers, setActiveCard, setFavorite }: NearPlacesProps) {
   const handleCardClick = () => {
     window.scrollTo({
       top: 0,
       behavior: 'smooth',
     });
-  };
-
-
-  const handleSetFavorite = (IsStatusFavorite: boolean, offerId: number): MouseEventHandler<HTMLButtonElement> => (event) => {
-    event.preventDefault();
-
-    dispatch(postFavoriteAction([ IsStatusFavorite ? FavoriteStatus.Favorite : FavoriteStatus.NotFavorite , offerId]));
-
   };
 
   return (
@@ -39,7 +31,7 @@ function NearPlaces({ offers, setActiveCard }: NearPlacesProps) {
               setActiveCard={setActiveCard}
               cardType="nearPlaces"
               onCardClick={handleCardClick}
-              setFavorite={handleSetFavorite}
+              setFavorite={setFavorite}
             />
           ))}
       </div>
@@ -47,7 +39,4 @@ function NearPlaces({ offers, setActiveCard }: NearPlacesProps) {
   );
 }
 
-export default React.memo(
-  NearPlaces,
-  (prevProps, nextProps) => prevProps.offers === nextProps.offers
-);
+export default NearPlaces;

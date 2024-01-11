@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { AppData } from '../../types/state';
-import { AuthorizationStatus, NameSpace } from '../../const';
+import { NameSpace } from '../../const';
 import {
   getFavoritesOffersAction,
   getOfferByIdAction,
@@ -73,6 +73,7 @@ export const appData = createSlice({
             (offer) => offer.id !== id
           );
           state.offers = updateFavoriteStatus(state.offers, id, isFavorite);
+          state.offersNearby = updateFavoriteStatus(state.offersNearby, id, isFavorite);
         } else {
           const existingIndex = state.favoriteOffers.findIndex(
             (offer) => offer.id === id
@@ -85,6 +86,7 @@ export const appData = createSlice({
             ];
           }
           state.offers = updateFavoriteStatus(state.offers, id, isFavorite);
+          state.offersNearby = updateFavoriteStatus(state.offersNearby, id, isFavorite);
         }
         state.isFavoriteStatus = true;
 

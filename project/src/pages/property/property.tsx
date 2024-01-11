@@ -122,6 +122,7 @@ function Property(): JSX.Element {
           <NearPlaces
             offers={currentOffersNearby}
             setActiveCard={setActiveCard}
+            setFavorite={handleSetFavorite}
           />
         </div>
       </main>
