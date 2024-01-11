@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { MouseEventHandler, useEffect, useState } from 'react';
 import PropertyDescriptionList from '../../components/property-description-list/property-description-list';
 import Reviews from '../../components/reviews/reviews';
@@ -14,7 +14,7 @@ import {
 } from '../../store/api-actions';
 import Page404 from '../page404/page404';
 import Spinner from '../../components/spinner/spinner';
-import { AuthorizationStatus, FavoriteStatus } from '../../const';
+import { APIRoute, AuthorizationStatus, FavoriteStatus } from '../../const';
 import HeaderNavigation from '../../components/header-navigation/header-navigation';
 import { getCurrentCity } from '../../store/app-process/selectors';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
@@ -41,6 +41,7 @@ function Property(): JSX.Element {
   const currentOffer = useAppSelector(getCurrentOffer);
   const isOfferLoading = useAppSelector(getLoadingStatus);
   const currentOffersNearby = useAppSelector(getOffersNearby);
+  const navigate = useNavigate();
 
   const showReviewsWithAuth =
     authorizationStatus === AuthorizationStatus.Auth ? <Reviews /> : null;
@@ -53,23 +54,12 @@ function Property(): JSX.Element {
     }
   }, [id, dispatch]);
 
-  const handleSetFavorite =
-  (
-    IsStatusFavorite: boolean,
-    offerId: number
-  ): MouseEventHandler<HTMLButtonElement> =>
-    (event) => {
-      event.preventDefault();
-
-      dispatch(
-        postFavoriteAction([
-          !IsStatusFavorite
-            ? FavoriteStatus.Favorite
-            : FavoriteStatus.NotFavorite,
-          offerId,
-        ])
-      );
-    };
+  const handleSetFavorite = (IsStatusFavorite: boolean, offerId: number): MouseEventHandler<HTMLButtonElement> => (event) => {
+    event.preventDefault();
+    authorizationStatus === AuthorizationStatus.Auth
+      ? dispatch(postFavoriteAction([!IsStatusFavorite ? FavoriteStatus.Favorite : FavoriteStatus.NotFavorite, offerId]))
+      : navigate(APIRoute.Login);
+  };
 
   if (isOfferLoading) {
     return <Spinner />;
