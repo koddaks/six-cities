@@ -5,7 +5,11 @@ import {
   getFavoritesOffersAction,
   logoutAction,
 } from '../../store/api-actions';
-import { getAuthorizationStatus } from '../../store/user-process/selectors';
+import {
+  getAuthorizationStatus,
+  getAvatarUrl,
+  getUserEmail,
+} from '../../store/user-process/selectors';
 import React, { useEffect } from 'react';
 import { getFavorites } from '../../store/app-data/selectors';
 
@@ -13,6 +17,8 @@ function HeaderNavigation() {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const favoriteCount = useAppSelector(getFavorites);
   const dispatch = useAppDispatch();
+  const userEmail = useAppSelector(getUserEmail);
+  const avatarUrl = useAppSelector(getAvatarUrl);
 
   useEffect(() => {
     dispatch(getFavoritesOffersAction());
@@ -27,10 +33,15 @@ function HeaderNavigation() {
               className="header__nav-link header__nav-link--profile"
               href="#todo"
             >
-              <div className="header__avatar-wrapper user__avatar-wrapper"></div>
-              <span className="header__user-name user__name">
-                Oliver.conner@gmail.com
-              </span>
+              <div
+                className="header__avatar-wrapper user__avatar-wrapper"
+                style={{
+                  backgroundImage: `url("${avatarUrl}")`,
+                  borderRadius: '50%',
+                }}
+              >
+              </div>
+              <span className="header__user-name user__name">{userEmail}</span>
             </a>
             <Link to={AppRoute.Favorites}>
               <span className="header__favorite-count">
