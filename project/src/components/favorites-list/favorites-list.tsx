@@ -14,14 +14,13 @@ function FavoritesList({ favoriteOffers }: FavoritesListProps) {
 
   const handleSetFavorite =
     (
-      IsFavorite: boolean,
+      isFavorite: boolean,
       offerId: number
     ): MouseEventHandler<HTMLButtonElement> =>
-      (event) => {
-        event.preventDefault();
+      () => {
         dispatch(
           postFavoriteAction([
-            !IsFavorite
+            !isFavorite
               ? FavoriteStatus.Favorite
               : FavoriteStatus.NotFavorite,
             offerId,

@@ -6,7 +6,7 @@ type NearPlacesProps = {
   offers?: Offer[] | undefined;
   setActiveCard(id: number | null): void;
   setFavorite: (
-    statusIsFavorite: boolean,
+    isFavorite: boolean,
     offerId: number
   ) => MouseEventHandler<HTMLButtonElement> | undefined;
 };

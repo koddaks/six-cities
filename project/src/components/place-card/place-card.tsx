@@ -10,7 +10,7 @@ export type PlaceCardProps = {
   cardType?: 'cities' | 'favorites' | 'nearPlaces';
   onCardClick?: () => void;
   setFavorite: (
-    statusIsFavorite: boolean,
+    isFavorite: boolean,
     offerId: number
   ) => MouseEventHandler<HTMLButtonElement> | undefined;
 };

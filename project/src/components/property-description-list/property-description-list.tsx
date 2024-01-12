@@ -5,7 +5,7 @@ import { ratingProperty } from '../../utils';
 type PropertyDescriptionListProps = {
   offer: Offer;
   setFavorite: (
-    statusIsFavorite: boolean,
+    isFavorite: boolean,
     offerId: number
   ) => MouseEventHandler<HTMLButtonElement> | undefined;
 };

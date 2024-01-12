@@ -27,11 +27,10 @@ const PlacesCardList = ({ setActiveCard }: PlacesCardListProps) => {
 
   const sortedOffersBySortType = sortOffers(offersByActiveCity, sortType);
 
-  const handleSetFavorite = (IsFavorite: boolean, offerId: number): MouseEventHandler<HTMLButtonElement> => (event) => {
-    event.preventDefault();
+  const handleSetFavorite = (isFavorite: boolean, offerId: number): MouseEventHandler<HTMLButtonElement> => () => {
     authorizationStatus === AuthorizationStatus.NoAuth && toast.warn('You must log in or register to add to favorites.');
     authorizationStatus === AuthorizationStatus.Auth
-      ? dispatch(postFavoriteAction([!IsFavorite ? FavoriteStatus.Favorite : FavoriteStatus.NotFavorite, offerId]))
+      ? dispatch(postFavoriteAction([!isFavorite ? FavoriteStatus.Favorite : FavoriteStatus.NotFavorite, offerId]))
       : navigate(APIRoute.Login);
   };
 
