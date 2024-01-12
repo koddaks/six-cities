@@ -21,8 +21,10 @@ function HeaderNavigation() {
   const avatarUrl = useAppSelector(getAvatarUrl);
 
   useEffect(() => {
-    dispatch(getFavoritesOffersAction());
-  }, [dispatch]);
+    if (authorizationStatus === AuthorizationStatus.Auth) {
+      dispatch(getFavoritesOffersAction());
+    }
+  }, [dispatch, authorizationStatus]);
 
   const getContent = () => {
     if (authorizationStatus === AuthorizationStatus.Auth) {
@@ -39,8 +41,7 @@ function HeaderNavigation() {
                   backgroundImage: `url("${avatarUrl}")`,
                   borderRadius: '50%',
                 }}
-              >
-              </div>
+              ></div>
               <span className="header__user-name user__name">{userEmail}</span>
             </a>
             <Link to={AppRoute.Favorites}>
