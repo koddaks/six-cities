@@ -41,7 +41,8 @@ function HeaderNavigation() {
                   backgroundImage: `url("${avatarUrl}")`,
                   borderRadius: '50%',
                 }}
-              ></div>
+              >
+              </div>
               <span className="header__user-name user__name">{userEmail}</span>
             </a>
             <Link to={AppRoute.Favorites}>
