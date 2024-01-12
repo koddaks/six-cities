@@ -1,19 +1,25 @@
 import { Navigate } from 'react-router-dom';
-import { AppRoute, AuthorizationStatus } from '../../const';
+import { AppRoute } from '../../const';
+import { useAppSelector } from '../../hooks';
+import { getAuthLogInStatus } from '../../store/user-process/selectors';
+
+import Spinner from '../spinner/spinner';
+import { getFavoriteStatus } from '../../store/app-data/selectors';
 
 type PrivateRouteProps = {
-  authorizationStatus: AuthorizationStatus;
   children: JSX.Element;
 };
 
 function PrivateRoute(props: PrivateRouteProps): JSX.Element {
-  const { authorizationStatus, children } = props;
+  const { children } = props;
+  const isDataLoading = useAppSelector(getFavoriteStatus);
+  const isUserLoggedIn = useAppSelector(getAuthLogInStatus);
 
-  return authorizationStatus === AuthorizationStatus.Auth ? (
-    children
-  ) : (
-    <Navigate to={AppRoute.Login} />
-  );
+  if (!isUserLoggedIn && !isDataLoading) {
+    return <Spinner />;
+  }
+
+  return isUserLoggedIn ? children : <Navigate to={AppRoute.Login} />;
 }
 
 export default PrivateRoute;
