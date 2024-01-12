@@ -31,9 +31,9 @@ function HeaderNavigation() {
       return (
         <ul className="header__nav-list">
           <li className="header__nav-item user">
-            <a
+            <Link
               className="header__nav-link header__nav-link--profile"
-              href="#todo"
+              to={AppRoute.Root}
             >
               <div
                 className="header__avatar-wrapper user__avatar-wrapper"
@@ -44,7 +44,7 @@ function HeaderNavigation() {
               >
               </div>
               <span className="header__user-name user__name">{userEmail}</span>
-            </a>
+            </Link>
             <Link to={AppRoute.Favorites}>
               <span className="header__favorite-count">
                 {favoriteCount.length}
