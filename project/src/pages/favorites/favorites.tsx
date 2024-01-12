@@ -3,10 +3,12 @@ import FavoritesList from '../../components/favorites-list/favorites-list';
 import HeaderNavigation from '../../components/header-navigation/header-navigation';
 import { useAppSelector } from '../../hooks';
 
-import { getFavorites } from '../../store/app-data/selectors';
+import { getFavoriteStatus, getFavorites } from '../../store/app-data/selectors';
 
 function Favorites() {
   const favoriteOffers = useAppSelector(getFavorites);
+  const isDataLoading = useAppSelector(getFavoriteStatus);
+
 
   return (
     <div
@@ -39,7 +41,7 @@ function Favorites() {
         }`}
       >
         <div className="page__favorites-container container">
-          {favoriteOffers.length === 0 ? (
+          {favoriteOffers.length === 0 && !isDataLoading ? (
             <FavoritesEmpty />
           ) : (
             <FavoritesList favoriteOffers={favoriteOffers} />
