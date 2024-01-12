@@ -8,4 +8,5 @@ export const getOffersNearby = (state: State): Offer[] => state[NameSpace.Data].
 export const getReviews = (state: State): Review[] => state[NameSpace.Data].reviews;
 export const getLoadingStatus = (state: State): boolean => state[NameSpace.Data].isLoading;
 export const getFavorites = (state: State): Offer[] => state[NameSpace.Data].favoriteOffers;
+export const getFavoriteStatus = (state: State): boolean => state[NameSpace.Data].isFavoriteLoadingStatus;
 
