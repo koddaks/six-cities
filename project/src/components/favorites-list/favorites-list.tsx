@@ -29,13 +29,13 @@ function FavoritesList({ favoriteOffers }: FavoritesListProps) {
         );
       };
 
-  const citiesOffers = new Set(favoriteOffers.map((offer) => offer.city.name));
+  const citiesOfFavoriteOffers = new Set(favoriteOffers.map((offer) => offer.city.name));
 
   return (
     <section className="favorites">
       <h1 className="favorites__title">Saved listing</h1>
       <ul className="favorites__list">
-        {[...citiesOffers].map((city) => (
+        {[...citiesOfFavoriteOffers].map((city) => (
           <li key={city} className="favorites__locations-items">
             <div className="favorites__locations locations locations--current">
               <div className="locations__item">
