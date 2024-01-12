@@ -8,6 +8,7 @@ import { sortOffers } from '../../utils/sortOffers';
 import PlaceCard from '../place-card/place-card';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 type PlacesCardListProps = {
   setActiveCard: (id: number | null) => void;
@@ -28,6 +29,7 @@ const PlacesCardList = ({ setActiveCard }: PlacesCardListProps) => {
 
   const handleSetFavorite = (IsStatusFavorite: boolean, offerId: number): MouseEventHandler<HTMLButtonElement> => (event) => {
     event.preventDefault();
+    authorizationStatus === AuthorizationStatus.NoAuth && toast.warn('You must log in or register to add to favorites.');
     authorizationStatus === AuthorizationStatus.Auth
       ? dispatch(postFavoriteAction([!IsStatusFavorite ? FavoriteStatus.Favorite : FavoriteStatus.NotFavorite, offerId]))
       : navigate(APIRoute.Login);
