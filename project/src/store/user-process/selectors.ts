@@ -6,6 +6,9 @@ export const getAuthorizationStatus = (state: State): AuthorizationStatus =>
 export const getAuthCheckedStatus = (state: State): boolean =>
   state[NameSpace.User].authorizationStatus !== AuthorizationStatus.Unknown;
 
+export const getAuthLogInStatus = (state: State): boolean =>
+  state[NameSpace.User].authorizationStatus === AuthorizationStatus.Auth;
+
 export const getUserEmail = (state: State): string =>
   state[NameSpace.User].userData.email;
 export const getAvatarUrl = (state: State): string =>
