@@ -19,7 +19,7 @@ const initialState: AppData = {
   reviews: [],
   favoriteOffers: [],
   isLoading: false,
-  isFavoriteStatus: false,
+  isFavoriteLoadingStatus: false,
 };
 
 export const appData = createSlice({
@@ -54,14 +54,21 @@ export const appData = createSlice({
       .addCase(getReviewsbyIdAction.fulfilled, (state, action) => {
         state.reviews = action.payload;
       })
+      .addCase(getFavoritesOffersAction.pending, (state) => {
+        state.isFavoriteLoadingStatus = true;
+      })
+      .addCase(getFavoritesOffersAction.rejected, (state) => {
+        state.isFavoriteLoadingStatus = false;
+      })
       .addCase(getFavoritesOffersAction.fulfilled, (state, action) => {
         state.favoriteOffers = action.payload;
+        state.isFavoriteLoadingStatus = false;
       })
       .addCase(postFavoriteAction.pending, (state) => {
-        state.isFavoriteStatus = true;
+        state.isFavoriteLoadingStatus = true;
       })
       .addCase(postFavoriteAction.rejected, (state) => {
-        state.isFavoriteStatus = true;
+        state.isFavoriteLoadingStatus = true;
       })
       .addCase(postFavoriteAction.fulfilled, (state, action) => {
         const { id, isFavorite } = action.payload;
@@ -88,13 +95,13 @@ export const appData = createSlice({
           state.offers = updateFavoriteStatus(state.offers, id, isFavorite);
           state.offersNearby = updateFavoriteStatus(state.offersNearby, id, isFavorite);
         }
-        state.isFavoriteStatus = true;
+        state.isFavoriteLoadingStatus = true;
 
         if (state.offerById !== null) {
           state.offerById = { ...state.offerById, ...action.payload };
         }
 
-        state.isFavoriteStatus = false;
+        state.isFavoriteLoadingStatus = false;
       });
   },
 });
