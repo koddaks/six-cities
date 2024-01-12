@@ -54,8 +54,7 @@ function HeaderNavigation() {
           <li className="header__nav-item">
             <Link
               className="header__nav-link"
-              onClick={(evt) => {
-                evt.preventDefault();
+              onClick={() => {
                 dispatch(logoutAction());
               }}
               to={AppRoute.Root}
