@@ -102,8 +102,8 @@ export const appData = createSlice({
           );
         }
 
-        if (state.offerById !== null) {
-          state.offerById = { ...state.offerById, ...action.payload };
+        if (state.offerById?.id === action.payload.id) {
+          state.offerById.isFavorite = action.payload.isFavorite;
         }
       });
   },
