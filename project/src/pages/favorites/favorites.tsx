@@ -4,11 +4,11 @@ import HeaderNavigation from '../../components/header-navigation/header-navigati
 import Spinner from '../../components/spinner/spinner';
 import { useAppSelector } from '../../hooks';
 
-import { getFavorites, getFavoritesLoadingStatus } from '../../store/app-data/selectors';
+import { getFavorites, getIsFavoritesLoading } from '../../store/app-data/selectors';
 
 function Favorites() {
   const favoriteOffers = useAppSelector(getFavorites);
-  const isLoading = useAppSelector(getFavoritesLoadingStatus);
+  const isLoading = useAppSelector(getIsFavoritesLoading);
 
   if (isLoading) {
     <Spinner />;

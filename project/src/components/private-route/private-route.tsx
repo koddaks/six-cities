@@ -4,7 +4,7 @@ import { useAppSelector } from '../../hooks';
 import { getAuthLogInStatus } from '../../store/user-process/selectors';
 
 import Spinner from '../spinner/spinner';
-import { getLoadingStatus } from '../../store/app-data/selectors';
+import { getIsLoading } from '../../store/app-data/selectors';
 
 type PrivateRouteProps = {
   children: JSX.Element;
@@ -12,7 +12,7 @@ type PrivateRouteProps = {
 
 function PrivateRoute(props: PrivateRouteProps): JSX.Element {
   const { children } = props;
-  const isLoading = useAppSelector(getLoadingStatus);
+  const isLoading = useAppSelector(getIsLoading);
   const isUserLoggedIn = useAppSelector(getAuthLogInStatus);
 
 

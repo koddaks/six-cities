@@ -20,7 +20,7 @@ import { getCurrentCity } from '../../store/app-process/selectors';
 import { getAuthLogInStatus, getAuthorizationStatus } from '../../store/user-process/selectors';
 import {
   getCurrentOffer,
-  getLoadingStatus,
+  getIsLoading,
   getOffersNearby,
 } from '../../store/app-data/selectors';
 import { toast } from 'react-toastify';
@@ -40,7 +40,7 @@ function Property(): JSX.Element {
 
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const currentOffer = useAppSelector(getCurrentOffer);
-  const isLoading = useAppSelector(getLoadingStatus);
+  const isLoading = useAppSelector(getIsLoading);
   const currentOffersNearby = useAppSelector(getOffersNearby);
   const isUserLoggedIn = useAppSelector(getAuthLogInStatus);
   const navigate = useNavigate();
