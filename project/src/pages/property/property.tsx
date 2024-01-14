@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from 'react-router-dom';
-import { MouseEventHandler, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import PropertyDescriptionList from '../../components/property-description-list/property-description-list';
 import Reviews from '../../components/reviews/reviews';
 import NearPlaces from '../../components/near-places/near-places';
@@ -17,12 +17,13 @@ import Spinner from '../../components/spinner/spinner';
 import { APIRoute, AuthorizationStatus, FavoriteStatus } from '../../const';
 import HeaderNavigation from '../../components/header-navigation/header-navigation';
 import { getCurrentCity } from '../../store/app-process/selectors';
-import { getAuthorizationStatus } from '../../store/user-process/selectors';
+import { getAuthLogInStatus, getAuthorizationStatus } from '../../store/user-process/selectors';
 import {
   getCurrentOffer,
   getLoadingStatus,
   getOffersNearby,
 } from '../../store/app-data/selectors';
+import { toast } from 'react-toastify';
 
 function Property(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -39,8 +40,9 @@ function Property(): JSX.Element {
 
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const currentOffer = useAppSelector(getCurrentOffer);
-  const isOfferLoading = useAppSelector(getLoadingStatus);
+  const isLoading = useAppSelector(getLoadingStatus);
   const currentOffersNearby = useAppSelector(getOffersNearby);
+  const isUserLoggedIn = useAppSelector(getAuthLogInStatus);
   const navigate = useNavigate();
 
   const showReviewsWithAuth =
@@ -54,13 +56,21 @@ function Property(): JSX.Element {
     }
   }, [id, dispatch]);
 
-  const handleSetFavorite = (isFavorite: boolean, offerId: number): MouseEventHandler<HTMLButtonElement> => () => {
-    authorizationStatus === AuthorizationStatus.Auth
-      ? dispatch(postFavoriteAction([!isFavorite ? FavoriteStatus.Favorite : FavoriteStatus.NotFavorite, offerId]))
-      : navigate(APIRoute.Login);
+  const handleSetFavorite = (isFavorite: boolean, offerId: number) => {
+    if (!isUserLoggedIn) {
+      toast.warn('You must log in or register to add to favorites.');
+      navigate(APIRoute.Login);
+    } else {
+      dispatch(
+        postFavoriteAction([
+          !isFavorite ? FavoriteStatus.Favorite : FavoriteStatus.NotFavorite,
+          offerId,
+        ])
+      );
+    }
   };
 
-  if (isOfferLoading) {
+  if (isLoading) {
     return <Spinner />;
   }
 

@@ -1,4 +1,3 @@
-import { MouseEventHandler } from 'react';
 import { useAppDispatch } from '../../hooks';
 import { Offer } from '../../types';
 import PlaceCard from '../place-card/place-card';
@@ -16,17 +15,17 @@ function FavoritesList({ favoriteOffers }: FavoritesListProps) {
     (
       isFavorite: boolean,
       offerId: number
-    ): MouseEventHandler<HTMLButtonElement> =>
-      () => {
-        dispatch(
-          postFavoriteAction([
-            !isFavorite
-              ? FavoriteStatus.Favorite
-              : FavoriteStatus.NotFavorite,
-            offerId,
-          ])
-        );
-      };
+    ) =>
+    {
+      dispatch(
+        postFavoriteAction([
+          !isFavorite
+            ? FavoriteStatus.Favorite
+            : FavoriteStatus.NotFavorite,
+          offerId,
+        ])
+      );
+    };
 
   const citiesOfFavoriteOffers = new Set(favoriteOffers.map((offer) => offer.city.name));
 

@@ -1,12 +1,11 @@
-import { MouseEventHandler } from 'react';
-import { APIRoute, AuthorizationStatus, FavoriteStatus } from '../../const';
+import { APIRoute, FavoriteStatus } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { postFavoriteAction } from '../../store/api-actions';
 import { getOffers } from '../../store/app-data/selectors';
 import { getCurrentCity, getSortType } from '../../store/app-process/selectors';
 import { sortOffers } from '../../utils/sortOffers';
 import PlaceCard from '../place-card/place-card';
-import { getAuthorizationStatus } from '../../store/user-process/selectors';
+import { getAuthLogInStatus } from '../../store/user-process/selectors';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
@@ -19,7 +18,7 @@ const PlacesCardList = ({ setActiveCard }: PlacesCardListProps) => {
   const offers = useAppSelector(getOffers);
   const activeCity = useAppSelector(getCurrentCity);
   const sortType = useAppSelector(getSortType);
-  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const isUserLoggedIn = useAppSelector(getAuthLogInStatus);
   const offersByActiveCity = offers.filter(
     (offer) => offer.city.name === activeCity.name
   );
@@ -27,11 +26,18 @@ const PlacesCardList = ({ setActiveCard }: PlacesCardListProps) => {
 
   const sortedOffersBySortType = sortOffers(offersByActiveCity, sortType);
 
-  const handleSetFavorite = (isFavorite: boolean, offerId: number): MouseEventHandler<HTMLButtonElement> => () => {
-    authorizationStatus === AuthorizationStatus.NoAuth && toast.warn('You must log in or register to add to favorites.');
-    authorizationStatus === AuthorizationStatus.Auth
-      ? dispatch(postFavoriteAction([!isFavorite ? FavoriteStatus.Favorite : FavoriteStatus.NotFavorite, offerId]))
-      : navigate(APIRoute.Login);
+  const handleSetFavorite = (isFavorite: boolean, offerId: number) => {
+    if (!isUserLoggedIn) {
+      toast.warn('You must log in or register to add to favorites.');
+      navigate(APIRoute.Login);
+    } else {
+      dispatch(
+        postFavoriteAction([
+          !isFavorite ? FavoriteStatus.Favorite : FavoriteStatus.NotFavorite,
+          offerId,
+        ])
+      );
+    }
   };
 
   return (

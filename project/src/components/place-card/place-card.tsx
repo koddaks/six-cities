@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { Offer } from '../../types';
 import { ratingProperty } from '../../utils';
-import { MouseEventHandler} from 'react';
 
 export type PlaceCardProps = {
   offer: Offer;
@@ -12,7 +11,7 @@ export type PlaceCardProps = {
   setFavorite: (
     isFavorite: boolean,
     offerId: number
-  ) => MouseEventHandler<HTMLButtonElement> | undefined;
+  ) => void;
 };
 
 export const PLACE_CARD_CLASS_NAMES_MAP = {
@@ -105,7 +104,7 @@ function PlaceCard({
               isFavorite ? 'place-card__bookmark-button--active' : ''
             }`}
             type="button"
-            onClick={setFavorite(isFavorite, id)}
+            onClick={() => setFavorite(isFavorite, id)}
           >
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use href="#icon-bookmark"></use>

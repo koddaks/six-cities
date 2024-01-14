@@ -1,15 +1,14 @@
-import { MouseEventHandler } from 'react';
 import { Offer } from '../../types';
 import { ratingProperty } from '../../utils';
 
 type PropertyDescriptionListProps = {
   offer: Offer;
-  setFavorite: (
-    isFavorite: boolean,
-    offerId: number
-  ) => MouseEventHandler<HTMLButtonElement> | undefined;
+  setFavorite: (isFavorite: boolean, offerId: number) => void;
 };
-function PropertyDescriptionList({ offer, setFavorite }: PropertyDescriptionListProps) {
+function PropertyDescriptionList({
+  offer,
+  setFavorite,
+}: PropertyDescriptionListProps) {
   const {
     id,
     title,
@@ -40,7 +39,7 @@ function PropertyDescriptionList({ offer, setFavorite }: PropertyDescriptionList
             isFavorite ? 'property__bookmark-button--active' : ''
           }`}
           type="button"
-          onClick={setFavorite(isFavorite, id)}
+          onClick={() => setFavorite(isFavorite, id)}
         >
           <svg
             className={`${

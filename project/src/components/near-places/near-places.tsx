@@ -1,4 +1,3 @@
-import React, { MouseEventHandler } from 'react';
 import { Offer } from '../../types';
 import PlaceCard from '../place-card/place-card';
 
@@ -8,7 +7,7 @@ type NearPlacesProps = {
   setFavorite: (
     isFavorite: boolean,
     offerId: number
-  ) => MouseEventHandler<HTMLButtonElement> | undefined;
+  ) => void;
 };
 
 function NearPlaces({ offers, setActiveCard, setFavorite }: NearPlacesProps) {
