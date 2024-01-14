@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import Spinner from '../../components/spinner/spinner';
 import { getOffersAction } from '../../store/api-actions';
-import { getLoadingStatus, getOffers } from '../../store/app-data/selectors';
+import { getIsLoading, getOffers } from '../../store/app-data/selectors';
 import { getCurrentCity } from '../../store/app-process/selectors';
 import Header from '../../components/header/header';
 import MainEmpty from '../main-empty/main-empty';
@@ -19,7 +19,7 @@ function Main(): JSX.Element {
     (offer) => offer.city.name === activeCity.name
   );
 
-  const isOffersLoading = useAppSelector(getLoadingStatus);
+  const isOffersLoading = useAppSelector(getIsLoading);
 
   const [hoveredPlaceCardId, setHoveredPlaceCardId] = useState<number | null>(
     null
