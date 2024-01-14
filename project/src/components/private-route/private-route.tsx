@@ -12,10 +12,11 @@ type PrivateRouteProps = {
 
 function PrivateRoute(props: PrivateRouteProps): JSX.Element {
   const { children } = props;
-  const isDataLoading = useAppSelector(getLoadingStatus);
+  const isLoading = useAppSelector(getLoadingStatus);
   const isUserLoggedIn = useAppSelector(getAuthLogInStatus);
 
-  if (!isUserLoggedIn && !isDataLoading) {
+
+  if (!isUserLoggedIn && !isLoading) {
     return <Spinner />;
   }
 

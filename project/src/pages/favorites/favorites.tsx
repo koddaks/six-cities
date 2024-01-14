@@ -8,9 +8,9 @@ import { getFavorites, getLoadingStatus } from '../../store/app-data/selectors';
 
 function Favorites() {
   const favoriteOffers = useAppSelector(getFavorites);
-  const isDataLoading = useAppSelector(getLoadingStatus);
+  const isLoading = useAppSelector(getLoadingStatus);
 
-  if (!isDataLoading) {
+  if (isLoading) {
     <Spinner />;
   }
 
@@ -45,7 +45,7 @@ function Favorites() {
         }`}
       >
         <div className="page__favorites-container container">
-          {favoriteOffers.length === 0 ? (
+          {favoriteOffers.length === 0 && !isLoading ? (
             <FavoritesEmpty />
           ) : (
             <FavoritesList favoriteOffers={favoriteOffers} />
