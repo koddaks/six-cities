@@ -65,16 +65,23 @@ export const appData = createSlice({
       })
       .addCase(postFavoriteAction.fulfilled, (state, action) => {
         const { id, isFavorite } = action.payload;
-        console.log(action.payload);
 
-        state.favoriteOffers = updateFavoriteStatus(state.favoriteOffers, id, isFavorite);
+        state.favoriteOffers = updateFavoriteStatus(
+          state.favoriteOffers,
+          id,
+          isFavorite
+        );
 
         if (!isFavorite) {
           state.favoriteOffers = state.favoriteOffers.filter(
             (offer) => offer.id !== id
           );
           state.offers = updateFavoriteStatus(state.offers, id, isFavorite);
-          state.offersNearby = updateFavoriteStatus(state.offersNearby, id, isFavorite);
+          state.offersNearby = updateFavoriteStatus(
+            state.offersNearby,
+            id,
+            isFavorite
+          );
         } else {
           const existingIndex = state.favoriteOffers.findIndex(
             (offer) => offer.id === id
@@ -87,13 +94,16 @@ export const appData = createSlice({
             ];
           }
           state.offers = updateFavoriteStatus(state.offers, id, isFavorite);
-          state.offersNearby = updateFavoriteStatus(state.offersNearby, id, isFavorite);
+          state.offersNearby = updateFavoriteStatus(
+            state.offersNearby,
+            id,
+            isFavorite
+          );
         }
 
         if (state.offerById !== null) {
           state.offerById = { ...state.offerById, ...action.payload };
         }
-        console.log(state.favoriteOffers);
       });
   },
 });
