@@ -25,5 +25,4 @@ export type AppData = {
   reviews: Review[];
   favoriteOffers:Offer[];
   isLoading: boolean;
-  isFavoriteLoadingStatus: boolean;
 }

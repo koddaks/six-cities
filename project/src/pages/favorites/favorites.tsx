@@ -1,14 +1,18 @@
 import FavoritesEmpty from '../../components/favorites-empty/favorites-empty';
 import FavoritesList from '../../components/favorites-list/favorites-list';
 import HeaderNavigation from '../../components/header-navigation/header-navigation';
+import Spinner from '../../components/spinner/spinner';
 import { useAppSelector } from '../../hooks';
 
-import { getFavoriteStatus, getFavorites } from '../../store/app-data/selectors';
+import { getFavorites, getLoadingStatus } from '../../store/app-data/selectors';
 
 function Favorites() {
   const favoriteOffers = useAppSelector(getFavorites);
-  const isDataLoading = useAppSelector(getFavoriteStatus);
+  const isDataLoading = useAppSelector(getLoadingStatus);
 
+  if (!isDataLoading) {
+    <Spinner />;
+  }
 
   return (
     <div
@@ -41,7 +45,7 @@ function Favorites() {
         }`}
       >
         <div className="page__favorites-container container">
-          {favoriteOffers.length === 0 && !isDataLoading ? (
+          {favoriteOffers.length === 0 ? (
             <FavoritesEmpty />
           ) : (
             <FavoritesList favoriteOffers={favoriteOffers} />
