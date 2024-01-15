@@ -7,8 +7,7 @@ import {
 } from '../../store/api-actions';
 import {
   getAuthorizationStatus,
-  getAvatarUrl,
-  getUserEmail,
+  getUserData,
 } from '../../store/user-process/selectors';
 import React, { useEffect } from 'react';
 import { getFavorites } from '../../store/app-data/selectors';
@@ -17,8 +16,7 @@ function HeaderNavigation() {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const favoriteCount = useAppSelector(getFavorites);
   const dispatch = useAppDispatch();
-  const userEmail = useAppSelector(getUserEmail);
-  const avatarUrl = useAppSelector(getAvatarUrl);
+  const { email , avatarUrl } = useAppSelector(getUserData);
 
   useEffect(() => {
     if (authorizationStatus === AuthorizationStatus.Auth) {
@@ -43,7 +41,7 @@ function HeaderNavigation() {
                 }}
               >
               </div>
-              <span className="header__user-name user__name">{userEmail}</span>
+              <span className="header__user-name user__name">{email}</span>
             </Link>
             <Link to={AppRoute.Favorites}>
               <span className="header__favorite-count">
