@@ -17,7 +17,10 @@ import Spinner from '../../components/spinner/spinner';
 import { APIRoute, AuthorizationStatus, FavoriteStatus } from '../../const';
 import HeaderNavigation from '../../components/header-navigation/header-navigation';
 import { getCurrentCity } from '../../store/app-process/selectors';
-import { getAuthLogInStatus, getAuthorizationStatus } from '../../store/user-process/selectors';
+import {
+  getIsUserAuthenticated,
+  getAuthorizationStatus,
+} from '../../store/user-process/selectors';
 import {
   getCurrentOffer,
   getIsLoading,
@@ -42,7 +45,7 @@ function Property(): JSX.Element {
   const currentOffer = useAppSelector(getCurrentOffer);
   const isLoading = useAppSelector(getIsLoading);
   const currentOffersNearby = useAppSelector(getOffersNearby);
-  const isUserLoggedIn = useAppSelector(getAuthLogInStatus);
+  const isUserLoggedIn = useAppSelector(getIsUserAuthenticated);
   const navigate = useNavigate();
 
   const showReviewsWithAuth =
@@ -61,12 +64,11 @@ function Property(): JSX.Element {
       toast.warn('You must log in or register to add to favorites.');
       navigate(APIRoute.Login);
     } else {
-      dispatch(
-        postFavoriteAction([
-          !isFavorite ? FavoriteStatus.Favorite : FavoriteStatus.NotFavorite,
-          offerId,
-        ])
-      );
+      const newFavoriteStatus = isFavorite
+        ? FavoriteStatus.NotFavorite
+        : FavoriteStatus.Favorite;
+
+      dispatch(postFavoriteAction([newFavoriteStatus, offerId]));
     }
   };
 
@@ -104,7 +106,10 @@ function Property(): JSX.Element {
           <PropertyGallery offer={currentOffer} />
           <div className="property__container container">
             {currentOffer ? (
-              <PropertyDescriptionList setFavorite={handleSetFavorite} offer={currentOffer} />
+              <PropertyDescriptionList
+                setFavorite={handleSetFavorite}
+                offer={currentOffer}
+              />
             ) : null}
             {showReviewsWithAuth}
           </div>

@@ -11,23 +11,22 @@ type FavoritesListProps = {
 function FavoritesList({ favoriteOffers }: FavoritesListProps) {
   const dispatch = useAppDispatch();
 
-  const handleSetFavorite =
-    (
-      isFavorite: boolean,
-      offerId: number
-    ) =>
-    {
-      dispatch(
-        postFavoriteAction([
-          !isFavorite
-            ? FavoriteStatus.Favorite
-            : FavoriteStatus.NotFavorite,
-          offerId,
-        ])
-      );
-    };
+  const handleSetFavorite = (isFavorite: boolean, offerId: number) => {
+    const newFavoriteStatus = isFavorite
+      ? FavoriteStatus.NotFavorite
+      : FavoriteStatus.Favorite;
 
-  const citiesOfFavoriteOffers = new Set(favoriteOffers.map((offer) => offer.city.name));
+    dispatch(
+      postFavoriteAction([
+        newFavoriteStatus,
+        offerId,
+      ])
+    );
+  };
+
+  const citiesOfFavoriteOffers = new Set(
+    favoriteOffers.map((offer) => offer.city.name)
+  );
 
   return (
     <section className="favorites">

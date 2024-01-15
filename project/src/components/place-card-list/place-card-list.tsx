@@ -5,7 +5,7 @@ import { getOffers } from '../../store/app-data/selectors';
 import { getCurrentCity, getSortType } from '../../store/app-process/selectors';
 import { sortOffers } from '../../utils/sortOffers';
 import PlaceCard from '../place-card/place-card';
-import { getAuthLogInStatus } from '../../store/user-process/selectors';
+import { getIsUserAuthenticated } from '../../store/user-process/selectors';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
@@ -18,7 +18,7 @@ const PlacesCardList = ({ setActiveCard }: PlacesCardListProps) => {
   const offers = useAppSelector(getOffers);
   const activeCity = useAppSelector(getCurrentCity);
   const sortType = useAppSelector(getSortType);
-  const isUserLoggedIn = useAppSelector(getAuthLogInStatus);
+  const isUserLoggedIn = useAppSelector(getIsUserAuthenticated);
   const offersByActiveCity = offers.filter(
     (offer) => offer.city.name === activeCity.name
   );
@@ -31,12 +31,11 @@ const PlacesCardList = ({ setActiveCard }: PlacesCardListProps) => {
       toast.warn('You must log in or register to add to favorites.');
       navigate(APIRoute.Login);
     } else {
-      dispatch(
-        postFavoriteAction([
-          !isFavorite ? FavoriteStatus.Favorite : FavoriteStatus.NotFavorite,
-          offerId,
-        ])
-      );
+      const newFavoriteStatus = isFavorite
+        ? FavoriteStatus.NotFavorite
+        : FavoriteStatus.Favorite;
+
+      dispatch(postFavoriteAction([newFavoriteStatus, offerId]));
     }
   };
 
