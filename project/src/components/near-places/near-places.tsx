@@ -1,13 +1,16 @@
-import React from 'react';
 import { Offer } from '../../types';
 import PlaceCard from '../place-card/place-card';
 
 type NearPlacesProps = {
   offers?: Offer[] | undefined;
   setActiveCard(id: number | null): void;
+  setFavorite: (
+    isFavorite: boolean,
+    offerId: number
+  ) => void;
 };
 
-function NearPlaces({ offers, setActiveCard }: NearPlacesProps) {
+function NearPlaces({ offers, setActiveCard, setFavorite }: NearPlacesProps) {
   const handleCardClick = () => {
     window.scrollTo({
       top: 0,
@@ -27,6 +30,7 @@ function NearPlaces({ offers, setActiveCard }: NearPlacesProps) {
               setActiveCard={setActiveCard}
               cardType="nearPlaces"
               onCardClick={handleCardClick}
+              setFavorite={setFavorite}
             />
           ))}
       </div>
@@ -34,7 +38,4 @@ function NearPlaces({ offers, setActiveCard }: NearPlacesProps) {
   );
 }
 
-export default React.memo(
-  NearPlaces,
-  (prevProps, nextProps) => prevProps.offers === nextProps.offers
-);
+export default NearPlaces;

@@ -60,3 +60,10 @@ export const REVIEW_RATING = [
     value: 1,
   },
 ];
+
+export enum FavoriteStatus {
+  Favorite = 1,
+  NotFavorite = 0,
+}
+
+

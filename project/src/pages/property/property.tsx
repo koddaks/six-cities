@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import PropertyDescriptionList from '../../components/property-description-list/property-description-list';
 import Reviews from '../../components/reviews/reviews';
@@ -10,18 +10,23 @@ import {
   getOfferByIdAction,
   getOffersNearbyAction,
   getReviewsbyIdAction,
+  postFavoriteAction,
 } from '../../store/api-actions';
 import Page404 from '../page404/page404';
 import Spinner from '../../components/spinner/spinner';
-import { AuthorizationStatus } from '../../const';
+import { APIRoute, AuthorizationStatus, FavoriteStatus } from '../../const';
 import HeaderNavigation from '../../components/header-navigation/header-navigation';
 import { getCurrentCity } from '../../store/app-process/selectors';
-import { getAuthorizationStatus } from '../../store/user-process/selectors';
+import {
+  getIsUserAuthenticated,
+  getAuthorizationStatus,
+} from '../../store/user-process/selectors';
 import {
   getCurrentOffer,
-  getLoadingStatus,
+  getIsLoading,
   getOffersNearby,
 } from '../../store/app-data/selectors';
+import { toast } from 'react-toastify';
 
 function Property(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -38,8 +43,10 @@ function Property(): JSX.Element {
 
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const currentOffer = useAppSelector(getCurrentOffer);
-  const isOfferLoading = useAppSelector(getLoadingStatus);
+  const isLoading = useAppSelector(getIsLoading);
   const currentOffersNearby = useAppSelector(getOffersNearby);
+  const isUserLoggedIn = useAppSelector(getIsUserAuthenticated);
+  const navigate = useNavigate();
 
   const showReviewsWithAuth =
     authorizationStatus === AuthorizationStatus.Auth ? <Reviews /> : null;
@@ -52,7 +59,20 @@ function Property(): JSX.Element {
     }
   }, [id, dispatch]);
 
-  if (isOfferLoading) {
+  const handleSetFavorite = (isFavorite: boolean, offerId: number) => {
+    if (!isUserLoggedIn) {
+      toast.warn('You must log in or register to add to favorites.');
+      navigate(APIRoute.Login);
+    } else {
+      const newFavoriteStatus = isFavorite
+        ? FavoriteStatus.NotFavorite
+        : FavoriteStatus.Favorite;
+
+      dispatch(postFavoriteAction([newFavoriteStatus, offerId]));
+    }
+  };
+
+  if (isLoading) {
     return <Spinner />;
   }
 
@@ -86,7 +106,10 @@ function Property(): JSX.Element {
           <PropertyGallery offer={currentOffer} />
           <div className="property__container container">
             {currentOffer ? (
-              <PropertyDescriptionList offer={currentOffer} />
+              <PropertyDescriptionList
+                setFavorite={handleSetFavorite}
+                offer={currentOffer}
+              />
             ) : null}
             {showReviewsWithAuth}
           </div>
@@ -103,6 +126,7 @@ function Property(): JSX.Element {
           <NearPlaces
             offers={currentOffersNearby}
             setActiveCard={setActiveCard}
+            setFavorite={handleSetFavorite}
           />
         </div>
       </main>
