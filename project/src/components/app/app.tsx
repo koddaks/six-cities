@@ -8,12 +8,14 @@ import { AppRoute } from '../../const';
 import PrivateRoute from '../private-route/private-route';
 import HistoryRouter from '../history-route/history-route';
 import browserHistory from '../../browser-history';
+import ScrollToTop from '../../utils/scrollToTop';
 
 
 function App(): JSX.Element {
 
   return (
     <HistoryRouter history={browserHistory}>
+      <ScrollToTop/>
       <Routes>
         <Route path={AppRoute.Root} element={<Main />} />
         <Route path={AppRoute.Login} element={<LogIn />} />
