@@ -11,12 +11,6 @@ type NearPlacesProps = {
 };
 
 function NearPlaces({ offers, setActiveCard, setFavorite }: NearPlacesProps) {
-  const handleCardClick = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
-  };
 
   return (
     <section className="near-places places">
@@ -29,7 +23,6 @@ function NearPlaces({ offers, setActiveCard, setFavorite }: NearPlacesProps) {
               offer={offer}
               setActiveCard={setActiveCard}
               cardType="nearPlaces"
-              onCardClick={handleCardClick}
               setFavorite={setFavorite}
             />
           ))}

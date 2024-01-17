@@ -5,16 +5,19 @@ import Map from '../../components/map/map';
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import Spinner from '../../components/spinner/spinner';
-import { getOffersAction } from '../../store/api-actions';
+import { getFavoritesOffersAction, getOffersAction } from '../../store/api-actions';
 import { getIsLoading, getOffers } from '../../store/app-data/selectors';
 import { getCurrentCity } from '../../store/app-process/selectors';
 import Header from '../../components/header/header';
 import MainEmpty from '../main-empty/main-empty';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
+import { AuthorizationStatus } from '../../const';
 
 function Main(): JSX.Element {
   const dispatch = useAppDispatch();
   const offers = useAppSelector(getOffers);
   const activeCity = useAppSelector(getCurrentCity);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const currentCityOffers = offers.filter(
     (offer) => offer.city.name === activeCity.name
   );
@@ -31,7 +34,10 @@ function Main(): JSX.Element {
 
   useEffect(() => {
     dispatch(getOffersAction());
-  }, [dispatch]);
+    if (authorizationStatus === AuthorizationStatus.Auth) {
+      dispatch(getFavoritesOffersAction());
+    }
+  }, [dispatch, authorizationStatus]);
 
 
   if (currentCityOffers.length === 0 && !isOffersLoading) {

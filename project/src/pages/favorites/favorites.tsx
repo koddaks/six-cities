@@ -1,17 +1,32 @@
+import { useEffect } from 'react';
 import FavoritesEmpty from '../../components/favorites-empty/favorites-empty';
 import FavoritesList from '../../components/favorites-list/favorites-list';
 import HeaderNavigation from '../../components/header-navigation/header-navigation';
 import Spinner from '../../components/spinner/spinner';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { getFavoritesOffersAction } from '../../store/api-actions';
 
-import { getFavorites, getIsFavoritesLoading } from '../../store/app-data/selectors';
+import {
+  getFavorites,
+  getIsFavoritesLoading,
+} from '../../store/app-data/selectors';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
+import { AuthorizationStatus } from '../../const';
 
 function Favorites() {
+  const dispatch = useAppDispatch();
   const favoriteOffers = useAppSelector(getFavorites);
   const isLoading = useAppSelector(getIsFavoritesLoading);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+
+  useEffect(() => {
+    if (authorizationStatus === AuthorizationStatus.Auth) {
+      dispatch(getFavoritesOffersAction());
+    }
+  }, [dispatch, authorizationStatus]);
 
   if (isLoading) {
-    <Spinner />;
+    return <Spinner />;
   }
 
   return (
