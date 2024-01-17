@@ -2,27 +2,21 @@ import { Link } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import {
-  getFavoritesOffersAction,
   logoutAction,
 } from '../../store/api-actions';
 import {
   getAuthorizationStatus,
   getUserData,
 } from '../../store/user-process/selectors';
-import React, { useEffect } from 'react';
+
 import { getFavorites } from '../../store/app-data/selectors';
+import React from 'react';
 
 function HeaderNavigation() {
+  const dispatch = useAppDispatch();
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const favoriteCount = useAppSelector(getFavorites);
-  const dispatch = useAppDispatch();
   const { email , avatarUrl } = useAppSelector(getUserData);
-
-  useEffect(() => {
-    if (authorizationStatus === AuthorizationStatus.Auth) {
-      dispatch(getFavoritesOffersAction());
-    }
-  }, [dispatch, authorizationStatus]);
 
   const getContent = () => {
     if (authorizationStatus === AuthorizationStatus.Auth) {
