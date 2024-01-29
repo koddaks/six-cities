@@ -60,8 +60,8 @@ export const getReviewsbyIdAction = createAsyncThunk<
     state: State;
     extra: AxiosInstance;
   }
->('data/getReviewsbyId', async (hotelId, { extra: api }) => {
-  const { data } = await api.get<Review[]>(`${APIRoute.Reviews}/${hotelId}`);
+>('data/getReviewsbyId', async (offerId, { extra: api }) => {
+  const { data } = await api.get<Review[]>(`${APIRoute.Reviews}/${offerId}`);
   return data;
 });
 
@@ -73,8 +73,8 @@ export const postReviewAction = createAsyncThunk<
     state: State;
     extra: AxiosInstance;
   }
->('data/postReview', async ([{ comment, rating }, hotelId], { extra: api }) => {
-  const { data } = await api.post<Review[]>(`${APIRoute.Reviews}/${hotelId}`, {
+>('data/postReview', async ([{ comment, rating }, offerId], { extra: api }) => {
+  const { data } = await api.post<Review[]>(`${APIRoute.Reviews}/${offerId}`, {
     comment,
     rating,
   });
