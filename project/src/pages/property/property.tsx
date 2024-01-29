@@ -28,6 +28,7 @@ import {
   getOffersNearby,
 } from '../../store/app-data/selectors';
 import { toast } from 'react-toastify';
+import { Offer } from '../../types';
 
 function Property(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -49,6 +50,17 @@ function Property(): JSX.Element {
   const isUserLoggedIn = useAppSelector(getIsUserAuthenticated);
   const navigate = useNavigate();
 
+  const [visibleItems, setVisibleItems] = useState(3);
+  const [filteredOffers, setFilteredOffers] = useState<Offer[]>([]);
+
+  const handleLoadMore = () => {
+    setVisibleItems((prevVisibleItems) => prevVisibleItems + 3);
+  };
+
+  useEffect(() => {
+    setFilteredOffers(currentOffersNearby.slice(0, visibleItems));
+  }, [currentOffersNearby, visibleItems]);
+
   const showReviewsWithAuth =
     authorizationStatus === AuthorizationStatus.Auth ? <Reviews /> : null;
 
@@ -60,6 +72,7 @@ function Property(): JSX.Element {
       dispatch(getOfferByIdAction(id));
       dispatch(getOffersNearbyAction(id));
       dispatch(getReviewsbyIdAction(id));
+      setVisibleItems(3);
     }
   }, [id, dispatch, authorizationStatus]);
 
@@ -121,16 +134,17 @@ function Property(): JSX.Element {
           <section className="property__map map">
             <Map
               city={activeCity}
-              offers={currentOffersNearby}
+              offers={filteredOffers}
               placeLocationId={hoveredPlaceCardId}
             />
           </section>
         </section>
         <div className="container">
           <NearPlaces
-            offers={currentOffersNearby}
+            offers={filteredOffers}
             setActiveCard={setActiveCard}
             setFavorite={handleSetFavorite}
+            onLoadMore={handleLoadMore}
           />
         </div>
       </main>
