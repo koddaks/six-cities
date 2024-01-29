@@ -28,8 +28,8 @@ function NearPlaces({ offers, setActiveCard, setFavorite, onLoadMore }: NearPlac
           ))}
       </div>
       <button className="near-places__button" onClick={onLoadMore}>
-          <span>Load More</span>
-        </button>
+        <span>Load More</span>
+      </button>
     </section>
   );
 }
