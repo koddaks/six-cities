@@ -8,10 +8,11 @@ type NearPlacesProps = {
     isFavorite: boolean,
     offerId: number
   ) => void;
+  onLoadMore: () => void;
 };
 
-function NearPlaces({ offers, setActiveCard, setFavorite }: NearPlacesProps) {
 
+function NearPlaces({ offers, setActiveCard, setFavorite, onLoadMore }: NearPlacesProps) {
   return (
     <section className="near-places places">
       <h2 className="near-places__title">Other places in the neighbourhood</h2>
@@ -27,6 +28,9 @@ function NearPlaces({ offers, setActiveCard, setFavorite }: NearPlacesProps) {
             />
           ))}
       </div>
+      <button className="near-places__button" onClick={onLoadMore}>
+        <span>Load More</span>
+      </button>
     </section>
   );
 }
