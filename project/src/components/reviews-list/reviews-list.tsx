@@ -8,13 +8,11 @@ type ReviewsListProps = {
 function ReviewsList({ reviews }: ReviewsListProps) {
   return (
     <ul className="reviews__list">
-      {Array.isArray(reviews) ? (
-        reviews.map((review) => (
+      {Array.isArray(reviews)
+        ? reviews.map((review) => (
           <ReviewsItem key={review.id} review={review} />
         ))
-      ) : (
-       null
-      )}
+        : null}
     </ul>
   );
 }
