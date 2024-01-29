@@ -13,7 +13,6 @@ type NearPlacesProps = {
 
 
 function NearPlaces({ offers, setActiveCard, setFavorite, onLoadMore }: NearPlacesProps) {
-  
   return (
     <section className="near-places places">
       <h2 className="near-places__title">Other places in the neighbourhood</h2>
