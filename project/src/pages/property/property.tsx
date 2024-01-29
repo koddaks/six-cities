@@ -7,6 +7,7 @@ import Map from '../../components/map/map';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import PropertyGallery from '../../components/property-gallery/property-gallery';
 import {
+  getFavoritesOffersAction,
   getOfferByIdAction,
   getOffersNearbyAction,
   getReviewsbyIdAction,
@@ -52,12 +53,15 @@ function Property(): JSX.Element {
     authorizationStatus === AuthorizationStatus.Auth ? <Reviews /> : null;
 
   useEffect(() => {
+    if (authorizationStatus === AuthorizationStatus.Auth) {
+      dispatch(getFavoritesOffersAction());
+    }
     if (id) {
       dispatch(getOfferByIdAction(id));
       dispatch(getOffersNearbyAction(id));
       dispatch(getReviewsbyIdAction(id));
     }
-  }, [id, dispatch]);
+  }, [id, dispatch, authorizationStatus]);
 
   const handleSetFavorite = (isFavorite: boolean, offerId: number) => {
     if (!isUserLoggedIn) {

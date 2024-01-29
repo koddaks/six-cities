@@ -31,8 +31,8 @@ export const getOfferByIdAction = createAsyncThunk<
     state: State;
     extra: AxiosInstance;
   }
->('data/getOfferById', async (hotelId, { extra: api }) => {
-  const { data } = await api.get<Offer>(`${APIRoute.Offers}/${hotelId}`);
+>('data/getOfferById', async (offerId, { extra: api }) => {
+  const { data } = await api.get<Offer>(`${APIRoute.Offers}/${offerId}`);
 
   return data;
 });
@@ -45,9 +45,9 @@ export const getOffersNearbyAction = createAsyncThunk<
     state: State;
     extra: AxiosInstance;
   }
->('data/getOffersNearby', async (hotelId, { extra: api }) => {
+>('data/getOffersNearby', async (offerId, { extra: api }) => {
   const { data } = await api.get<Offer[]>(
-    `${APIRoute.Offers}/${hotelId}/nearby`
+    `${APIRoute.Offers}/${offerId}/nearby`
   );
   return data;
 });
@@ -60,8 +60,8 @@ export const getReviewsbyIdAction = createAsyncThunk<
     state: State;
     extra: AxiosInstance;
   }
->('data/getReviewsbyId', async (hotelId, { extra: api }) => {
-  const { data } = await api.get<Review[]>(`${APIRoute.Reviews}/${hotelId}`);
+>('data/getReviewsbyId', async (offerId, { extra: api }) => {
+  const { data } = await api.get<Review[]>(`${APIRoute.Reviews}/${offerId}`);
   return data;
 });
 
@@ -73,8 +73,8 @@ export const postReviewAction = createAsyncThunk<
     state: State;
     extra: AxiosInstance;
   }
->('data/postReview', async ([{ comment, rating }, hotelId], { extra: api }) => {
-  const { data } = await api.post<Review[]>(`${APIRoute.Reviews}/${hotelId}`, {
+>('data/postReview', async ([{ comment, rating }, offerId], { extra: api }) => {
+  const { data } = await api.post<Review[]>(`${APIRoute.Reviews}/${offerId}`, {
     comment,
     rating,
   });
