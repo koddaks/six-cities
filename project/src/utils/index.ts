@@ -18,3 +18,7 @@ export const firstLetterToUpperCase = (word: string) => {
   }
   return word.charAt(0).toUpperCase() + word.slice(1);
 };
+
+export const hasEnglishCharacters = (password: string) => /[a-zA-Z]/.test(password);
+export const isAnySpaces = (password: string) => /\s/.test(password);
+export const hasNumber = (password: string) => /\d/.test(password);
