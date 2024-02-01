@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import ReviewsList from '../reviews-list/reviews-list';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import {
@@ -17,16 +17,21 @@ function Reviews() {
   const { id } = useParams<{ id: string }>();
   const reviews = useAppSelector(getReviews);
   const dispatch = useAppDispatch();
+  console.log(`rerender`);
 
-  const handleRatingChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleRatingChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const value = Number(e.target.value);
     setRating(value);
-  };
+  }, [] );
 
-  const handleCommentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const value = e.target.value;
-    setComment(value);
-  };
+
+  const handleCommentChange = useCallback(
+    (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+      const value = e.target.value;
+      setComment(value);
+    },
+    []
+  );
 
   const handleSubmit: React.FormEventHandler<HTMLFormElement> | undefined = (
     event

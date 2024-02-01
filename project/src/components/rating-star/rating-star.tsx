@@ -1,3 +1,4 @@
+import React from "react";
 
 
 type RatingStarProps = {
@@ -33,4 +34,4 @@ function RatingStar({ value, title, rating, handleRatingChange }: RatingStarProp
   );
 }
 
-export default RatingStar;
+export default React.memo(RatingStar);
