@@ -46,12 +46,6 @@ export type Review = {
   };
 };
 
-export type PropertiesLocation = {
-  latitude: number;
-  longitude: number;
-  zoom: number;
-};
-
 export type City = {
   location: {
     latitude: number;
