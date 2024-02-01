@@ -5,12 +5,9 @@ import { firstLetterToUpperCase, ratingProperty } from '../../utils';
 
 export type PlaceCardProps = {
   offer: Offer;
-  setActiveCard?: (id: number | null) => void;
+  onSetActiveCard?: (id: number | null) => void;
   cardType?: 'cities' | 'favorites' | 'nearPlaces';
-  setFavorite: (
-    isFavorite: boolean,
-    offerId: number
-  ) => void;
+  onSetFavorite: (isFavorite: boolean, offerId: number) => void;
 };
 
 export const PLACE_CARD_CLASS_NAMES_MAP = {
@@ -30,8 +27,8 @@ export const PLACE_CARD_CLASS_NAMES_MAP = {
 
 function PlaceCard({
   offer,
-  setActiveCard,
-  setFavorite,
+  onSetActiveCard,
+  onSetFavorite,
   cardType = 'cities',
 }: PlaceCardProps): JSX.Element {
   const {
@@ -50,17 +47,16 @@ function PlaceCard({
     PLACE_CARD_CLASS_NAMES_MAP[cardType]?.imageWrapper;
 
   const handleMouseOver = () => {
-    if (setActiveCard) {
-      setActiveCard(id);
+    if (onSetActiveCard) {
+      onSetActiveCard(id);
     }
   };
 
   const handleMouseLeave = () => {
-    if (setActiveCard) {
-      setActiveCard(id);
+    if (onSetActiveCard) {
+      onSetActiveCard(id);
     }
   };
-
 
   return (
     <article
@@ -101,7 +97,7 @@ function PlaceCard({
               isFavorite ? 'place-card__bookmark-button--active' : ''
             }`}
             type="button"
-            onClick={() => setFavorite(isFavorite, id)}
+            onClick={() => onSetFavorite(isFavorite, id)}
           >
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use href="#icon-bookmark"></use>

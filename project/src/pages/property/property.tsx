@@ -39,7 +39,7 @@ function Property(): JSX.Element {
     null
   );
 
-  const setActiveCard = (cardId: number | null) => {
+  const onSetActiveCard = (cardId: number | null) => {
     setHoveredPlaceCardId(cardId);
   };
 
@@ -76,7 +76,7 @@ function Property(): JSX.Element {
     }
   }, [id, dispatch, authorizationStatus]);
 
-  const handleSetFavorite = (isFavorite: boolean, offerId: number) => {
+  const handleonSetFavorite = (isFavorite: boolean, offerId: number) => {
     if (!isUserLoggedIn) {
       toast.warn('You must log in or register to add to favorites.');
       navigate(APIRoute.Login);
@@ -124,7 +124,7 @@ function Property(): JSX.Element {
           <div className="property__container container">
             {currentOffer ? (
               <PropertyDescriptionList
-                setFavorite={handleSetFavorite}
+                onSetFavorite={handleonSetFavorite}
                 offer={currentOffer}
               />
             ) : null}
@@ -142,8 +142,8 @@ function Property(): JSX.Element {
         <div className="container">
           <NearPlaces
             offers={filteredOffers}
-            setActiveCard={setActiveCard}
-            setFavorite={handleSetFavorite}
+            onSetActiveCard={onSetActiveCard}
+            onSetFavorite={handleonSetFavorite}
             onLoadMore={handleLoadMore}
           />
         </div>

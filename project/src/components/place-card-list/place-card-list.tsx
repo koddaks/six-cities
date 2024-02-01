@@ -10,10 +10,10 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 type PlacesCardListProps = {
-  setActiveCard: (id: number | null) => void;
+  onSetActiveCard: (id: number | null) => void;
 };
 
-const PlacesCardList = ({ setActiveCard }: PlacesCardListProps) => {
+const PlacesCardList = ({ onSetActiveCard }: PlacesCardListProps) => {
   const dispatch = useAppDispatch();
   const offers = useAppSelector(getOffers);
   const activeCity = useAppSelector(getCurrentCity);
@@ -26,7 +26,7 @@ const PlacesCardList = ({ setActiveCard }: PlacesCardListProps) => {
 
   const sortedOffersBySortType = sortOffers(offersByActiveCity, sortType);
 
-  const handleSetFavorite = (isFavorite: boolean, offerId: number) => {
+  const handleonSetFavorite = (isFavorite: boolean, offerId: number) => {
     if (!isUserLoggedIn) {
       toast.warn('You must log in or register to add to favorites.');
       navigate(APIRoute.Login);
@@ -45,8 +45,8 @@ const PlacesCardList = ({ setActiveCard }: PlacesCardListProps) => {
         <PlaceCard
           key={offer.id}
           offer={offer}
-          setFavorite={handleSetFavorite}
-          setActiveCard={setActiveCard}
+          onSetFavorite={handleonSetFavorite}
+          onSetActiveCard={onSetActiveCard}
         />
       ))}
     </div>

@@ -5,7 +5,10 @@ import Map from '../../components/map/map';
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import Spinner from '../../components/spinner/spinner';
-import { getFavoritesOffersAction, getOffersAction } from '../../store/api-actions';
+import {
+  getFavoritesOffersAction,
+  getOffersAction,
+} from '../../store/api-actions';
 import { getIsLoading, getOffers } from '../../store/app-data/selectors';
 import { getCurrentCity } from '../../store/app-process/selectors';
 import Header from '../../components/header/header';
@@ -28,7 +31,7 @@ function Main(): JSX.Element {
     null
   );
 
-  const setActiveCard = (id: number | null) => {
+  const onSetActiveCard = (id: number | null) => {
     setHoveredPlaceCardId(id);
   };
 
@@ -38,7 +41,6 @@ function Main(): JSX.Element {
       dispatch(getFavoritesOffersAction());
     }
   }, [dispatch, authorizationStatus]);
-
 
   if (currentCityOffers.length === 0 && !isOffersLoading) {
     return <MainEmpty />;
@@ -65,7 +67,7 @@ function Main(): JSX.Element {
                     {activeCity.name}
                   </b>
                   <PlacesSorting />
-                  <PlacesCardList setActiveCard={setActiveCard} />
+                  <PlacesCardList onSetActiveCard={onSetActiveCard} />
                 </>
               )}
             </section>

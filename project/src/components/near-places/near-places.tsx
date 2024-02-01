@@ -3,16 +3,17 @@ import PlaceCard from '../place-card/place-card';
 
 type NearPlacesProps = {
   offers?: Offer[] | undefined;
-  setActiveCard(id: number | null): void;
-  setFavorite: (
-    isFavorite: boolean,
-    offerId: number
-  ) => void;
+  onSetActiveCard(id: number | null): void;
+  onSetFavorite: (isFavorite: boolean, offerId: number) => void;
   onLoadMore: () => void;
 };
 
-
-function NearPlaces({ offers, setActiveCard, setFavorite, onLoadMore }: NearPlacesProps) {
+function NearPlaces({
+  offers,
+  onSetActiveCard,
+  onSetFavorite,
+  onLoadMore,
+}: NearPlacesProps) {
   return (
     <section className="near-places places">
       <h2 className="near-places__title">Other places in the neighbourhood</h2>
@@ -22,9 +23,9 @@ function NearPlaces({ offers, setActiveCard, setFavorite, onLoadMore }: NearPlac
             <PlaceCard
               key={offer.id}
               offer={offer}
-              setActiveCard={setActiveCard}
+              onSetActiveCard={onSetActiveCard}
               cardType="nearPlaces"
-              setFavorite={setFavorite}
+              onSetFavorite={onSetFavorite}
             />
           ))}
       </div>
