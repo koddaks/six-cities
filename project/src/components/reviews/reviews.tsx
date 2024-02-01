@@ -17,7 +17,6 @@ function Reviews() {
   const { id } = useParams<{ id: string }>();
   const reviews = useAppSelector(getReviews);
   const dispatch = useAppDispatch();
-  console.log(`rerender`);
 
   const handleRatingChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const value = Number(e.target.value);
