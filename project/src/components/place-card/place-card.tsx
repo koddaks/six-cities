@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { Offer } from '../../types';
-import { ratingProperty } from '../../utils';
+import { firstLetterToUpperCase, ratingProperty } from '../../utils';
 
 export type PlaceCardProps = {
   offer: Offer;
@@ -118,7 +118,7 @@ function PlaceCard({
         <h2 className="place-card__name">
           <Link to={`${AppRoute.Property}/${id}`}>{title}</Link>
         </h2>
-        <p className="place-card__type">{type}</p>
+        <p className="place-card__type">{firstLetterToUpperCase(type)}</p>
       </div>
     </article>
   );

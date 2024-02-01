@@ -11,3 +11,10 @@ export const updateFavoriteStatus = (
   offers.map((offer) =>
     offer.id === targetId ? { ...offer, isFavorite: newIsFavorite } : offer
   );
+
+export const firstLetterToUpperCase = (word: string) => {
+  if (word.toLowerCase() === 'room') {
+    return 'Private Room';
+  }
+  return word.charAt(0).toUpperCase() + word.slice(1);
+};

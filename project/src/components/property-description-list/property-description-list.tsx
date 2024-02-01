@@ -1,5 +1,5 @@
 import { Offer } from '../../types';
-import { ratingProperty } from '../../utils';
+import { firstLetterToUpperCase, ratingProperty } from '../../utils';
 
 type PropertyDescriptionListProps = {
   offer: Offer;
@@ -63,7 +63,7 @@ function PropertyDescriptionList({
         <span className="property__rating-value rating__value">{rating}</span>
       </div>
       <ul className="property__features">
-        <li className="property__feature property__feature--entire">{type}</li>
+        <li className="property__feature property__feature--entire">{firstLetterToUpperCase(type)}</li>
         <li className="property__feature property__feature--bedrooms">
           {bedrooms
             ? `${bedrooms} ${bedrooms > 1 ? 'Bedrooms' : 'Bedroom'}`
