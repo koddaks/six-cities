@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { Review } from '../../types';
 import ReviewsItem from '../reviews-item/reviews-item';
+import { useAppSelector } from '../../hooks';
+import { getReviews } from '../../store/app-data/selectors';
 
-type ReviewsListProps = {
-  reviews?: Review[];
-};
+// type ReviewsListProps = {
+//   reviews?: Review[];
+// };
 
-function ReviewsList({ reviews }: ReviewsListProps) {
+function ReviewsList() {
+  const reviews = useAppSelector(getReviews);
   const [visibleItems, setVisibleItems] = useState(10);
   const [filteredReviews, setFilteredReviews] = useState<Review[]>([]);
 
@@ -15,7 +18,11 @@ function ReviewsList({ reviews }: ReviewsListProps) {
   };
   useEffect(() => {
     if (Array.isArray(reviews)) {
-      const sortedReviews = reviews.slice().sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+      const sortedReviews = reviews
+        .slice()
+        .sort(
+          (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+        );
       setFilteredReviews(sortedReviews.slice(0, visibleItems));
     } else {
       setFilteredReviews([]);
@@ -27,6 +34,10 @@ function ReviewsList({ reviews }: ReviewsListProps) {
 
   return (
     <>
+      <h2 className="reviews__title">
+        Reviews &middot;{' '}
+        <span className="reviews__amount">{reviews?.length}</span>
+      </h2>
       <ul className="reviews__list">
         {Array.isArray(filteredReviews)
           ? filteredReviews.map((review) => (
