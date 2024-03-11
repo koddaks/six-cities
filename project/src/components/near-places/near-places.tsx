@@ -1,9 +1,6 @@
-import { useAppSelector } from '../../hooks';
-import { getIsLoading, getOffersNearby } from '../../store/app-data/selectors';
 import { Offer } from '../../types';
 import Pagination from '../pagination/paginaion';
 import PlaceCard from '../place-card/place-card';
-import Spinner from '../spinner/spinner';
 
 type NearPlacesProps = {
   offers?: Offer[] | undefined;
@@ -21,12 +18,6 @@ function NearPlaces({
   onPageClick,
 
 }: NearPlacesProps) {
-  const isLoading = useAppSelector(getIsLoading);
-
-  if (isLoading) {
-    <Spinner/>
-  }
-
   return (
     <section className="near-places places">
       <h2 className="near-places__title">Other places in the neighbourhood</h2>
