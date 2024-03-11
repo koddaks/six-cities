@@ -50,7 +50,7 @@ function Property(): JSX.Element {
   const navigate = useNavigate();
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [offersPerPage, setOffersPerPage] = useState(3);
+  const [offersPerPage] = useState(3);
 
   const lastOfferIndex = currentPage * offersPerPage;
   const firstOfferIndex = lastOfferIndex - offersPerPage;
