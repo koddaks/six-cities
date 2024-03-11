@@ -15,7 +15,6 @@ const initialState: AppProcess = {
   sortType: 'POPULAR',
 };
 
-
 export const appProcess = createSlice({
   name: NameSpace.App,
   initialState,
@@ -25,7 +24,7 @@ export const appProcess = createSlice({
     },
     setSortType: (state, action: PayloadAction<SortType>) => {
       state.sortType = action.payload;
-    }
+    },
   },
 });
 

@@ -10,7 +10,6 @@ import Header from '../../components/header/header';
 import { hasEnglishCharacters, hasNumber, isAnySpaces } from '../../utils';
 
 function LogIn() {
-
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const dispatch = useAppDispatch();
   const loginRef = useRef<HTMLInputElement | null>(null);

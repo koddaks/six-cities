@@ -4,10 +4,6 @@ import ReviewsItem from '../reviews-item/reviews-item';
 import { useAppSelector } from '../../hooks';
 import { getReviews } from '../../store/app-data/selectors';
 
-// type ReviewsListProps = {
-//   reviews?: Review[];
-// };
-
 function ReviewsList() {
   const reviews = useAppSelector(getReviews);
   const [visibleItems, setVisibleItems] = useState(10);
@@ -41,8 +37,8 @@ function ReviewsList() {
       <ul className="reviews__list">
         {Array.isArray(filteredReviews)
           ? filteredReviews.map((review) => (
-              <ReviewsItem key={review.id} review={review} />
-            ))
+            <ReviewsItem key={review.id} review={review} />
+          ))
           : null}
       </ul>
       {hasMoreReviews && (
