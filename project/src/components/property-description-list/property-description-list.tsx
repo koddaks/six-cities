@@ -1,3 +1,4 @@
+import React from 'react';
 import { Offer } from '../../types';
 import { firstLetterToUpperCase, ratingProperty } from '../../utils';
 
@@ -116,4 +117,7 @@ function PropertyDescriptionList({
   );
 }
 
-export default PropertyDescriptionList;
+export default React.memo(
+  PropertyDescriptionList,
+  (prevProps, nextProps) => prevProps.offer === nextProps.offer
+);
