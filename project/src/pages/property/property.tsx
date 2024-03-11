@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import PropertyDescriptionList from '../../components/property-description-list/property-description-list';
 import Reviews from '../../components/reviews/reviews';
 import NearPlaces from '../../components/near-places/near-places';
@@ -28,7 +28,6 @@ import {
   getOffersNearby,
 } from '../../store/app-data/selectors';
 import { toast } from 'react-toastify';
-import { Offer } from '../../types';
 
 function Property(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -55,10 +54,14 @@ function Property(): JSX.Element {
 
   const lastOfferIndex = currentPage * offersPerPage;
   const firstOfferIndex = lastOfferIndex - offersPerPage;
-  const currentVisibleOffers = currentOffersNearby.slice(firstOfferIndex, lastOfferIndex);
+  const currentVisibleOffers = currentOffersNearby.slice(
+    firstOfferIndex,
+    lastOfferIndex
+  );
 
-  const onPageClick = (pageNumber: number) => setCurrentPage(pageNumber)
-
+  const onPageClick = useCallback((pageNumber: number) => {
+    setCurrentPage(pageNumber);
+  }, []);
 
   const showReviewsWithAuth =
     authorizationStatus === AuthorizationStatus.Auth ? <Reviews /> : null;
@@ -71,7 +74,6 @@ function Property(): JSX.Element {
       dispatch(getOfferByIdAction(id));
       dispatch(getOffersNearbyAction(id));
       dispatch(getReviewsbyIdAction(id));
-
     }
   }, [id, dispatch, authorizationStatus]);
 
