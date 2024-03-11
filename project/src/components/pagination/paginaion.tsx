@@ -1,3 +1,4 @@
+import React from 'react';
 import { useAppSelector } from '../../hooks';
 import { getOffersNearby } from '../../store/app-data/selectors';
 import '../pagination/pagination.css';
@@ -22,7 +23,11 @@ function Pagination({ offersPerPage, onPageClick }: PaginationProps) {
       <ul className="pagination-list">
         {pageNumbers.map((number) => (
           <li className="pagination-list__item" key={number}>
-            <button className='pagination-list__item-button' type="button" onClick={() => onPageClick(number)}>
+            <button
+              className="pagination-list__item-button"
+              type="button"
+              onClick={() => onPageClick(number)}
+            >
               {number}
             </button>
           </li>
@@ -32,4 +37,4 @@ function Pagination({ offersPerPage, onPageClick }: PaginationProps) {
   );
 }
 
-export default Pagination;
+export default React.memo(Pagination);
