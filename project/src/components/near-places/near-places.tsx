@@ -1,19 +1,32 @@
+import { useAppSelector } from '../../hooks';
+import { getIsLoading, getOffersNearby } from '../../store/app-data/selectors';
 import { Offer } from '../../types';
+import Pagination from '../pagination/paginaion';
 import PlaceCard from '../place-card/place-card';
+import Spinner from '../spinner/spinner';
 
 type NearPlacesProps = {
   offers?: Offer[] | undefined;
   onSetActiveCard(id: number | null): void;
   onSetFavorite: (isFavorite: boolean, offerId: number) => void;
-  onLoadMore: () => void;
+  offersPerPage: number;
+  onPageClick: (pageNumber:number) => void;
 };
 
 function NearPlaces({
   offers,
   onSetActiveCard,
   onSetFavorite,
-  onLoadMore,
+  offersPerPage,
+  onPageClick,
+
 }: NearPlacesProps) {
+  const isLoading = useAppSelector(getIsLoading);
+
+  if (isLoading) {
+    <Spinner/>
+  }
+
   return (
     <section className="near-places places">
       <h2 className="near-places__title">Other places in the neighbourhood</h2>
@@ -29,9 +42,7 @@ function NearPlaces({
             />
           ))}
       </div>
-      <button className="near-places__button" onClick={onLoadMore}>
-        <span>Load More</span>
-      </button>
+      <Pagination offersPerPage={offersPerPage} onPageClick={onPageClick}/>
     </section>
   );
 }

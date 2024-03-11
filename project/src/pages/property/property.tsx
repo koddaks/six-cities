@@ -50,16 +50,15 @@ function Property(): JSX.Element {
   const isUserLoggedIn = useAppSelector(getIsUserAuthenticated);
   const navigate = useNavigate();
 
-  const [visibleItems, setVisibleItems] = useState(3);
-  const [filteredOffers, setFilteredOffers] = useState<Offer[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [offersPerPage, setOffersPerPage] = useState(3);
 
-  const handleLoadMore = () => {
-    setVisibleItems((prevVisibleItems) => prevVisibleItems + 3);
-  };
+  const lastOfferIndex = currentPage * offersPerPage;
+  const firstOfferIndex = lastOfferIndex - offersPerPage;
+  const currentVisibleOffers = currentOffersNearby.slice(firstOfferIndex, lastOfferIndex);
 
-  useEffect(() => {
-    setFilteredOffers(currentOffersNearby.slice(0, visibleItems));
-  }, [currentOffersNearby, visibleItems]);
+  const onPageClick = (pageNumber: number) => setCurrentPage(pageNumber)
+
 
   const showReviewsWithAuth =
     authorizationStatus === AuthorizationStatus.Auth ? <Reviews /> : null;
@@ -72,7 +71,7 @@ function Property(): JSX.Element {
       dispatch(getOfferByIdAction(id));
       dispatch(getOffersNearbyAction(id));
       dispatch(getReviewsbyIdAction(id));
-      setVisibleItems(3);
+
     }
   }, [id, dispatch, authorizationStatus]);
 
@@ -134,17 +133,18 @@ function Property(): JSX.Element {
           <section className="property__map map">
             <Map
               city={activeCity}
-              offers={filteredOffers}
+              offers={currentVisibleOffers}
               placeLocationId={hoveredPlaceCardId}
             />
           </section>
         </section>
         <div className="container">
           <NearPlaces
-            offers={filteredOffers}
+            offers={currentVisibleOffers}
             onSetActiveCard={onSetActiveCard}
             onSetFavorite={handleonSetFavorite}
-            onLoadMore={handleLoadMore}
+            offersPerPage={offersPerPage}
+            onPageClick={onPageClick}
           />
         </div>
       </main>
