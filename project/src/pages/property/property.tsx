@@ -147,6 +147,7 @@ function Property(): JSX.Element {
             onSetFavorite={handleonSetFavorite}
             offersPerPage={offersPerPage}
             onPageClick={onPageClick}
+            currentPage={currentPage}
           />
         </div>
       </main>

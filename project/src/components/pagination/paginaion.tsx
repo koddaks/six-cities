@@ -6,9 +6,10 @@ import '../pagination/pagination.css';
 type PaginationProps = {
   offersPerPage: number;
   onPageClick: (pageNumber: number) => void;
+  currentPage: number
 };
 
-function Pagination({ offersPerPage, onPageClick }: PaginationProps) {
+function Pagination({ offersPerPage, onPageClick, currentPage }: PaginationProps) {
   const totalOffers = useAppSelector(getOffersNearby);
   const pageNumbers = [];
 
@@ -24,7 +25,7 @@ function Pagination({ offersPerPage, onPageClick }: PaginationProps) {
         {pageNumbers.map((number) => (
           <li className="pagination-list__item" key={number}>
             <button
-              className="pagination-list__item-button"
+              className={`${currentPage === number ? 'pagination-button--active' : ''} pagination-list__item-button`}
               type="button"
               onClick={() => onPageClick(number)}
             >

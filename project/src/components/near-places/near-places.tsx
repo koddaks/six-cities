@@ -8,6 +8,7 @@ type NearPlacesProps = {
   onSetFavorite: (isFavorite: boolean, offerId: number) => void;
   offersPerPage: number;
   onPageClick: (pageNumber:number) => void;
+  currentPage: number
 };
 
 function NearPlaces({
@@ -16,6 +17,7 @@ function NearPlaces({
   onSetFavorite,
   offersPerPage,
   onPageClick,
+  currentPage
 
 }: NearPlacesProps) {
   return (
@@ -33,7 +35,7 @@ function NearPlaces({
             />
           ))}
       </div>
-      <Pagination offersPerPage={offersPerPage} onPageClick={onPageClick}/>
+      <Pagination offersPerPage={offersPerPage} onPageClick={onPageClick} currentPage={currentPage}/>
     </section>
   );
 }
