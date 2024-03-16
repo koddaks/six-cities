@@ -59,6 +59,8 @@ function ReviewsForm() {
         id="review"
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
+        minLength={minCommentLength}
+        maxLength={300}
         value={comment}
       />
       <div className="reviews__button-wrapper">
