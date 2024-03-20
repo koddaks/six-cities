@@ -8,6 +8,7 @@ import { toast } from 'react-toastify';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
 import Header from '../../components/header/header';
 import { hasEnglishCharacters, hasNumber, isAnySpaces } from '../../utils';
+import { Helmet } from 'react-helmet-async';
 
 function LogIn() {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
@@ -61,59 +62,65 @@ function LogIn() {
   };
 
   return (
-    <div className="page page--gray page--login">
-      <Header />
+    <>
+      <Helmet>
+        <title>Six-cities: Sign in</title>
+        <link id="favicon" rel="icon" href="../../../public/favicon.ico" />
+      </Helmet>
+      <div className="page page--gray page--login">
+        <Header />
 
-      <main className="page__main page__main--login">
-        <div className="page__login-container container">
-          <section className="login">
-            <h1 className="login__title">Sign in</h1>
-            <form
-              onSubmit={handleSubmit}
-              className="login__form form"
-              action="#"
-              method="post"
-            >
-              <div className="login__input-wrapper form__input-wrapper">
-                <label className="visually-hidden">E-mail</label>
-                <input
-                  className="login__input form__input"
-                  type="email"
-                  name="email"
-                  placeholder="Email"
-                  required
-                  ref={loginRef}
-                />
-              </div>
-              <div className="login__input-wrapper form__input-wrapper">
-                <label className="visually-hidden">Password</label>
-                <input
-                  className="login__input form__input"
-                  type="password"
-                  name="password"
-                  placeholder="Password"
-                  required
-                  ref={passwordRef}
-                />
-              </div>
-              <button
-                className="login__submit form__submit button"
-                type="submit"
+        <main className="page__main page__main--login">
+          <div className="page__login-container container">
+            <section className="login">
+              <h1 className="login__title">Sign in</h1>
+              <form
+                onSubmit={handleSubmit}
+                className="login__form form"
+                action="#"
+                method="post"
               >
-                Sign in
-              </button>
-            </form>
-          </section>
-          <section className="locations locations--login locations--current">
-            <div className="locations__item">
-              <a className="locations__item-link" href="#todo">
-                <span>Amsterdam</span>
-              </a>
-            </div>
-          </section>
-        </div>
-      </main>
-    </div>
+                <div className="login__input-wrapper form__input-wrapper">
+                  <label className="visually-hidden">E-mail</label>
+                  <input
+                    className="login__input form__input"
+                    type="email"
+                    name="email"
+                    placeholder="Email"
+                    required
+                    ref={loginRef}
+                  />
+                </div>
+                <div className="login__input-wrapper form__input-wrapper">
+                  <label className="visually-hidden">Password</label>
+                  <input
+                    className="login__input form__input"
+                    type="password"
+                    name="password"
+                    placeholder="Password"
+                    required
+                    ref={passwordRef}
+                  />
+                </div>
+                <button
+                  className="login__submit form__submit button"
+                  type="submit"
+                >
+                  Sign in
+                </button>
+              </form>
+            </section>
+            <section className="locations locations--login locations--current">
+              <div className="locations__item">
+                <a className="locations__item-link" href="#todo">
+                  <span>Amsterdam</span>
+                </a>
+              </div>
+            </section>
+          </div>
+        </main>
+      </div>
+    </>
   );
 }
 

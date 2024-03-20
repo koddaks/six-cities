@@ -15,6 +15,7 @@ import Header from '../../components/header/header';
 import MainEmpty from '../main-empty/main-empty';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
 import { AuthorizationStatus } from '../../const';
+import { Helmet } from 'react-helmet-async';
 
 function Main(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -47,43 +48,49 @@ function Main(): JSX.Element {
   }
 
   return (
-    <div className="page page--gray page--main">
-      <Header />
-      <main className="page__main page__main--index">
-        <h1 className="visually-hidden">Cities</h1>
-        <div className="tabs">
-          <Locations />
-        </div>
-        <div className="cities">
-          <div className="cities__places-container container">
-            <section className="cities__places places">
-              {isOffersLoading ? (
-                <Spinner />
-              ) : (
-                <>
-                  <h2 className="visually-hidden">Places</h2>
-                  <b className="places__found">
-                    {currentCityOffers.length} places to stay in{' '}
-                    {activeCity.name}
-                  </b>
-                  <PlacesSorting />
-                  <PlacesCardList onSetActiveCard={onSetActiveCard} />
-                </>
-              )}
-            </section>
-            <div className="cities__right-section">
-              <section className="cities__map map">
-                <Map
-                  city={activeCity}
-                  placeLocationId={hoveredPlaceCardId}
-                  offers={currentCityOffers}
-                />
+    <>
+      <Helmet>
+        <title>Six-cities: places in {activeCity.name}</title>
+        <link id="favicon" rel="icon" href="../../../public/favicon.ico" />
+      </Helmet>
+      <div className="page page--gray page--main">
+        <Header />
+        <main className="page__main page__main--index">
+          <h1 className="visually-hidden">Cities</h1>
+          <div className="tabs">
+            <Locations />
+          </div>
+          <div className="cities">
+            <div className="cities__places-container container">
+              <section className="cities__places places">
+                {isOffersLoading ? (
+                  <Spinner />
+                ) : (
+                  <>
+                    <h2 className="visually-hidden">Places</h2>
+                    <b className="places__found">
+                      {currentCityOffers.length} places to stay in{' '}
+                      {activeCity.name}
+                    </b>
+                    <PlacesSorting />
+                    <PlacesCardList onSetActiveCard={onSetActiveCard} />
+                  </>
+                )}
               </section>
+              <div className="cities__right-section">
+                <section className="cities__map map">
+                  <Map
+                    city={activeCity}
+                    placeLocationId={hoveredPlaceCardId}
+                    offers={currentCityOffers}
+                  />
+                </section>
+              </div>
             </div>
           </div>
-        </div>
-      </main>
-    </div>
+        </main>
+      </div>
+    </>
   );
 }
 
