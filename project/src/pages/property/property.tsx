@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import PropertyDescriptionList from '../../components/property-description-list/property-description-list';
 import Reviews from '../../components/reviews/reviews';
 import NearPlaces from '../../components/near-places/near-places';
@@ -28,7 +28,6 @@ import {
   getOffersNearby,
 } from '../../store/app-data/selectors';
 import { toast } from 'react-toastify';
-import { Offer } from '../../types';
 
 function Property(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -39,7 +38,7 @@ function Property(): JSX.Element {
     null
   );
 
-  const setActiveCard = (cardId: number | null) => {
+  const onSetActiveCard = (cardId: number | null) => {
     setHoveredPlaceCardId(cardId);
   };
 
@@ -50,16 +49,19 @@ function Property(): JSX.Element {
   const isUserLoggedIn = useAppSelector(getIsUserAuthenticated);
   const navigate = useNavigate();
 
-  const [visibleItems, setVisibleItems] = useState(3);
-  const [filteredOffers, setFilteredOffers] = useState<Offer[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [offersPerPage] = useState(3);
 
-  const handleLoadMore = () => {
-    setVisibleItems((prevVisibleItems) => prevVisibleItems + 3);
-  };
+  const lastOfferIndex = currentPage * offersPerPage;
+  const firstOfferIndex = lastOfferIndex - offersPerPage;
+  const currentVisibleOffers = currentOffersNearby.slice(
+    firstOfferIndex,
+    lastOfferIndex
+  );
 
-  useEffect(() => {
-    setFilteredOffers(currentOffersNearby.slice(0, visibleItems));
-  }, [currentOffersNearby, visibleItems]);
+  const onPageClick = useCallback((pageNumber: number) => {
+    setCurrentPage(pageNumber);
+  }, []);
 
   const showReviewsWithAuth =
     authorizationStatus === AuthorizationStatus.Auth ? <Reviews /> : null;
@@ -72,11 +74,10 @@ function Property(): JSX.Element {
       dispatch(getOfferByIdAction(id));
       dispatch(getOffersNearbyAction(id));
       dispatch(getReviewsbyIdAction(id));
-      setVisibleItems(3);
     }
   }, [id, dispatch, authorizationStatus]);
 
-  const handleSetFavorite = (isFavorite: boolean, offerId: number) => {
+  const handleonSetFavorite = (isFavorite: boolean, offerId: number) => {
     if (!isUserLoggedIn) {
       toast.warn('You must log in or register to add to favorites.');
       navigate(APIRoute.Login);
@@ -124,7 +125,7 @@ function Property(): JSX.Element {
           <div className="property__container container">
             {currentOffer ? (
               <PropertyDescriptionList
-                setFavorite={handleSetFavorite}
+                onSetFavorite={handleonSetFavorite}
                 offer={currentOffer}
               />
             ) : null}
@@ -134,17 +135,19 @@ function Property(): JSX.Element {
           <section className="property__map map">
             <Map
               city={activeCity}
-              offers={filteredOffers}
+              offers={currentVisibleOffers}
               placeLocationId={hoveredPlaceCardId}
             />
           </section>
         </section>
         <div className="container">
           <NearPlaces
-            offers={filteredOffers}
-            setActiveCard={setActiveCard}
-            setFavorite={handleSetFavorite}
-            onLoadMore={handleLoadMore}
+            offers={currentVisibleOffers}
+            onSetActiveCard={onSetActiveCard}
+            onSetFavorite={handleonSetFavorite}
+            offersPerPage={offersPerPage}
+            onPageClick={onPageClick}
+            currentPage={currentPage}
           />
         </div>
       </main>

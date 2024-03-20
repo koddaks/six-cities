@@ -1,3 +1,4 @@
+import React from 'react';
 import { REVIEW_RATING } from '../../const';
 import RatingStar from '../rating-star/rating-star';
 
@@ -22,4 +23,4 @@ function ReviewRating({ handleRatingChange, rating }: ReviewRatingProps) {
   );
 }
 
-export default ReviewRating;
+export default React.memo(ReviewRating);

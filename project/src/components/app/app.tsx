@@ -10,19 +10,17 @@ import HistoryRouter from '../history-route/history-route';
 import browserHistory from '../../browser-history';
 import ScrollToTop from '../../utils/scrollToTop';
 
-
 function App(): JSX.Element {
-
   return (
     <HistoryRouter history={browserHistory}>
-      <ScrollToTop/>
+      <ScrollToTop />
       <Routes>
         <Route path={AppRoute.Root} element={<Main />} />
         <Route path={AppRoute.Login} element={<LogIn />} />
         <Route
           path={AppRoute.Favorites}
           element={
-            <PrivateRoute >
+            <PrivateRoute>
               <Favorites />
             </PrivateRoute>
           }

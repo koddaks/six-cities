@@ -1,13 +1,14 @@
+import React from 'react';
 import { Offer } from '../../types';
-import { ratingProperty } from '../../utils';
+import { firstLetterToUpperCase, ratingProperty } from '../../utils';
 
 type PropertyDescriptionListProps = {
   offer: Offer;
-  setFavorite: (isFavorite: boolean, offerId: number) => void;
+  onSetFavorite: (isFavorite: boolean, offerId: number) => void;
 };
 function PropertyDescriptionList({
   offer,
-  setFavorite,
+  onSetFavorite,
 }: PropertyDescriptionListProps) {
   const {
     id,
@@ -24,7 +25,6 @@ function PropertyDescriptionList({
     description,
   } = offer;
 
-
   return (
     <div key={id} className="property__wrapper">
       {isPremium && (
@@ -39,7 +39,7 @@ function PropertyDescriptionList({
             isFavorite ? 'property__bookmark-button--active' : ''
           }`}
           type="button"
-          onClick={() => setFavorite(isFavorite, id)}
+          onClick={() => onSetFavorite(isFavorite, id)}
         >
           <svg
             className={`${
@@ -63,7 +63,9 @@ function PropertyDescriptionList({
         <span className="property__rating-value rating__value">{rating}</span>
       </div>
       <ul className="property__features">
-        <li className="property__feature property__feature--entire">{type}</li>
+        <li className="property__feature property__feature--entire">
+          {firstLetterToUpperCase(type)}
+        </li>
         <li className="property__feature property__feature--bedrooms">
           {bedrooms
             ? `${bedrooms} ${bedrooms > 1 ? 'Bedrooms' : 'Bedroom'}`
@@ -115,4 +117,7 @@ function PropertyDescriptionList({
   );
 }
 
-export default PropertyDescriptionList;
+export default React.memo(
+  PropertyDescriptionList,
+  (prevProps, nextProps) => prevProps.offer === nextProps.offer
+);

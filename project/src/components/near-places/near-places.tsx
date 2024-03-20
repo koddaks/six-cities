@@ -1,18 +1,25 @@
 import { Offer } from '../../types';
+import Pagination from '../pagination/paginaion';
 import PlaceCard from '../place-card/place-card';
 
 type NearPlacesProps = {
   offers?: Offer[] | undefined;
-  setActiveCard(id: number | null): void;
-  setFavorite: (
-    isFavorite: boolean,
-    offerId: number
-  ) => void;
-  onLoadMore: () => void;
+  onSetActiveCard(id: number | null): void;
+  onSetFavorite: (isFavorite: boolean, offerId: number) => void;
+  offersPerPage: number;
+  onPageClick: (pageNumber:number) => void;
+  currentPage: number;
 };
 
+function NearPlaces({
+  offers,
+  onSetActiveCard,
+  onSetFavorite,
+  offersPerPage,
+  onPageClick,
+  currentPage
 
-function NearPlaces({ offers, setActiveCard, setFavorite, onLoadMore }: NearPlacesProps) {
+}: NearPlacesProps) {
   return (
     <section className="near-places places">
       <h2 className="near-places__title">Other places in the neighbourhood</h2>
@@ -22,15 +29,13 @@ function NearPlaces({ offers, setActiveCard, setFavorite, onLoadMore }: NearPlac
             <PlaceCard
               key={offer.id}
               offer={offer}
-              setActiveCard={setActiveCard}
+              onSetActiveCard={onSetActiveCard}
               cardType="nearPlaces"
-              setFavorite={setFavorite}
+              onSetFavorite={onSetFavorite}
             />
           ))}
       </div>
-      <button className="near-places__button" onClick={onLoadMore}>
-        <span>Load More</span>
-      </button>
+      <Pagination offersPerPage={offersPerPage} onPageClick={onPageClick} currentPage={currentPage}/>
     </section>
   );
 }

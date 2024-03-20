@@ -7,9 +7,9 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
 import Header from '../../components/header/header';
+import { hasEnglishCharacters, hasNumber, isAnySpaces } from '../../utils';
 
 function LogIn() {
-
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const dispatch = useAppDispatch();
   const loginRef = useRef<HTMLInputElement | null>(null);
@@ -34,13 +34,23 @@ function LogIn() {
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
-    const isAnySpaces = (password: string) => /\s/.test(password);
-
     if (
       passwordRef.current !== null &&
       isAnySpaces(passwordRef.current.value)
     ) {
       toast.warn('Password should not contain spaces.');
+    } else if (
+      passwordRef.current !== null &&
+      loginRef.current !== null &&
+      !hasEnglishCharacters(passwordRef.current.value)
+    ) {
+      toast.warn('Password should contain English characters.');
+    } else if (
+      passwordRef.current !== null &&
+      loginRef.current !== null &&
+      !hasNumber(passwordRef.current.value)
+    ) {
+      toast.warn('Password should contain at least one number.');
     } else if (loginRef.current !== null && passwordRef.current !== null) {
       toast.success('You are logged in!');
       onSubmit({

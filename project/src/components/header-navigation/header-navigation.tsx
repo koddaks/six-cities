@@ -1,9 +1,7 @@
 import { Link } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import {
-  logoutAction,
-} from '../../store/api-actions';
+import { logoutAction } from '../../store/api-actions';
 import {
   getAuthorizationStatus,
   getUserData,
@@ -16,7 +14,7 @@ function HeaderNavigation() {
   const dispatch = useAppDispatch();
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const favoriteCount = useAppSelector(getFavorites);
-  const { email , avatarUrl } = useAppSelector(getUserData);
+  const { email, avatarUrl } = useAppSelector(getUserData);
 
   const getContent = () => {
     if (authorizationStatus === AuthorizationStatus.Auth) {

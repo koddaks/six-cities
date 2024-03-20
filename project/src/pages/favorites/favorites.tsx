@@ -23,7 +23,7 @@ function Favorites() {
     if (authorizationStatus === AuthorizationStatus.Auth) {
       dispatch(getFavoritesOffersAction());
     }
-  }, [dispatch, authorizationStatus]);
+  }, [authorizationStatus]);
 
   if (isLoading) {
     return <Spinner />;

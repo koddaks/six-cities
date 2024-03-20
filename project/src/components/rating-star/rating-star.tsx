@@ -1,4 +1,4 @@
-
+import React from 'react';
 
 type RatingStarProps = {
   value: number;
@@ -7,8 +7,12 @@ type RatingStarProps = {
   handleRatingChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-function RatingStar({ value, title, rating, handleRatingChange }: RatingStarProps) {
-
+function RatingStar({
+  value,
+  title,
+  rating,
+  handleRatingChange,
+}: RatingStarProps) {
   return (
     <>
       <input
@@ -33,4 +37,4 @@ function RatingStar({ value, title, rating, handleRatingChange }: RatingStarProp
   );
 }
 
-export default RatingStar;
+export default React.memo(RatingStar);
