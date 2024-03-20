@@ -8,7 +8,7 @@ type NearPlacesProps = {
   onSetFavorite: (isFavorite: boolean, offerId: number) => void;
   offersPerPage: number;
   onPageClick: (pageNumber:number) => void;
-  currentPage: number
+  currentPage: number;
 };
 
 function NearPlaces({

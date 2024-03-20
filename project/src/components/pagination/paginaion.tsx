@@ -6,7 +6,7 @@ import '../pagination/pagination.css';
 type PaginationProps = {
   offersPerPage: number;
   onPageClick: (pageNumber: number) => void;
-  currentPage: number
+  currentPage: number;
 };
 
 function Pagination({ offersPerPage, onPageClick, currentPage }: PaginationProps) {
