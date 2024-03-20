@@ -34,7 +34,6 @@ function Favorites() {
     <>
       <Helmet>
         <title>Favorites</title>
-        <link id="favicon" rel="icon" href="../../../public/favicon.ico" />
       </Helmet>
       <div
         className={`page ${

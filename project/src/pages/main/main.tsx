@@ -51,7 +51,6 @@ function Main(): JSX.Element {
     <>
       <Helmet>
         <title>Six-cities: places in {activeCity.name}</title>
-        <link id="favicon" rel="icon" href="../../../public/favicon.ico" />
       </Helmet>
       <div className="page page--gray page--main">
         <Header />

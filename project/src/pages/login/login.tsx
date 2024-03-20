@@ -65,7 +65,6 @@ function LogIn() {
     <>
       <Helmet>
         <title>Six-cities: Sign in</title>
-        <link id="favicon" rel="icon" href="../../../public/favicon.ico" />
       </Helmet>
       <div className="page page--gray page--login">
         <Header />

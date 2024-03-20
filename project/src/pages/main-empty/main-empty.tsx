@@ -11,7 +11,6 @@ function MainEmpty() {
     <>
       <Helmet>
         <title>Six-cities: No places in {activeCity.name}</title>
-        <link id="favicon" rel="icon" href="../../../public/favicon.ico" />
       </Helmet>
       <div className="page page--gray page--main">
         <Header />
